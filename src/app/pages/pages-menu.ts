@@ -44,6 +44,16 @@ export const MENU_ITEMS: NbMenuItem[] = [
     ],
   },
   {
+    title: 'Point of <Re>view',
+    icon: 'layout-outline',
+    children: [
+      {
+        title: 'feed',
+        link: '/pages/point-of-review/feed',
+      }
+    ],
+  },
+  {
     title: 'Forms',
     icon: 'edit-2-outline',
     children: [

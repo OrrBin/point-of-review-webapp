@@ -51,6 +51,8 @@ import { StatsProgressBarService } from './mock/stats-progress-bar.service';
 import { VisitorsAnalyticsService } from './mock/visitors-analytics.service';
 import { SecurityCamerasService } from './mock/security-cameras.service';
 import { MockDataModule } from './mock/mock-data.module';
+import { CodeSnippetsData } from './data/code-snippets';
+import { CodeSnippetsService } from './mock/code-snippets-order.service';
 
 const socialLinks = [
   {
@@ -90,6 +92,7 @@ const DATA_SERVICES = [
   { provide: StatsProgressBarData, useClass: StatsProgressBarService },
   { provide: VisitorsAnalyticsData, useClass: VisitorsAnalyticsService },
   { provide: SecurityCamerasData, useClass: SecurityCamerasService },
+  { provide: CodeSnippetsData, useClass: CodeSnippetsService },
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {

@@ -24,6 +24,11 @@ const routes: Routes = [{
         .then(m => m.LayoutModule),
     },
     {
+      path: 'point-of-review',
+      loadChildren: () => import('./point-of-review/point-of-review.module')
+        .then(m => m.PointOfReviewModule),
+    },
+    {
       path: 'forms',
       loadChildren: () => import('./forms/forms.module')
         .then(m => m.FormsModule),
