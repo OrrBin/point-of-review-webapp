@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { CodeSnippetsData } from '../../../@core/data/code-snippets';
+import { StateService } from "../../../@core/utils";
+import { CodeSnippet } from '../../../@core/lib/objects/code-snippet';
 
 @Component({
   selector: 'ngx-infinite-list',
@@ -15,7 +17,7 @@ export class FeedComponent {
   };
   pageSize = 10;
 
-  constructor(private codeSnippetsService: CodeSnippetsData) {
+  constructor(private codeSnippetsService: CodeSnippetsData, private state: StateService) {
     this.codeSnippetsService.getCodeSnippets().subscribe(nextSnippet => {
       console.log(nextSnippet)
     });
@@ -32,5 +34,9 @@ export class FeedComponent {
         cardData.loading = false;
         cardData.pageToLoadNext++;
       });
+  }
+
+  choosePost(snippet: CodeSnippet) {
+    console.log('snippet chosen ' + snippet.$id);
   }
 }

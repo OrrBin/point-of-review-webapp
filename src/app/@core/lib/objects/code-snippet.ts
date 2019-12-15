@@ -1,5 +1,6 @@
 import { Code } from './code';
 import { CodeReview } from './code-review';
+import { Score } from './score';
 
 export class CodeSnippet {
   private id: string;
@@ -7,14 +8,15 @@ export class CodeSnippet {
   private description: string;
   private code: Code;
   private reviews: CodeReview[];
+  private score: Score;
 
-
-  constructor($id: string, $userId: string, $description: string, $code: Code, $reviews: CodeReview[]) {
+  constructor($id: string, $userId: string, $description: string, $code: Code, $reviews: CodeReview[], $score: Score) {
     this.id = $id;
     this.userId = $userId;
     this.description = $description;
     this.code = $code;
     this.reviews = $reviews;
+    this.score = $score;
   }
 
 
@@ -96,6 +98,22 @@ export class CodeSnippet {
    */
   public set $reviews(value: CodeReview[]) {
     this.reviews = value;
+  }
+
+  /**
+    * Getter $score
+    * @return {Score}
+    */
+  public get $score(): Score {
+    return this.score;
+  }
+
+  /**
+   * Setter $score
+   * @param {Score} value
+   */
+  public set $score(value: Score) {
+    this.score = value;
   }
 
 
