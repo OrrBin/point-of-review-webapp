@@ -23,6 +23,7 @@ import { CommentComponent } from './comment/comment.component';
 import { ScoreComponent } from './score/score.component';
 import { CodeEditorComponent } from './code-editor/code-editor.component';
 import { TagsComponent } from './tags/tags.component';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { TagsComponent } from './tags/tags.component';
     NbListModule,
     NbAccordionModule,
     NbUserModule,
+    MonacoEditorModule,
     PointOfReviewRoutingModule,
   ],
   declarations: [

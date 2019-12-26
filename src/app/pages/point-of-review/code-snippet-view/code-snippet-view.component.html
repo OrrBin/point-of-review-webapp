@@ -1,5 +1,5 @@
-<div class="col-md-12 col-lg-12 col-xxxl-12">
-  <nb-card *ngIf="snippet; else placeHolder">
+<div class="col-md-12 col-lg-12 col-xxxl-12 code-snippet-container">
+  <nb-card *ngIf="snippet; else placeHolder" class="code-snippet-container">
     <nb-card-header>
       <h5>{{snippet.description}}</h5>
     </nb-card-header>
@@ -8,7 +8,7 @@
         {{snippet.description}}
       </div>
       <ngx-tags [tags]="snippet.tags"></ngx-tags>
-      <ngx-code-editor [code]="snippet.code"></ngx-code-editor>
+      <ngx-code-editor></ngx-code-editor>
     </nb-card-body>
     <nb-card-footer>
       <div class="row show-grid">
