@@ -1,13 +1,11 @@
 <div class="col-md-12 col-lg-12 col-xxxl-12">
-  <nb-card>
-    <nb-card-header>Popular posts</nb-card-header>
-    <nb-list nbInfiniteList listenWindowScroll [threshold]="500" (bottomThreshold)="loadNext(secondCard)">
-      <nb-list-item *ngFor="let codeSnippetPost of secondCard.news">
-        <ngx-code-snippet-post [post]="codeSnippetPost" (click)="choosePost(codeSnippetPost)"></ngx-code-snippet-post>
-      </nb-list-item>
-      <nb-list-item *ngFor="let _ of secondCard.placeholders">
-        <ngx-code-snippet-post-placeholder></ngx-code-snippet-post-placeholder>
-      </nb-list-item>
-    </nb-list>
-  </nb-card>
+  <!-- <nb-card>
+    <nb-card-header>Popular posts</nb-card-header> -->
+  <nb-list listenWindowScroll>
+    <nb-list-item *ngFor="let codeSnippetPost of snippets">
+      <ngx-code-snippet-post [snippet]="codeSnippetPost" (click)="choosePost(codeSnippetPost)">
+      </ngx-code-snippet-post>
+    </nb-list-item>
+  </nb-list>
+  <!-- </nb-card> -->
 </div>

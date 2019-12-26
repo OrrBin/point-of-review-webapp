@@ -1,11 +1,31 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { of as observableOf,  Observable,  BehaviorSubject } from 'rxjs';
+import { of as observableOf, Observable, BehaviorSubject, Subject } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
 import { NbLayoutDirectionService, NbLayoutDirection } from '@nebular/theme';
+import { CodeSnippet } from '../lib/objects/code-snippet';
+import { CodeReview } from '../lib/objects/code-review';
+import { CodeReviewSection } from '../lib/objects/code-review-section';
 
 @Injectable()
 export class StateService implements OnDestroy {
+
+  selectedCodeSnippet = new BehaviorSubject<CodeSnippet>(null);
+  selectedCodeReview = new BehaviorSubject<CodeReview>(null);
+  selectedCodeReviewSection = new BehaviorSubject<CodeReviewSection>(null);
+
+  selectCodeSnippet(snippet: CodeSnippet) {
+    console.log('selected snippet with id ' + snippet.id);
+    this.selectedCodeSnippet.next(snippet);
+  }
+
+  selectCodeReview(review: CodeReview) {
+    this.selectedCodeReview.next(review);
+  }
+
+  selectCodeReviewSection(section: CodeReviewSection) {
+    this.selectedCodeReviewSection.next(section);
+  }
 
   protected layouts: any = [
     {
@@ -58,7 +78,7 @@ export class StateService implements OnDestroy {
   }
 
   private updateSidebarIcons(direction: NbLayoutDirection) {
-    const [ startSidebar, endSidebar ] = this.sidebars;
+    const [startSidebar, endSidebar] = this.sidebars;
     const isLtr = direction === NbLayoutDirection.LTR;
     const startIconClass = isLtr ? 'nb-layout-sidebar-left' : 'nb-layout-sidebar-right';
     const endIconClass = isLtr ? 'nb-layout-sidebar-right' : 'nb-layout-sidebar-left';

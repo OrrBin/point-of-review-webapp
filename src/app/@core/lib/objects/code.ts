@@ -1,5 +1,6 @@
 export class Code {
-  private text: string;
+  text: string;
+  language: string;
 
   constructor($text: string) {
     this.text = $text;

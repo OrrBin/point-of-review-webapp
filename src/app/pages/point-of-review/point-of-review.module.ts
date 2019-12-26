@@ -7,7 +7,7 @@ import {
   NbListModule,
   NbRouteTabsetModule,
   NbStepperModule,
-  NbTabsetModule, NbUserModule,
+  NbTabsetModule, NbUserModule, NbIconModule,
 } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
@@ -17,6 +17,12 @@ import { FeedComponent } from './feed/feed.component';
 import { CodeSnippetPostComponent } from './feed/code-snippet-post/code-snippet-post.component';
 import { NewsPostPlaceholderComponent } from './feed/code-snippet-post-placeholder/code-snippet-post-placeholder.component';
 import { NewsService } from './news.service';
+import { CodeSnippetViewComponent } from './code-snippet-view/code-snippet-view.component';
+import { CodeReviewComponent } from './code-review/code-review.component';
+import { CommentComponent } from './comment/comment.component';
+import { ScoreComponent } from './score/score.component';
+import { CodeEditorComponent } from './code-editor/code-editor.component';
+import { TagsComponent } from './tags/tags.component';
 
 @NgModule({
   imports: [
@@ -27,6 +33,7 @@ import { NewsService } from './news.service';
     NbRouteTabsetModule,
     NbStepperModule,
     NbCardModule,
+    NbIconModule,
     NbButtonModule,
     NbListModule,
     NbAccordionModule,
@@ -37,7 +44,13 @@ import { NewsService } from './news.service';
     PointOfReviewComponent,
     NewsPostPlaceholderComponent,
     FeedComponent,
-    CodeSnippetPostComponent
+    CodeSnippetPostComponent,
+    CodeSnippetViewComponent,
+    CodeReviewComponent,
+    CommentComponent,
+    ScoreComponent,
+    CodeEditorComponent,
+    TagsComponent,
   ],
   providers: [
     NewsService,

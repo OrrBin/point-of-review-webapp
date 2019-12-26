@@ -52,7 +52,7 @@ import { VisitorsAnalyticsService } from './mock/visitors-analytics.service';
 import { SecurityCamerasService } from './mock/security-cameras.service';
 import { MockDataModule } from './mock/mock-data.module';
 import { CodeSnippetsData } from './data/code-snippets';
-import { CodeSnippetsService } from './mock/code-snippets-order.service';
+import { CodeSnippetsService } from './services/code-snippets.service';
 
 const socialLinks = [
   {
