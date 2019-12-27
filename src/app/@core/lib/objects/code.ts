@@ -2,15 +2,15 @@ export class Code {
   text: string;
   language: string;
 
-  constructor($text: string) {
+  constructor($text: string, $language: string) {
     this.text = $text;
+    this.language = $language;
   }
 
-  public get $text(): string {
-    return this.text;
-  }
+  validate(): boolean {
+    if (!this.text || !this.language)
+      return false;
 
-  public set $text(value: string) {
-    this.text = value;
+    return true;
   }
 }

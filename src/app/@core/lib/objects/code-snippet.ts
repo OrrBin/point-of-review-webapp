@@ -21,4 +21,15 @@ export class CodeSnippet {
     this.reviews = $reviews;
     this.score = $score;
   }
+
+  validate(): boolean {
+    if (!this.title || !this.description) {
+      return false;
+    }
+
+    if (!this.code.validate())
+      return false;
+
+    return true;
+  }
 }

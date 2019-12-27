@@ -3,11 +3,11 @@ import { Code } from '../../../@core/lib/objects/code';
 import { DiffEditorModel } from 'ngx-monaco-editor';
 
 @Component({
-  selector: 'ngx-code-editor',
-  templateUrl: './code-editor.component.html',
-  styleUrls: ['./code-editor.component.scss']
+  selector: 'ngx-code-viewer',
+  templateUrl: './code-viewer.component.html',
+  styleUrls: ['./code-viewer.component.scss']
 })
-export class CodeEditorComponent implements OnInit {
+export class CodeViewerComponent implements OnInit {
 
 
   _code: Code;
@@ -21,13 +21,13 @@ export class CodeEditorComponent implements OnInit {
   set code(code: Code) {
     this._code = code;
     console.log("setting language to: " + code.language);
-    this.editorOptions = { theme: 'vs-dark', language: code.language, readOnly: false };
+    this.editorOptions = { theme: 'vs-dark', language: code.language, readOnly: true };
     this.codeChange.emit(this._code)
   }
 
   editor;
 
-  editorOptions = { theme: 'vs-dark', language: 'javascript', readOnly: false };
+  editorOptions = { theme: 'vs-dark', language: 'javascript', readOnly: true };
   codeStr: string = 'function x() {\nconsole.log("Hello world!");\n}';
   options = {
     theme: 'vs-dark'

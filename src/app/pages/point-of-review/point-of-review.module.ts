@@ -7,7 +7,7 @@ import {
   NbListModule,
   NbRouteTabsetModule,
   NbStepperModule,
-  NbTabsetModule, NbUserModule, NbIconModule,
+  NbTabsetModule, NbUserModule, NbIconModule, NbSelectModule, NbDatepickerModule, NbRadioModule, NbCheckboxModule, NbActionsModule, NbInputModule,
 } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
@@ -24,10 +24,13 @@ import { ScoreComponent } from './score/score.component';
 import { CodeEditorComponent } from './code-editor/code-editor.component';
 import { TagsComponent } from './tags/tags.component';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { CreateCodeSnippetComponent } from './create-code-snippet/create-code-snippet.component';
+import { FormsModule as ngFormsModule } from '@angular/forms';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { CodeViewerComponent } from './code-viewer/code-viewer.component';
 
 @NgModule({
   imports: [
-    FormsModule,
     ReactiveFormsModule,
     ThemeModule,
     NbTabsetModule,
@@ -39,8 +42,17 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
     NbListModule,
     NbAccordionModule,
     NbUserModule,
+    NbInputModule,
+    NbActionsModule,
+    NbCheckboxModule,
+    NbRadioModule,
+    NbDatepickerModule,
+    NbSelectModule,
+    NbIconModule,
+    ngFormsModule,
     MonacoEditorModule,
     PointOfReviewRoutingModule,
+    NgMultiSelectDropDownModule
   ],
   declarations: [
     PointOfReviewComponent,
@@ -53,6 +65,8 @@ import { MonacoEditorModule } from 'ngx-monaco-editor';
     ScoreComponent,
     CodeEditorComponent,
     TagsComponent,
+    CreateCodeSnippetComponent,
+    CodeViewerComponent,
   ],
   providers: [
     NewsService,

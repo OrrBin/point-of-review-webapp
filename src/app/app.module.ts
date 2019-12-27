@@ -12,6 +12,7 @@ import { ThemeModule } from './@theme/theme.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 import {
   NbChatModule,
@@ -43,7 +44,8 @@ import {
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
     CoreModule.forRoot(),
-    MonacoEditorModule.forRoot()
+    MonacoEditorModule.forRoot(),
+    NgMultiSelectDropDownModule.forRoot()
   ],
   bootstrap: [AppComponent],
 })

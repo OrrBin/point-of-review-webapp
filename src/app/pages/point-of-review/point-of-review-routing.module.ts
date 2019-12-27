@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PointOfReviewComponent } from './point-of-review.component';
 import { FeedComponent } from './feed/feed.component';
 import { CodeSnippetViewComponent } from './code-snippet-view/code-snippet-view.component';
+import { CreateCodeSnippetComponent } from './create-code-snippet/create-code-snippet.component';
 
 const routes: Routes = [{
   path: '',
@@ -17,6 +18,10 @@ const routes: Routes = [{
       path: 'code-snippet',
       component: CodeSnippetViewComponent,
     },
+    {
+      path: 'create-code-snippet',
+      component: CreateCodeSnippetComponent,
+    }
   ],
 }];
 

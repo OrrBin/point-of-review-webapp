@@ -1,5 +1,7 @@
 <div class="row">
-  <div *ngFor="let tag of tags" class="tag">
-    <b>{{tag.name}}</b>
+  <div *ngFor="let tag of tags" class="tag-container">
+    <button nbButton status="primary" hero>
+      {{tag.name}}
+    </button>
   </div>
 </div>

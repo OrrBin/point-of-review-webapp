@@ -50,6 +50,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'feed',
         link: '/pages/point-of-review/feed',
+      },
+      {
+        title: 'Create Code Snippet',
+        link: '/pages/point-of-review/create-code-snippet',
       }
     ],
   },
