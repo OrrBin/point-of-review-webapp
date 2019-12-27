@@ -3,7 +3,9 @@
     <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
       <nb-icon icon="menu-2-outline"></nb-icon>
     </a>
-    <a class="logo" href="#" (click)="navigateHome()">PointOf<span>&#60;Re&#62;view
+    <a class="logo" href="#" (click)="navigateHome()">
+      <img src="assets/images/point_of_review_logo.png" alt="image" height="70" width="80">
+      PointOf<span>&#60;Re&#62;view
       </span></a>
   </div>
   <nb-select [selected]="currentTheme" (selectedChange)="changeTheme($event)" status="primary">
