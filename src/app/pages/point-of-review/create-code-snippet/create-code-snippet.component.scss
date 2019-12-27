@@ -1,3 +1,12 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+
+  nb-card-body {
+    height: nb-theme(card-height-large);
+  }
+}
+
 nb-card-body {
   overflow: visible;
   padding-top: 0;

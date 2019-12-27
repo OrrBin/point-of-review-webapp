@@ -1,3 +1,10 @@
-.code-snippet-container {
-  height: 100%;
+@import '../../../@theme/styles/themes';
+
+
+@include nb-install-component() {
+
+  nb-card-body {
+    height: nb-theme(card-height-medium);
+  }
+
 }

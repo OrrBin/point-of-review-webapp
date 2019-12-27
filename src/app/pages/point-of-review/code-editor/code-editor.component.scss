@@ -1,4 +1,12 @@
+@import '../../../@theme/styles/themes';
+
 .editor-container {
   margin-top: 20px;
-  height: 100%;
+  height: nb-theme(card-height-medium);
+}
+
+.my-code-editor {
+  .editor-container {
+    height: nb-theme(card-height-medium);
+  }
 }
