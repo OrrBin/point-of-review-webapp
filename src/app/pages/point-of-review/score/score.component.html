@@ -1,14 +1,20 @@
 <div class="row show-grid">
-  <div class="col-md-2">
-    <nb-icon icon="check" pack="fa"></nb-icon>
+  <div class="col-md-3">
+    <button nbButton ghost>
+      <nb-icon icon="check" pack="fa" style="color: white;"></nb-icon>
+    </button>
     {{score.score}}
   </div>
-  <div class="col-md-2">
-    <nb-icon icon="thumbs-up" pack="fa"></nb-icon>
+  <div class="col-md-3">
+    <button nbButton ghost>
+      <nb-icon icon="thumbs-up" pack="fa" style="color: white;"></nb-icon>
+    </button>
     {{score.approves}}
   </div>
-  <div class="col-md-2">
-    <nb-icon icon="thumbs-down" pack="fa"></nb-icon>
+  <div class="col-md-3">
+    <button nbButton ghost>
+      <nb-icon icon="thumbs-down" pack="fa" style="color: white;"></nb-icon>
+    </button>
     {{score.disapproves}}
   </div>
 </div>

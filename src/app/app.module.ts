@@ -13,6 +13,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
 
 import {
   NbChatModule,
@@ -45,7 +48,9 @@ import {
     }),
     CoreModule.forRoot(),
     MonacoEditorModule.forRoot(),
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    MatButtonModule,
+    MatIconModule
   ],
   bootstrap: [AppComponent],
 })

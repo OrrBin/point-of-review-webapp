@@ -28,6 +28,9 @@ import { CreateCodeSnippetComponent } from './create-code-snippet/create-code-sn
 import { FormsModule as ngFormsModule } from '@angular/forms';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CodeViewerComponent } from './code-viewer/code-viewer.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @NgModule({
   imports: [
@@ -52,7 +55,9 @@ import { CodeViewerComponent } from './code-viewer/code-viewer.component';
     ngFormsModule,
     MonacoEditorModule,
     PointOfReviewRoutingModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    MatButtonModule,
+    MatIconModule
   ],
   declarations: [
     PointOfReviewComponent,
