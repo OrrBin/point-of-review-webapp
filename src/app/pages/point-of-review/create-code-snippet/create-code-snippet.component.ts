@@ -7,8 +7,6 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Tag } from '../../../@core/lib/objects/tag';
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
 
-
-
 @Component({
   selector: 'ngx-create-code-snippet',
   templateUrl: './create-code-snippet.component.html',
@@ -21,7 +19,7 @@ export class CreateCodeSnippetComponent implements OnInit {
   selectedTags: any[] = [];
   dropdownSettings = {};
   constructor(private codeSnippetsService: CodeSnippetsData, private toastrService: NbToastrService) {
-    this.snippet = new CodeSnippet('', '', '', new Code('', 'javascript'), [], new Score(0, 0, 0, 0));
+    this.snippet = new CodeSnippet('', '', '', new Code('', 'javascript'), [], new Score(85, null, null));
   }
 
   ngOnInit() {
@@ -83,7 +81,7 @@ export class CreateCodeSnippetComponent implements OnInit {
     this.codeSnippetsService.postSnippet(this.snippet).subscribe((snippet) => {
       console.log('got response from server to post request');
       this.successToast();
-      this.snippet = new CodeSnippet('', '', '', new Code('', 'javascript'), [], new Score(0, 0, 0, 0));
+      this.snippet = new CodeSnippet('', '', '', new Code('', 'javascript'), [], new Score(0, null, null));
     }
     );
   }

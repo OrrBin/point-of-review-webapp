@@ -1,9 +1,9 @@
 <div class="col-md-12 col-lg-12 col-xxxl-12">
   <nb-card *ngIf="snippet; else placeHolder">
-    <nb-card-header>
+    <nb-card-header (click)="choosePost()">
       <h5>{{snippet.title}}</h5>
     </nb-card-header>
-    <nb-card-body>
+    <nb-card-body (click)="choosePost()">
       <div class="desc-container">
         {{snippet.description}}
       </div>
@@ -12,7 +12,7 @@
     <nb-card-footer>
       <div class="row show-grid">
         <div class="col-md-8">
-          <ngx-score [score]="snippet.score"></ngx-score>
+          <ngx-score [score]="snippet.score" [snippet]="snippet"></ngx-score>
         </div>
         <div class="col-md-2 offset-md-2">
           <span class="user-id">{{snippet.userId}}</span>

@@ -1,14 +1,17 @@
+import {Impression} from "./impression";
+import {CodeSnippet} from "./code-snippet";
+import {Observable} from "rxjs";
+
 export class Score {
   score: number;
-  approves: number;
-  disapproves: number;
-  reports: number;
+  impressions: Map<Impression, number> ;
+  voterToImpression: Map<String, Impression> ;
 
 
-  constructor($score: number, $approves: number, $disapproves: number, $reports: number) {
+  constructor($score: number, $impressions: Map<Impression, number> , $voterToImpression: Map<String, Impression> ) {
     this.score = $score;
-    this.approves = $approves;
-    this.disapproves = $disapproves;
-    this.reports = $reports;
+    this.impressions = $impressions;
+    this.voterToImpression = $voterToImpression;
   }
+
 }

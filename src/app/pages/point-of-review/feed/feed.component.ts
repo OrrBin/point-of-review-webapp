@@ -48,9 +48,4 @@ export class FeedComponent {
       });
   }
 
-  choosePost(snippet: CodeSnippet) {
-    console.log('snippet chosen ' + snippet.id);
-    this.state.selectCodeSnippet(snippet);
-    this.router.navigate(['/pages/point-of-review/code-snippet']);
-  }
 }
