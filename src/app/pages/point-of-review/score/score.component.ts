@@ -5,7 +5,6 @@ import {CodeSnippetsData} from '../../../@core/data/code-snippets';
 import {CodeSnippet} from '../../../@core/lib/objects/code-snippet';
 import {Impression} from '../../../@core/lib/objects/impression';
 import {ImpressionRequest} from '../../../@core/lib/objects/impression-request';
-import {equal} from "assert";
 
 @Component({
   selector: 'ngx-score',
@@ -48,13 +47,21 @@ export class ScoreComponent implements OnInit {
       }
   }
   getScore(): number {
-    if (this.score.voterToImpression == null || this.score.voterToImpression.size == 0) {
+    if (this.score == null || this.score.voterToImpression == null || this.score.voterToImpression.size == 0) {
       return 0;
     }
-
-    const likesPowered = this.getImpression('LIKE');
-    const dislikes = this.getImpression('DISLIKE');
-
+    let likesPowered;
+    let dislikes;
+    if (this.score.impressions['LIKE'] == null) {
+      likesPowered = 0;
+    } else {
+      likesPowered = Math.pow(this.score.impressions['LIKE'], 2);
+    }
+    if (this.score.impressions['DISLIKE'] == null) {
+      dislikes = 0;
+    } else {
+      dislikes = this.score.impressions['DISLIKE'];
+    }
     return 100 * (likesPowered / (likesPowered + dislikes));
   }
   ngOnInit() {
