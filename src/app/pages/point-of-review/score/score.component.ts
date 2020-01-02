@@ -47,9 +47,6 @@ export class ScoreComponent implements OnInit {
       }
   }
   getScore(): number {
-    if (this.score == null || this.score.voterToImpression == null || this.score.voterToImpression.size == 0) {
-      return 0;
-    }
     let likesPowered;
     let dislikes;
     if (this.score.impressions['LIKE'] == null) {
@@ -62,7 +59,14 @@ export class ScoreComponent implements OnInit {
     } else {
       dislikes = this.score.impressions['DISLIKE'];
     }
-    return 100 * (likesPowered / (likesPowered + dislikes));
+    if (this.snippet.title=="dfdfgsdg"){
+      console.log('likesPowered');
+      console.log(likesPowered);
+      console.log('dislikes');
+      console.log(dislikes);
+    }
+
+    return (dislikes == 0 && likesPowered == 0) ? 0 : 100 * (likesPowered / (likesPowered + dislikes));
   }
   ngOnInit() {
   }
