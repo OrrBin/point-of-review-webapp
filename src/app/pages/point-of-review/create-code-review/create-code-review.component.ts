@@ -47,7 +47,7 @@ export class CreateCodeReviewComponent implements OnInit {
   newSection(): CodeReviewSection {
     let id: string = this.review == null ? '' + 0 : '' + this.review.sections.length;
     let code: Code = this.snippet == null ? new Code('', '') : new Code(this.snippet.code.text, this.snippet.code.language);
-    return new CodeReviewSection(id, '', this.snippet == null ? '' : this.snippet.id, this.review == null ? '' : this.review.id, new Score(0, 0, 0, 0), code, '', []);
+    return new CodeReviewSection(id, '', this.snippet == null ? '' : this.snippet.id, this.review == null ? '' : this.review.id, new Score(0, new Map(), new Map()), code, '', []);
   }
 
   ngOnInit() {

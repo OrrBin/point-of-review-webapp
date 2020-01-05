@@ -23,7 +23,7 @@ export class CodeSnippetViewComponent implements OnInit {
   }
 
   addCodeReview() {
-    this.state.selectCodeReview(new CodeReview('' + this.snippet.reviews.length, this.snippet.id, this.snippet.id, new Score(0, 0, 0, 0), '', [], [], []));
+    this.state.selectCodeReview(new CodeReview('' + this.snippet.reviews.length, this.snippet.id, this.snippet.id, new Score(0, new Map(), new Map()), '', [], [], []));
     this.router.navigate(['/pages/point-of-review/create-code-review']);
   }
 
