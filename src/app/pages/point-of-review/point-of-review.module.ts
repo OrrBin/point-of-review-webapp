@@ -30,6 +30,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CodeViewerComponent } from './code-viewer/code-viewer.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { CreateCodeReviewComponent } from './create-code-review/create-code-review.component';
+import { CodeReviewViewComponent } from './code-review-view/code-review-view.component';
+import { CodeCompareComponent } from './code-compare/code-compare.component';
 
 
 @NgModule({
@@ -72,6 +75,9 @@ import { MatIconModule } from '@angular/material/icon';
     TagsComponent,
     CreateCodeSnippetComponent,
     CodeViewerComponent,
+    CreateCodeReviewComponent,
+    CodeReviewViewComponent,
+    CodeCompareComponent,
   ],
   providers: [
     NewsService,

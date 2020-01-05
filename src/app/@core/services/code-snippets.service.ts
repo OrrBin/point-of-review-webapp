@@ -7,6 +7,7 @@ import { Code } from '../lib/objects/code';
 import { Score } from '../lib/objects/score';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
+import { CodeReview } from '../lib/objects/code-review';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -28,6 +29,16 @@ export class CodeSnippetsService extends CodeSnippetsData {
     console.log('sending post request for snippet:');
     console.log(snippet);
     return this.http.post<CodeSnippet>('http://localhost:8080/snippets', snippet, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+
+
+  }
+
+  postReview(review: CodeReview): Observable<CodeReview> {
+    console.log('sending post request for review:');
+    return this.http.post<CodeReview>('http://localhost:8080/reviews', review, httpOptions)
       .pipe(
         catchError(this.handleError)
       );

@@ -15,11 +15,9 @@
         <div class="col-md-8">
           <ngx-score [score]="snippet.score"></ngx-score>
         </div>
-        <div class="col-md-2 offset-md-2">
-          <span class="user-id">{{snippet.userId}}</span>
-        </div>
+        <button nbButton status="primary" hero (click)="addCodeReview()">Add Review</button>
       </div>
     </nb-card-footer>
   </nb-card>
-  <ng-template #placeHolder>Alternate text while primary text is hidden</ng-template>
+  <ng-template #placeHolder>refresh the page</ng-template>
 </div>

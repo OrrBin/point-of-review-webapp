@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { of as observableOf, Observable } from 'rxjs';
-import { CountryOrderData } from '../data/country-order';
 import { CodeSnippetsData } from '../data/code-snippets';
 import { CodeSnippet } from '../lib/objects/code-snippet';
+import { CodeReview } from '../lib/objects/code-review';
 import { Code } from '../lib/objects/code';
 import { Score } from '../lib/objects/score';
 
@@ -23,5 +23,15 @@ export class CodeSnippetsService extends CodeSnippetsData {
   postSnippet(snippet: CodeSnippet): Observable<CodeSnippet> {
     this.snippets.push(snippet);
     return observableOf(snippet);
+  }
+
+  postReview(review: CodeReview) {
+    for (let index = 0; index < this.snippets.length; index++) {
+      const snippet = this.snippets[index];
+      if (snippet.id == review.codeSnippetId)
+        snippet.reviews.push(review);
+    }
+
+    return observableOf(review);
   }
 }

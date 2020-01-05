@@ -1,0 +1,15 @@
+<div class="col-lg-12">
+  <textarea readonly nbInput fullWidth shape="round" placeholder="Description" [(ngModel)]="section.content"
+    rows="5"></textarea>
+
+  <div class="lang-container row">
+    <div class="lang-container col-lg-4">
+      <h6>Language: {{section.code.language}}</h6>
+    </div>
+
+    <ngx-tags [tags]="section.tags"></ngx-tags>
+  </div>
+  <h6 class="code-comparison">Code comparison:</h6>
+  <ngx-code-compare [originalCode]="snippet.code" [modifiedCode]="section.code">
+  </ngx-code-compare>
+</div>
