@@ -26,6 +26,12 @@ export class ScoreComponent extends AuthorizedComponentComponent {
     iconsLibrary.registerFontPack('fas', { packClass: 'fas', iconClassPrefix: 'fa' });
     iconsLibrary.registerFontPack('ion', { iconClassPrefix: 'ion' });
   }
+  ngOnInit() {
+    let vote = this.score.voterToImpression[this.currentUserName()];
+    this.toggle1 = vote == 'LIKE';
+    this.toggle2 = vote == 'DISLIKE';
+  }
+
   vote(impression: Impression): void {
     console.log('voting');
     if (impression == 0) {
@@ -42,7 +48,10 @@ export class ScoreComponent extends AuthorizedComponentComponent {
     }
     this.codeSnippetsService.updateSnippetImpressions(
       new ImpressionRequest(this.snippet, this.currentUserName(), impression)).subscribe(
-        (score) => { this.score = score; });
+        (score) => {
+          this.score = score;
+          this.snippet.score = score;
+        });
   }
   getImpression(impression: Impression): number {
     if (this.score.impressions[impression] == null) {
@@ -72,8 +81,6 @@ export class ScoreComponent extends AuthorizedComponentComponent {
     }
 
     return Math.ceil((dislikes == 0 && likesPowered == 0) ? 0 : 100 * (likesPowered / (likesPowered + dislikes)));
-  }
-  ngOnInit() {
   }
 
 }

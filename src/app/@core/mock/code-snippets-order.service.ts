@@ -10,6 +10,9 @@ import { ImpressionRequest } from "../lib/objects/impression-request";
 
 @Injectable()
 export class CodeSnippetsService extends CodeSnippetsData {
+  getCodeSnippetsByUserName(username: string): Observable<CodeSnippet[]> {
+    throw new Error("Method not implemented.");
+  }
 
   private snippets = [
     new CodeSnippet('testId1', 'Orr', 'Help me get this code better', new Code("test code 1;", 'javascript'), [], new Score(85, null, null)),

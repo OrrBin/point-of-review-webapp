@@ -48,6 +48,7 @@ export class CodeSnippetsService extends CodeSnippetsData {
   }
 
   updateSnippetImpressions(impressionRequest: ImpressionRequest): Observable<Score> {
+    console.log(impressionRequest);
     return this.http.post<Score>('http://localhost:8080/snippets/impressions', impressionRequest, httpOptions)
       .pipe(
         catchError(this.handleError),
