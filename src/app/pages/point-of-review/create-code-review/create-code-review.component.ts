@@ -9,8 +9,8 @@ import { NbComponentStatus, NbGlobalPhysicalPosition, NbToastrService } from '@n
 import { CodeReview } from '../../../@core/lib/objects/code-review';
 import { CodeReviewSection } from '../../../@core/lib/objects/code-review-section';
 import { StateService } from '../../../@core/utils';
-import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
+import { AuthorizedComponentComponent } from '../authorized-component/authorized-component.component';
 
 
 @Component({
@@ -18,15 +18,17 @@ import { Router } from '@angular/router';
   templateUrl: './create-code-review.component.html',
   styleUrls: ['./create-code-review.component.scss']
 })
-export class CreateCodeReviewComponent implements OnInit {
+export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
   snippet: CodeSnippet;
   review: CodeReview;
   section: CodeReviewSection;
   dropdownList = [];
   selectedTags: any[] = [];
   dropdownSettings = {};
-  constructor(private codeSnippetsService: CodeSnippetsData, private state: StateService, private toastrService: NbToastrService,
-    private router: Router) {
+
+  constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, private toastrService: NbToastrService,
+    router: Router) {
+    super(state, router);
     this.section = this.newSection();
     this.state.selectedCodeSnippet.subscribe((snippet) => {
       this.snippet = snippet;
@@ -39,15 +41,18 @@ export class CreateCodeReviewComponent implements OnInit {
       this.review = review;
       if (this.review) {
         this.section.codeReviewId = review.id;
-        this.section.id = '' + review.sections.length;
+        if (review.sections)
+          this.section.id = '' + review.sections.length;
+        else
+          this.section.id = '' + 0;
       }
     });
   }
 
   newSection(): CodeReviewSection {
-    let id: string = this.review == null ? '' + 0 : '' + this.review.sections.length;
+    let id: string = '';
     let code: Code = this.snippet == null ? new Code('', '') : new Code(this.snippet.code.text, this.snippet.code.language);
-    return new CodeReviewSection(id, '', this.snippet == null ? '' : this.snippet.id, this.review == null ? '' : this.review.id, new Score(0, new Map(), new Map()), code, '', []);
+    return new CodeReviewSection(id, this.currentUserName(), this.snippet == null ? '' : this.snippet.id, this.review == null ? '' : this.review.id, new Score(0, new Map(), new Map()), code, '', []);
   }
 
   ngOnInit() {
@@ -77,12 +82,6 @@ export class CreateCodeReviewComponent implements OnInit {
       allowSearchFilter: true,
     };
   }
-  onItemSelect(item: any) {
-  }
-  onSelectAll(items: any) {
-    console.log(items);
-  }
-
 
   get language(): string {
     return this.section.code.language;
@@ -93,7 +92,6 @@ export class CreateCodeReviewComponent implements OnInit {
   }
 
   submit(): void {
-    console.log('submitting section');
 
     if (!this.section.validate()) {
       this.failToast();
@@ -106,17 +104,14 @@ export class CreateCodeReviewComponent implements OnInit {
       this.section.tags.push(new Tag(this.selectedTags[index].item_text));
     }
 
-    console.log(this.section);
     this.review.sections.push(this.section);
     this.codeSnippetsService.postReview(this.review).subscribe((review) => {
-      console.log('got response from server to post review request');
       this.successToast();
       this.router.navigate(['/pages/point-of-review/feed']);
     });
   }
 
   AddCodeReviewSection() {
-    console.log('adding section section');
 
     if (!this.section.validate()) {
       this.failToast();
@@ -129,9 +124,7 @@ export class CreateCodeReviewComponent implements OnInit {
       this.section.tags.push(new Tag(this.selectedTags[index].item_text));
     }
 
-    console.log(this.section);
     this.review.sections.push(this.section);
-    console.log(this.review);
     this.section = this.newSection();
   }
   successToast() {

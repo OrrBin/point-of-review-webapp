@@ -20,17 +20,11 @@ export class CodeCompareComponent implements OnInit {
 
   set originalCode(code: Code) {
     this._originalCode = code;
-    console.log("setting language to: " + code.language);
     this.options = { theme: 'vs-dark' };
     this.originalModel = {
       code: this._originalCode.text,
       language: this._originalCode.language
     };
-
-    // this.modifiedModel = {
-    //   code: this._modifiedCode.text,
-    //   language: this._modifiedCode.language
-    // };
   }
 
   @Input()
@@ -82,8 +76,6 @@ export class CodeCompareComponent implements OnInit {
 
   onInitEditor(editor) {
     this.editor = editor;
-    console.log(editor);
     let line = editor.getPosition();
-    console.log(line);
   }
 }

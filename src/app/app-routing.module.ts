@@ -8,6 +8,7 @@ import {
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
+import { LoginPageComponent } from './pages/point-of-review/login-page/login-page.component';
 
 const routes: Routes = [
   {
@@ -21,31 +22,31 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: NbLoginComponent,
+        component: LoginPageComponent,
       },
       {
         path: 'login',
-        component: NbLoginComponent,
+        component: LoginPageComponent,
       },
       {
         path: 'register',
-        component: NbRegisterComponent,
+        component: LoginPageComponent,
       },
-      {
-        path: 'logout',
-        component: NbLogoutComponent,
-      },
-      {
-        path: 'request-password',
-        component: NbRequestPasswordComponent,
-      },
-      {
-        path: 'reset-password',
-        component: NbResetPasswordComponent,
-      },
+      // {
+      //   path: 'logout',
+      //   component: NbLogoutComponent,
+      // },
+      // {
+      //   path: 'request-password',
+      //   component: NbRequestPasswordComponent,
+      // },
+      // {
+      //   path: 'reset-password',
+      //   component: NbResetPasswordComponent,
+      // },
     ],
   },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
   { path: '**', redirectTo: 'pages' },
 ];
 

@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewChecked } from '@angular/core';
 import { CodeSnippetsData } from '../../../@core/data/code-snippets';
 import { StateService } from "../../../@core/utils";
 import { CodeSnippet } from '../../../@core/lib/objects/code-snippet';
 import { Router } from '@angular/router';
+import { User } from '../../../@core/lib/objects/user';
+import { AuthorizedComponentComponent } from '../authorized-component/authorized-component.component';
 
 @Component({
   selector: 'ngx-infinite-list',
   templateUrl: 'feed.component.html',
   styleUrls: ['feed.component.scss'],
 })
-export class FeedComponent {
+export class FeedComponent extends AuthorizedComponentComponent {
   snippetsCard = {
     news: [],
     placeholders: [],
@@ -19,20 +21,14 @@ export class FeedComponent {
   pageSize = 10;
 
   snippets: CodeSnippet[] = [];
-
-  constructor(private codeSnippetsService: CodeSnippetsData, private state: StateService, private router: Router) {
-    this.codeSnippetsService.getCodeSnippets().subscribe(nextSnippet => {
-      console.log(nextSnippet)
-    });
-  }
-
-  ngOnInit() {
+  user: User;
+  constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router) {
+    super(state, router);
     this.codeSnippetsService.getCodeSnippets()
       .subscribe(nextSnippet => {
         this.snippets.push(...nextSnippet);
       });
   }
-
 
   loadNext(cardData) {
     if (cardData.loading) { return; }

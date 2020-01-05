@@ -53,6 +53,7 @@ import { SecurityCamerasService } from './mock/security-cameras.service';
 import { MockDataModule } from './mock/mock-data.module';
 import { CodeSnippetsData } from './data/code-snippets';
 import { CodeSnippetsService } from './services/code-snippets.service';
+import { AuthService } from './services/auth.service';
 
 const socialLinks = [
   {
@@ -93,6 +94,8 @@ const DATA_SERVICES = [
   { provide: VisitorsAnalyticsData, useClass: VisitorsAnalyticsService },
   { provide: SecurityCamerasData, useClass: SecurityCamerasService },
   { provide: CodeSnippetsData, useClass: CodeSnippetsService },
+  { provide: AuthService, useClass: AuthService },
+  { provide: StateService, useClass: StateService },
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {
@@ -143,7 +146,7 @@ export const NB_CORE_PROVIDERS = [
   AnalyticsService,
   LayoutService,
   PlayerService,
-  StateService,
+  // StateService,
 ];
 
 @NgModule({

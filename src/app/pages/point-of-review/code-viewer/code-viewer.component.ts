@@ -20,7 +20,6 @@ export class CodeViewerComponent implements OnInit {
 
   set code(code: Code) {
     this._code = code;
-    console.log("setting language to: " + code.language);
     this.editorOptions = { theme: 'vs-dark', language: code.language, readOnly: true };
     this.codeChange.emit(this._code)
   }
@@ -56,8 +55,6 @@ export class CodeViewerComponent implements OnInit {
 
   onInitEditor(editor) {
     this.editor = editor;
-    console.log(editor);
     let line = editor.getPosition();
-    console.log(line);
   }
 }

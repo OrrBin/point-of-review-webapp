@@ -6,20 +6,29 @@ import { CodeSnippetsData } from '../../../@core/data/code-snippets';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Tag } from '../../../@core/lib/objects/tag';
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { StateService } from '../../../@core/utils';
+import { Router } from '@angular/router';
+import { AuthorizedComponentComponent } from '../authorized-component/authorized-component.component';
 
 @Component({
   selector: 'ngx-create-code-snippet',
   templateUrl: './create-code-snippet.component.html',
   styleUrls: ['./create-code-snippet.component.scss']
 })
-export class CreateCodeSnippetComponent implements OnInit {
+export class CreateCodeSnippetComponent extends AuthorizedComponentComponent {
 
   snippet: CodeSnippet;
   dropdownList = [];
   selectedTags: any[] = [];
   dropdownSettings = {};
-  constructor(private codeSnippetsService: CodeSnippetsData, private toastrService: NbToastrService) {
+  constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router, private toastrService: NbToastrService) {
+    super(state, router);
     this.snippet = new CodeSnippet('', '', '', new Code('', 'javascript'), [], new Score(85, null, null));
+    this.state.user.subscribe(user => {
+      if (user) {
+        this.snippet = new CodeSnippet('', this.currentUserName(), '', new Code('', 'javascript'), [], new Score(85, null, null));
+      }
+    });
   }
 
   ngOnInit() {
@@ -48,12 +57,6 @@ export class CreateCodeSnippetComponent implements OnInit {
       allowSearchFilter: true,
     };
   }
-  onItemSelect(item: any) {
-  }
-  onSelectAll(items: any) {
-    console.log(items);
-  }
-
 
   get language(): string {
     return this.snippet.code.language;
@@ -64,8 +67,6 @@ export class CreateCodeSnippetComponent implements OnInit {
   }
 
   submit(): void {
-    console.log('submitting snippet');
-
     if (!this.snippet.validate()) {
       this.failToast();
       return;
@@ -77,11 +78,9 @@ export class CreateCodeSnippetComponent implements OnInit {
       this.snippet.tags.push(new Tag(this.selectedTags[index].item_text));
     }
 
-    console.log(this.snippet);
     this.codeSnippetsService.postSnippet(this.snippet).subscribe((snippet) => {
-      console.log('got response from server to post request');
       this.successToast();
-      this.snippet = new CodeSnippet('', '', '', new Code('', 'javascript'), [], new Score(0, null, null));
+      this.snippet = new CodeSnippet('', this.currentUserName(), '', new Code('', 'javascript'), [], new Score(0, null, null));
     }
     );
   }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { of as observableOf, Observable, throwError } from 'rxjs';
-import { CountryOrderData } from '../data/country-order';
+import { Observable, throwError } from 'rxjs';
 import { CodeSnippetsData } from '../data/code-snippets';
 import { CodeSnippet } from '../lib/objects/code-snippet';
 import { Code } from '../lib/objects/code';
@@ -28,8 +27,6 @@ export class CodeSnippetsService extends CodeSnippetsData {
   }
 
   postSnippet(snippet: CodeSnippet): Observable<CodeSnippet> {
-    console.log('sending post request for snippet:');
-    console.log(snippet);
     return this.http.post<CodeSnippet>('http://localhost:8080/snippets', snippet, httpOptions)
       .pipe(
         catchError(this.handleError),
@@ -39,7 +36,6 @@ export class CodeSnippetsService extends CodeSnippetsData {
   }
 
   postReview(review: CodeReview): Observable<CodeReview> {
-    console.log('sending post request for review:');
     return this.http.post<CodeReview>('http://localhost:8080/reviews', review, httpOptions)
       .pipe(
         catchError(this.handleError)
