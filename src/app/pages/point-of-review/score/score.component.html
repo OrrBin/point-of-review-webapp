@@ -3,18 +3,18 @@
     <button nbButton ghost>
       <nb-icon icon="check" pack="fa" style="color: white;"></nb-icon>
     </button>
-    {{score.score}}
+    {{getScore()}}
   </div>
   <div class="col-md-3">
-    <button nbButton ghost>
-      <nb-icon icon="thumbs-up" pack="fa" style="color: white;"></nb-icon>
+    <button nbButton ghost [style.background-color]="toggle1 || this.score.voterToImpression['2'] == 'LIKE' ? 'blue' : 'rgba(0, 0, 0, 0)'" (click)="vote(2, 0)">
+      <nb-icon icon="thumbs-up"  pack="fa" style="color: white;"></nb-icon>
     </button>
-    {{score.approves}}
+    {{getImpression('LIKE')}}
   </div>
   <div class="col-md-3">
-    <button nbButton ghost>
+    <button nbButton ghost [style.background-color]="toggle2 || this.score.voterToImpression['2'] == 'DISLIKE' ? 'blue' : 'rgba(0, 0, 0, 0)'" (click)="vote(2, 1)">
       <nb-icon icon="thumbs-down" pack="fa" style="color: white;"></nb-icon>
     </button>
-    {{score.disapproves}}
+    {{getImpression('DISLIKE')}}
   </div>
 </div>

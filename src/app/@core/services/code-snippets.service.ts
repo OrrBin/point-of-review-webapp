@@ -8,6 +8,8 @@ import { Score } from '../lib/objects/score';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { CodeReview } from '../lib/objects/code-review';
+import { Impression } from '../lib/objects/impression';
+import { ImpressionRequest } from '../lib/objects/impression-request';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -30,7 +32,7 @@ export class CodeSnippetsService extends CodeSnippetsData {
     console.log(snippet);
     return this.http.post<CodeSnippet>('http://localhost:8080/snippets', snippet, httpOptions)
       .pipe(
-        catchError(this.handleError)
+        catchError(this.handleError),
       );
 
 
@@ -43,6 +45,13 @@ export class CodeSnippetsService extends CodeSnippetsData {
         catchError(this.handleError)
       );
 
+  }
+
+  updateSnippetImpressions(impressionRequest: ImpressionRequest): Observable<Score> {
+    return this.http.post<Score>('http://localhost:8080/snippets/impressions', impressionRequest, httpOptions)
+      .pipe(
+        catchError(this.handleError),
+      );
 
   }
 
@@ -60,5 +69,5 @@ export class CodeSnippetsService extends CodeSnippetsData {
     // return an observable with a user-facing error message
     return throwError(
       'Something bad happened; please try again later.');
-  };
+  }
 }

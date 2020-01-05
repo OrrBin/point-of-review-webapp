@@ -13,7 +13,7 @@
     <nb-card-footer>
       <div class="row show-grid">
         <div class="col-md-8">
-          <ngx-score [score]="snippet.score"></ngx-score>
+          <ngx-score [score]="snippet.score" [snippet]="snippet"></ngx-score>
         </div>
         <button nbButton status="primary" hero (click)="addCodeReview()">Add Review</button>
       </div>
