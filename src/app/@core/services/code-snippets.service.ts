@@ -26,6 +26,10 @@ export class CodeSnippetsService extends CodeSnippetsData {
     return this.http.get<CodeSnippet[]>('http://localhost:8080/snippets/popular');
   }
 
+  getCodeSnippetsByUserName(username: string): Observable<CodeSnippet[]> {
+    return this.http.get<CodeSnippet[]>(`http://localhost:8080/snippets/users/${username}`);
+  }
+
   postSnippet(snippet: CodeSnippet): Observable<CodeSnippet> {
     return this.http.post<CodeSnippet>('http://localhost:8080/snippets', snippet, httpOptions)
       .pipe(

@@ -35,6 +35,7 @@ import { CodeCompareComponent } from './code-compare/code-compare.component';
 import { CodeReviewsViewComponent } from './code-reviews-view/code-reviews-view.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { AuthorizedComponentComponent } from './authorized-component/authorized-component.component';
+import { PersonalFeedComponent } from './personal-feed/personal-feed.component';
 
 
 @NgModule({
@@ -81,6 +82,7 @@ import { AuthorizedComponentComponent } from './authorized-component/authorized-
     CodeCompareComponent,
     CodeReviewsViewComponent,
     AuthorizedComponentComponent,
+    PersonalFeedComponent,
   ],
   providers: [
     NewsService,

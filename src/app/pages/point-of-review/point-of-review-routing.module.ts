@@ -8,6 +8,7 @@ import { CreateCodeSnippetComponent } from './create-code-snippet/create-code-sn
 import { CreateCodeReviewComponent } from './create-code-review/create-code-review.component';
 import { CodeReviewsViewComponent } from './code-reviews-view/code-reviews-view.component';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { PersonalFeedComponent } from './personal-feed/personal-feed.component';
 
 const routes: Routes = [{
   path: '',
@@ -16,6 +17,10 @@ const routes: Routes = [{
     {
       path: 'feed',
       component: FeedComponent,
+    },
+    {
+      path: 'personal-feed',
+      component: PersonalFeedComponent
     },
     {
       path: 'code-snippet',
@@ -32,7 +37,7 @@ const routes: Routes = [{
     {
       path: 'code-review-view',
       component: CodeReviewsViewComponent
-    }
+    },
   ],
 }];
 
