@@ -1,0 +1,56 @@
+<div class="row sections-row">
+  <div class="col-lg-12">
+    <nb-accordion>
+      <nb-accordion-item *ngFor="let section of review.sections">
+        <nb-accordion-item-header>
+          section number {{section.id}}
+        </nb-accordion-item-header>
+        <nb-accordion-item-body>
+          <ngx-code-review-view [snippet]="snippet" [review]="review" [section]="section"></ngx-code-review-view>
+        </nb-accordion-item-body>
+      </nb-accordion-item>
+    </nb-accordion>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-header>Add code review section number {{section.id}}</nb-card-header>
+      <nb-card-body>
+        <textarea nbInput fullWidth shape="round" placeholder="Description" [(ngModel)]="section.content"
+          rows="5"></textarea>
+
+        <div class="row">
+          <div class="col-lg-2">
+            <nb-select [(selected)]="language">
+              <nb-option value="javascript">Javascript</nb-option>
+              <nb-option value="java">Java</nb-option>
+              <nb-option value="typescript">TypeScript</nb-option>
+            </nb-select>
+          </div>
+
+          <div class="col-lg-10 drop-down-list-container">
+            <ng-multiselect-dropdown [placeholder]="'Tags'" [data]="dropdownList" [(ngModel)]="selectedTags"
+              [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+            </ng-multiselect-dropdown>
+          </div>
+        </div>
+        <h6>Code:</h6>
+        <ngx-code-editor [(code)]="section.code"></ngx-code-editor>
+      </nb-card-body>
+      <nb-card-footer>
+        <div class="row">
+          <div class="col-lg-4">
+            <button nbButton status="primary" hero (click)="AddCodeReviewSection()">
+              Add another review section
+            </button>
+          </div>
+          <div class="col-lg-6">
+            <button nbButton status="warning" hero (click)="submit()">
+              Submmit Code Review
+            </button>
+          </div>
+        </div>
+      </nb-card-footer>
+    </nb-card>
+  </div>

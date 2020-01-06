@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { of as observableOf, Observable } from 'rxjs';
-import { CountryOrderData } from '../data/country-order';
 import { CodeSnippetsData } from '../data/code-snippets';
 import { CodeSnippet } from '../lib/objects/code-snippet';
+import { CodeReview } from '../lib/objects/code-review';
 import { Code } from '../lib/objects/code';
 import { Score } from '../lib/objects/score';
-import {Impression} from "../lib/objects/impression";
-import {ImpressionRequest} from "../lib/objects/impression-request";
+import { Impression } from "../lib/objects/impression";
+import { ImpressionRequest } from "../lib/objects/impression-request";
 
 @Injectable()
 export class CodeSnippetsService extends CodeSnippetsData {
+  getCodeSnippetsByUserName(username: string): Observable<CodeSnippet[]> {
+    throw new Error("Method not implemented.");
+  }
 
   private snippets = [
     new CodeSnippet('testId1', 'Orr', 'Help me get this code better', new Code("test code 1;", 'javascript'), [], new Score(85, null, null)),
@@ -27,7 +30,18 @@ export class CodeSnippetsService extends CodeSnippetsData {
     return observableOf(snippet);
   }
 
+  postReview(review: CodeReview) {
+    for (let index = 0; index < this.snippets.length; index++) {
+      const snippet = this.snippets[index];
+      if (snippet.id == review.codeSnippetId)
+        snippet.reviews.push(review);
+    }
+
+    return observableOf(review);
+  }
+
   updateSnippetImpressions(impressionRequest: ImpressionRequest): Observable<Score> {
     return undefined; // TODO
+
   }
 }

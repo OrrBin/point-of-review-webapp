@@ -1,4 +1,5 @@
 <div class="col-md-12 col-lg-12 col-xxxl-12">
+  <h1>{{currentUserName()}}'s posts</h1>
   <nb-list listenWindowScroll>
     <nb-list-item *ngFor="let codeSnippetPost of snippets">
       <ngx-code-snippet-post [snippet]="codeSnippetPost">

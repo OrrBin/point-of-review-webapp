@@ -25,16 +25,20 @@ import {
   NbSidebarModule,
   NbToastrModule,
   NbWindowModule,
+  NbInputModule,
+  NbButtonModule,
 } from '@nebular/theme';
+import { LoginPageComponent } from './pages/point-of-review/login-page/login-page.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginPageComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-
+    FormsModule,
     ThemeModule.forRoot(),
 
     NbSidebarModule.forRoot(),
@@ -50,7 +54,9 @@ import {
     MonacoEditorModule.forRoot(),
     NgMultiSelectDropDownModule.forRoot(),
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    NbInputModule,
+    NbButtonModule
   ],
   bootstrap: [AppComponent],
 })

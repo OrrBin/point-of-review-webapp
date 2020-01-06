@@ -6,32 +6,57 @@ import { CodeSnippetsData } from '../../../@core/data/code-snippets';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Tag } from '../../../@core/lib/objects/tag';
 import { NbComponentStatus, NbGlobalPhysicalPosition, NbToastrService } from '@nebular/theme';
+import { CodeReview } from '../../../@core/lib/objects/code-review';
+import { CodeReviewSection } from '../../../@core/lib/objects/code-review-section';
 import { StateService } from '../../../@core/utils';
 import { Router } from '@angular/router';
 import { AuthorizedComponentComponent } from '../authorized-component/authorized-component.component';
 
-@Component({
-  selector: 'ngx-create-code-snippet',
-  templateUrl: './create-code-snippet.component.html',
-  styleUrls: ['./create-code-snippet.component.scss']
-})
-export class CreateCodeSnippetComponent extends AuthorizedComponentComponent {
 
+@Component({
+  selector: 'ngx-create-code-review',
+  templateUrl: './create-code-review.component.html',
+  styleUrls: ['./create-code-review.component.scss']
+})
+export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
   snippet: CodeSnippet;
+  review: CodeReview;
+  section: CodeReviewSection;
   dropdownList = [];
   selectedTags: any[] = [];
   dropdownSettings = {};
-  constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router, private toastrService: NbToastrService) {
+
+  constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, private toastrService: NbToastrService,
+    router: Router) {
     super(state, router);
-    this.snippet = new CodeSnippet('', '', '', new Code('', 'javascript'), [], new Score(85, null, null));
-    this.state.user.subscribe(user => {
-      if (user) {
-        this.snippet = new CodeSnippet('', this.currentUserName(), '', new Code('', 'javascript'), [], new Score(85, null, null));
+    this.section = this.newSection();
+    this.state.selectedCodeSnippet.subscribe((snippet) => {
+      this.snippet = snippet;
+      if (this.snippet) {
+        this.section.codeSnippetId = snippet.id;
+        this.section.code = new Code(this.snippet.code.text, this.snippet.code.language);
+      }
+    });
+    this.state.selectedCodeReview.subscribe((review) => {
+      this.review = review;
+      if (this.review) {
+        this.section.codeReviewId = review.id;
+        if (review.sections)
+          this.section.id = '' + review.sections.length;
+        else
+          this.section.id = '' + 0;
       }
     });
   }
 
+  newSection(): CodeReviewSection {
+    let id: string = '';
+    let code: Code = this.snippet == null ? new Code('', '') : new Code(this.snippet.code.text, this.snippet.code.language);
+    return new CodeReviewSection(id, this.currentUserName(), this.snippet == null ? '' : this.snippet.id, this.review == null ? '' : this.review.id, new Score(0, new Map(), new Map()), code, '', []);
+  }
+
   ngOnInit() {
+
     this.dropdownList = [
       { item_id: 1, item_text: 'javascript' },
       { item_id: 2, item_text: 'java' },
@@ -59,35 +84,52 @@ export class CreateCodeSnippetComponent extends AuthorizedComponentComponent {
   }
 
   get language(): string {
-    return this.snippet.code.language;
+    return this.section.code.language;
   }
 
   set language(lang: string) {
-    this.snippet.code = new Code(this.snippet.code.text, lang);
+    this.section.code = new Code(this.section.code.text, lang);
   }
 
   submit(): void {
-    if (!this.snippet.validate()) {
+
+    if (!this.section.validate()) {
       this.failToast();
       return;
     }
 
-    if (!this.snippet.tags)
-      this.snippet.tags = [];
+    if (!this.section.tags)
+      this.section.tags = [];
     for (let index = 0; index < this.selectedTags.length; index++) {
-      this.snippet.tags.push(new Tag(this.selectedTags[index].item_text));
+      this.section.tags.push(new Tag(this.selectedTags[index].item_text));
     }
 
-    this.codeSnippetsService.postSnippet(this.snippet).subscribe((snippet) => {
+    this.review.sections.push(this.section);
+    this.codeSnippetsService.postReview(this.review).subscribe((review) => {
       this.successToast();
-      this.snippet = new CodeSnippet('', this.currentUserName(), '', new Code('', 'javascript'), [], new Score(0, null, null));
-    }
-    );
+      this.router.navigate(['/pages/point-of-review/feed']);
+    });
   }
 
+  AddCodeReviewSection() {
+
+    if (!this.section.validate()) {
+      this.failToast();
+      return;
+    }
+
+    if (!this.section.tags)
+      this.section.tags = [];
+    for (let index = 0; index < this.selectedTags.length; index++) {
+      this.section.tags.push(new Tag(this.selectedTags[index].item_text));
+    }
+
+    this.review.sections.push(this.section);
+    this.section = this.newSection();
+  }
   successToast() {
     let status: NbComponentStatus = 'primary';
-    this.showToast(status, 'congrats!', 'Your code snippet was created succesfuly');
+    this.showToast(status, 'congrats!', 'Your code review was created succesfuly');
   }
 
   failToast() {

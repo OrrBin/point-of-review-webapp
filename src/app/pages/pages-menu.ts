@@ -2,9 +2,16 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'Popular posts',
+    title: 'Recent posts',
     icon: 'menu-outline',
     link: '/pages/point-of-review/feed',
+    home: true,
+
+  },
+  {
+    title: 'Personal posts',
+    icon: 'person-outline',
+    link: '/pages/point-of-review/personal-feed',
     home: true,
 
   },

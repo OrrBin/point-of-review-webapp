@@ -1,5 +1,5 @@
 export enum Impression {
-  LIKE,
-  DISLIKE,
-  REPORT,
+  LIKE = 0,
+  DISLIKE = 1,
+  REPORT = 2,
 }

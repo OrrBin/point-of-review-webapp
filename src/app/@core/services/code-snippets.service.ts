@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { of as observableOf, Observable, throwError } from 'rxjs';
-import { CountryOrderData } from '../data/country-order';
+import { Observable, throwError } from 'rxjs';
 import { CodeSnippetsData } from '../data/code-snippets';
 import { CodeSnippet } from '../lib/objects/code-snippet';
 import { Code } from '../lib/objects/code';
 import { Score } from '../lib/objects/score';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import {Impression} from '../lib/objects/impression';
-import {ImpressionRequest} from '../lib/objects/impression-request';
+import { CodeReview } from '../lib/objects/code-review';
+import { Impression } from '../lib/objects/impression';
+import { ImpressionRequest } from '../lib/objects/impression-request';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -26,9 +26,11 @@ export class CodeSnippetsService extends CodeSnippetsData {
     return this.http.get<CodeSnippet[]>('http://localhost:8080/snippets/popular');
   }
 
+  getCodeSnippetsByUserName(username: string): Observable<CodeSnippet[]> {
+    return this.http.get<CodeSnippet[]>(`http://localhost:8080/snippets/users/${username}`);
+  }
+
   postSnippet(snippet: CodeSnippet): Observable<CodeSnippet> {
-    console.log('sending post request for snippet:');
-    console.log(snippet);
     return this.http.post<CodeSnippet>('http://localhost:8080/snippets', snippet, httpOptions)
       .pipe(
         catchError(this.handleError),
@@ -37,7 +39,16 @@ export class CodeSnippetsService extends CodeSnippetsData {
 
   }
 
+  postReview(review: CodeReview): Observable<CodeReview> {
+    return this.http.post<CodeReview>('http://localhost:8080/reviews', review, httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+
+  }
+
   updateSnippetImpressions(impressionRequest: ImpressionRequest): Observable<Score> {
+    console.log(impressionRequest);
     return this.http.post<Score>('http://localhost:8080/snippets/impressions', impressionRequest, httpOptions)
       .pipe(
         catchError(this.handleError),

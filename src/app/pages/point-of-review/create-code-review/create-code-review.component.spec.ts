@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CodeReviewComponent } from './code-review.component';
+import { CreateCodeReviewComponent } from './create-code-review.component';
 
-describe('CodeReviewComponent', () => {
-  let component: CodeReviewComponent;
-  let fixture: ComponentFixture<CodeReviewComponent>;
+describe('CreateCodeReviewComponent', () => {
+  let component: CreateCodeReviewComponent;
+  let fixture: ComponentFixture<CreateCodeReviewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CodeReviewComponent ]
+      declarations: [ CreateCodeReviewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CodeReviewComponent);
+    fixture = TestBed.createComponent(CreateCodeReviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

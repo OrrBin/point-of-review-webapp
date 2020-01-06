@@ -18,7 +18,6 @@ import { CodeSnippetPostComponent } from './feed/code-snippet-post/code-snippet-
 import { NewsPostPlaceholderComponent } from './feed/code-snippet-post-placeholder/code-snippet-post-placeholder.component';
 import { NewsService } from './news.service';
 import { CodeSnippetViewComponent } from './code-snippet-view/code-snippet-view.component';
-import { CodeReviewComponent } from './code-review/code-review.component';
 import { CommentComponent } from './comment/comment.component';
 import { ScoreComponent } from './score/score.component';
 import { CodeEditorComponent } from './code-editor/code-editor.component';
@@ -30,6 +29,13 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CodeViewerComponent } from './code-viewer/code-viewer.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { CreateCodeReviewComponent } from './create-code-review/create-code-review.component';
+import { CodeReviewViewComponent } from './code-review-view/code-review-view.component';
+import { CodeCompareComponent } from './code-compare/code-compare.component';
+import { CodeReviewsViewComponent } from './code-reviews-view/code-reviews-view.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { AuthorizedComponentComponent } from './authorized-component/authorized-component.component';
+import { PersonalFeedComponent } from './personal-feed/personal-feed.component';
 import { ChartComponent } from './chart/chart.component';
 import {ChartsModule} from '../charts/charts.module';
 import {ChartModule} from 'angular2-chartjs';
@@ -71,13 +77,18 @@ import {ChartPieComponent} from './chart/chart-pie.component';
     FeedComponent,
     CodeSnippetPostComponent,
     CodeSnippetViewComponent,
-    CodeReviewComponent,
     CommentComponent,
     ScoreComponent,
     CodeEditorComponent,
     TagsComponent,
     CreateCodeSnippetComponent,
     CodeViewerComponent,
+    CreateCodeReviewComponent,
+    CodeReviewViewComponent,
+    CodeCompareComponent,
+    CodeReviewsViewComponent,
+    AuthorizedComponentComponent,
+    PersonalFeedComponent,
     ChartComponent,
     ChartPieComponent,
   ],

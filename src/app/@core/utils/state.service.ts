@@ -6,6 +6,7 @@ import { NbLayoutDirectionService, NbLayoutDirection } from '@nebular/theme';
 import { CodeSnippet } from '../lib/objects/code-snippet';
 import { CodeReview } from '../lib/objects/code-review';
 import { CodeReviewSection } from '../lib/objects/code-review-section';
+import { User } from '../lib/objects/user';
 
 @Injectable()
 export class StateService implements OnDestroy {
@@ -14,8 +15,13 @@ export class StateService implements OnDestroy {
   selectedCodeReview = new BehaviorSubject<CodeReview>(null);
   selectedCodeReviewSection = new BehaviorSubject<CodeReviewSection>(null);
 
+  user = new BehaviorSubject<User>(null);
+
+  selectUser(user: User) {
+    this.user.next(user);
+  }
+
   selectCodeSnippet(snippet: CodeSnippet) {
-    console.log('selected snippet with id ' + snippet.id);
     this.selectedCodeSnippet.next(snippet);
   }
 

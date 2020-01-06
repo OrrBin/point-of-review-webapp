@@ -1,5 +1,5 @@
-<div class="col-md-12 col-lg-12 col-xxxl-12 code-snippet-container">
-  <nb-card *ngIf="snippet; else placeHolder" class="code-snippet-container">
+<div *ngIf="snippet; else placeHolder" class="col-md-12 col-lg-12 col-xxxl-12 code-snippet-container">
+  <nb-card class="code-snippet-container">
     <nb-card-header>
       <h5>{{snippet.description}}</h5>
     </nb-card-header>
@@ -15,11 +15,19 @@
         <div class="col-md-8">
           <ngx-score [score]="snippet.score" [snippet]="snippet"></ngx-score>
         </div>
-        <div class="col-md-2 offset-md-2">
-          <span class="user-id">{{snippet.userId}}</span>
-        </div>
+        <button nbButton status="primary" hero (click)="addCodeReview()">Add Review</button>
       </div>
     </nb-card-footer>
   </nb-card>
-  <ng-template #placeHolder>Alternate text while primary text is hidden</ng-template>
+  <nb-list listenWindowScroll>
+    <nb-list-item *ngFor="let review of snippet.reviews">
+      <nb-card (click)="chooseReview(review)">
+        <nb-card-body>
+          Review by {{review.userId}}
+        </nb-card-body>
+      </nb-card>
+    </nb-list-item>
+  </nb-list>
+
 </div>
+<ng-template #placeHolder>refresh the page</ng-template>

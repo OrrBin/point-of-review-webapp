@@ -6,13 +6,13 @@
     {{getScore()}}
   </div>
   <div class="col-md-3">
-    <button nbButton ghost [style.background-color]="toggle1 || this.score.voterToImpression['2'] == 'LIKE' ? 'blue' : 'rgba(0, 0, 0, 0)'" (click)="vote(2, 0)">
-      <nb-icon icon="thumbs-up"  pack="fa" style="color: white;"></nb-icon>
+    <button nbButton ghost [style.background-color]="toggle1 ? 'blue' : 'rgba(0, 0, 0, 0)'" (click)="vote(0)">
+      <nb-icon icon="thumbs-up" pack="fa" style="color: white;"></nb-icon>
     </button>
     {{getImpression('LIKE')}}
   </div>
   <div class="col-md-3">
-    <button nbButton ghost [style.background-color]="toggle2 || this.score.voterToImpression['2'] == 'DISLIKE' ? 'blue' : 'rgba(0, 0, 0, 0)'" (click)="vote(2, 1)">
+    <button nbButton ghost [style.background-color]="toggle2 ? 'blue' : 'rgba(0, 0, 0, 0)'" (click)="vote(1)">
       <nb-icon icon="thumbs-down" pack="fa" style="color: white;"></nb-icon>
     </button>
     {{getImpression('DISLIKE')}}

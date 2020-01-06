@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 
 import { CodeSnippet } from '../../../../@core/lib/objects/code-snippet';
-import {CodeSnippetsData} from "../../../../@core/data/code-snippets";
-import {StateService} from "../../../../@core/utils";
-import {Router} from "@angular/router";
+import { CodeSnippetsData } from "../../../../@core/data/code-snippets";
+import { StateService } from "../../../../@core/utils";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'ngx-code-snippet-post',
@@ -18,7 +18,6 @@ export class CodeSnippetPostComponent {
   }
 
   choosePost() {
-    console.log('snippet chosen ' + this.snippet.id);
     this.state.selectCodeSnippet(this.snippet);
     this.router.navigate(['/pages/point-of-review/code-snippet']);
   }

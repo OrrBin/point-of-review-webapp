@@ -1,17 +1,17 @@
-import { Component, AfterViewChecked } from '@angular/core';
-import { CodeSnippetsData } from '../../../@core/data/code-snippets';
-import { StateService } from "../../../@core/utils";
+import { Component, OnInit } from '@angular/core';
 import { CodeSnippet } from '../../../@core/lib/objects/code-snippet';
-import { Router } from '@angular/router';
 import { User } from '../../../@core/lib/objects/user';
-import { AuthorizedComponentComponent } from '../authorized-component/authorized-component.component';
+import { CodeSnippetsData } from '../../../@core/data/code-snippets';
+import { StateService } from '../../../@core/utils';
+import { Router } from '@angular/router';
+import { AuthorizedComponentComponent as AuthorizedComponent } from '../authorized-component/authorized-component.component';
 
 @Component({
-  selector: 'ngx-infinite-list',
-  templateUrl: 'feed.component.html',
-  styleUrls: ['feed.component.scss'],
+  selector: 'ngx-personal-feed',
+  templateUrl: './personal-feed.component.html',
+  styleUrls: ['./personal-feed.component.scss']
 })
-export class FeedComponent extends AuthorizedComponentComponent {
+export class PersonalFeedComponent extends AuthorizedComponent {
   snippetsCard = {
     news: [],
     placeholders: [],
@@ -24,7 +24,7 @@ export class FeedComponent extends AuthorizedComponentComponent {
   user: User;
   constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router) {
     super(state, router);
-    this.codeSnippetsService.getCodeSnippets()
+    this.codeSnippetsService.getCodeSnippetsByUserName(this.currentUserName())
       .subscribe(nextSnippet => {
         this.snippets.push(...nextSnippet);
       });
@@ -35,7 +35,7 @@ export class FeedComponent extends AuthorizedComponentComponent {
 
     cardData.loading = true;
     cardData.placeholders = new Array(this.pageSize);
-    this.codeSnippetsService.getCodeSnippets()
+    this.codeSnippetsService.getCodeSnippetsByUserName(this.currentUserName())
       .subscribe(nextSnippet => {
         cardData.placeholders = [];
         cardData.news.push(...nextSnippet);
