@@ -1,7 +1,8 @@
 @import '../../../@theme/styles/themes';
 
 @include nb-install-component() {
-  ngx-chart-pie {
+  ngx-chart-pie,
+  ngx-chart-bar {
     display: block;
     height: nb-theme(card-height-medium);
     width: 100%;

@@ -1,70 +1,117 @@
-import { Component, OnDestroy } from '@angular/core';
+import {Component, Input, OnDestroy} from '@angular/core';
 import { NbThemeService, NbColorHelper } from '@nebular/theme';
+import {StatisticsData} from '../../../@core/data/statistics';
+import {Stat} from '../../../@core/lib/objects/stat';
 
 @Component({
-  selector: 'ngx-chartjs-bar',
+  selector: 'ngx-chart-bar',
   template: `
-    <chart type="bar" [data]="data" [options]="options"></chart>
+    <div echarts [options]="options" class="echart"></div>
   `,
 })
 export class ChartBarComponent implements OnDestroy {
+  @Input() statType: String;
   data: any;
   options: any;
   themeSubscription: any;
+  stats: Stat[] = [];
 
-  constructor(private theme: NbThemeService) {
+  constructor(private theme: NbThemeService, private statisticsService: StatisticsData) {
+  }
+
+  createBar() {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
 
       const colors: any = config.variables;
-      const chartjs: any = config.variables.chartjs;
+      const echarts: any = config.variables.echarts;
+      const stats: Stat[] = this.stats;
 
-      this.data = {
-        labels: ['2006', '2007', '2008', '2009', '2010', '2011', '2012'],
-        datasets: [{
-          data: [65, 59, 80, 81, 56, 55, 40],
-          label: 'Series A',
-          backgroundColor: NbColorHelper.hexToRgbA(colors.primaryLight, 0.8),
-        }, {
-          data: [28, 48, 40, 19, 86, 27, 90],
-          label: 'Series B',
-          backgroundColor: NbColorHelper.hexToRgbA(colors.infoLight, 0.8),
-        }],
-      };
+      const labels: String[] = []
+      const amount: Number[] = []
+      for (let i = 0; i < stats.length; i++) {
+        labels[i] = stats[i].tagName;
+      }
+
+      for (let i = 0; i <  stats.length; i++) {
+        amount[i] = stats[i].amount;
+      }
+
+      console.log('create bar from: ' + this.stats);
 
       this.options = {
-        maintainAspectRatio: false,
-        responsive: true,
-        legend: {
-          labels: {
-            fontColor: chartjs.textColor,
+        backgroundColor: echarts.bg,
+        color: [colors.primaryLight],
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow',
           },
         },
-        scales: {
-          xAxes: [
-            {
-              gridLines: {
-                display: false,
-                color: chartjs.axisLineColor,
-              },
-              ticks: {
-                fontColor: chartjs.textColor,
-              },
-            },
-          ],
-          yAxes: [
-            {
-              gridLines: {
-                display: true,
-                color: chartjs.axisLineColor,
-              },
-              ticks: {
-                fontColor: chartjs.textColor,
-              },
-            },
-          ],
+        grid: {
+          left: '3%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true,
         },
+        xAxis: [
+          {
+            type: 'category',
+            data: labels,
+            axisTick: {
+              alignWithLabel: true,
+            },
+            axisLine: {
+              lineStyle: {
+                color: echarts.axisLineColor,
+              },
+            },
+            axisLabel: {
+              textStyle: {
+                color: echarts.textColor,
+              },
+            },
+          },
+        ],
+        yAxis: [
+          {
+            type: 'value',
+            axisLine: {
+              lineStyle: {
+                color: echarts.axisLineColor,
+              },
+            },
+            splitLine: {
+              lineStyle: {
+                color: echarts.splitLineColor,
+              },
+            },
+            axisLabel: {
+              textStyle: {
+                color: echarts.textColor,
+              },
+            },
+          },
+        ],
+        series: [
+          {
+            name: 'posts',
+            type: 'bar',
+            barWidth: '60%',
+            data: amount,
+          },
+        ],
       };
     });
+  }
+
+  ngOnInit() {
+    this.statisticsService.getStatistics(this.statType)
+      .subscribe(stat => {
+        console.log('stat from server');
+        console.log(stat);
+        this.stats = stat;
+        this.createBar();
+      });
   }
 
   ngOnDestroy(): void {

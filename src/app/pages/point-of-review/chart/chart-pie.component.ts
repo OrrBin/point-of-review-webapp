@@ -10,11 +10,11 @@ import {Color, color, RGBColor, RGBColorFactory} from 'd3-color';
 @Component({
   selector: 'ngx-chart-pie',
   template: `
-    <chart type="pie" [data]="data" [options]="options"></chart>
+    <div echarts [options]="options" class="echart"></div>
   `,
 })
 export class ChartPieComponent implements OnDestroy {
-  // @Input() statType;
+  @Input() statType: String;
   data: any;
   options: any;
   themeSubscription: any;
@@ -27,56 +27,76 @@ export class ChartPieComponent implements OnDestroy {
     this.themeSubscription = this.theme.getJsTheme().subscribe(config => {
 
       const colors: any = config.variables;
-      const chartjs: any = config.variables.chartjs;
+      const echarts: any = config.variables.echarts;
       const stats: Stat[] = this.stats;
 
       const labels: String[] = []
-      const amounts: Number[] = []
+      const distribution: Number[] = []
+      const data: any[] = []
 
-      console.log(this.stats);
+      console.log('create pie from: ' + this.stats);
 
       for (let i = 0; i < stats.length; i++) {
         labels[i] = stats[i].tagName;
       }
 
-      for(let i = 0; i <  stats.length; i++) {
-        amounts[i] = stats[i].distribution * 100;
+      for (let i = 0; i <  stats.length; i++) {
+        data[i] = {}
+        data[i].name = stats[i].tagName;
+        data[i].value = stats[i].amount;
       }
 
-      this.data = {
-        labels: labels,
-        datasets: [{
-          data: amounts,
-          backgroundColor: [colors.primaryLight, colors.infoLight, colors.successLight],
-        }],
-      };
-
       this.options = {
-        maintainAspectRatio: false,
-        responsive: true,
-        scales: {
-          xAxes: [
-            {
-              display: false,
-            },
-          ],
-          yAxes: [
-            {
-              display: false,
-            },
-          ],
+        backgroundColor: echarts.bg,
+        color: [colors.warningLight, colors.infoLight, colors.dangerLight, colors.successLight, colors.primaryLight],
+        tooltip: {
+          trigger: 'item',
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
         },
         legend: {
-          labels: {
-            fontColor: chartjs.textColor,
+          orient: 'vertical',
+          left: 'left',
+          data: labels,
+          textStyle: {
+            color: echarts.textColor,
           },
         },
+        series: [
+          {
+            name: 'Programming languages',
+            type: 'pie',
+            radius: '80%',
+            center: ['50%', '50%'],
+            data: data,
+            itemStyle: {
+              emphasis: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: echarts.itemHoverShadowColor,
+              },
+            },
+            label: {
+              normal: {
+                textStyle: {
+                  color: echarts.textColor,
+                },
+              },
+            },
+            labelLine: {
+              normal: {
+                lineStyle: {
+                  color: echarts.axisLineColor,
+                },
+              },
+            },
+          },
+        ],
       };
     });
   }
 
   ngOnInit() {
-    this.statisticsService.getStatistics('language')
+    this.statisticsService.getStatistics(this.statType)
       .subscribe(stat => {
         console.log('stat from server');
         console.log(stat);

@@ -41,6 +41,8 @@ import { ChartComponent } from './chart/chart.component';
 import { ChartsModule } from '../charts/charts.module';
 import { ChartModule } from 'angular2-chartjs';
 import { ChartPieComponent } from './chart/chart-pie.component';
+import {ChartBarComponent} from './chart/chart-bar.component';
+import {NgxEchartsModule} from 'ngx-echarts';
 
 
 @NgModule({
@@ -71,29 +73,31 @@ import { ChartPieComponent } from './chart/chart-pie.component';
     MatIconModule,
     AngularEditorModule,
     ChartsModule,
-    ChartModule
+    ChartModule,
+    NgxEchartsModule
   ],
-  declarations: [
-    PointOfReviewComponent,
-    NewsPostPlaceholderComponent,
-    FeedComponent,
-    CodeSnippetPostComponent,
-    CodeSnippetViewComponent,
-    CommentComponent,
-    ScoreComponent,
-    CodeEditorComponent,
-    TagsComponent,
-    CreateCodeSnippetComponent,
-    CodeViewerComponent,
-    CreateCodeReviewComponent,
-    CodeReviewViewComponent,
-    CodeCompareComponent,
-    CodeReviewsViewComponent,
-    AuthorizedComponentComponent,
-    PersonalFeedComponent,
-    ChartComponent,
-    ChartPieComponent,
-  ],
+    declarations: [
+        PointOfReviewComponent,
+        NewsPostPlaceholderComponent,
+        FeedComponent,
+        CodeSnippetPostComponent,
+        CodeSnippetViewComponent,
+        CommentComponent,
+        ScoreComponent,
+        CodeEditorComponent,
+        TagsComponent,
+        CreateCodeSnippetComponent,
+        CodeViewerComponent,
+        CreateCodeReviewComponent,
+        CodeReviewViewComponent,
+        CodeCompareComponent,
+        CodeReviewsViewComponent,
+        AuthorizedComponentComponent,
+        PersonalFeedComponent,
+        ChartComponent,
+        ChartPieComponent,
+        ChartBarComponent,
+    ],
   providers: [
     NewsService,
   ],
