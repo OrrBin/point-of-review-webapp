@@ -9,7 +9,7 @@ import { NbComponentStatus, NbGlobalPhysicalPosition, NbToastrService } from '@n
 import { StateService } from '../../../@core/utils';
 import { Router } from '@angular/router';
 import { AuthorizedComponentComponent } from '../authorized-component/authorized-component.component';
-
+import { AngularEditorConfig } from '@kolkov/angular-editor/lib/config';
 @Component({
   selector: 'ngx-create-code-snippet',
   templateUrl: './create-code-snippet.component.html',
@@ -30,6 +30,29 @@ export class CreateCodeSnippetComponent extends AuthorizedComponentComponent {
       }
     });
   }
+
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: 'auto',
+    minHeight: '200',
+    maxHeight: 'auto',
+    width: 'auto',
+    minWidth: '0',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Enter the description here',
+    defaultParagraphSeparator: '',
+    defaultFontName: '',
+    defaultFontSize: '',
+    fonts: [
+      { class: 'arial', name: 'Arial' },
+      { class: 'times-new-roman', name: 'Times New Roman' },
+      { class: 'calibri', name: 'Calibri' },
+      { class: 'comic-sans-ms', name: 'Comic Sans MS' }
+    ]
+  };
 
   ngOnInit() {
     this.dropdownList = [

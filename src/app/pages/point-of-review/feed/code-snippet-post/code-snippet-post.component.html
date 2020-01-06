@@ -4,9 +4,7 @@
       <h5>{{snippet.title}}</h5>
     </nb-card-header>
     <nb-card-body (click)="choosePost()">
-      <div class="desc-container">
-        {{snippet.description}}
-      </div>
+      <div class="desc-container" [innerHTML]="snippet.description"></div>
       <ngx-tags [tags]="snippet.tags"></ngx-tags>
     </nb-card-body>
     <nb-card-footer>

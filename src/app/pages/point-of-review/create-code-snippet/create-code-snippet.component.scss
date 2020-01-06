@@ -1,5 +1,9 @@
 @import '../../../@theme/styles/themes';
 
+.title {
+  margin-bottom: 2vh;
+}
+
 @include nb-install-component() {
 
   nb-card-body {

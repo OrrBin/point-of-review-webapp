@@ -1,12 +1,10 @@
 <div *ngIf="snippet; else placeHolder" class="col-md-12 col-lg-12 col-xxxl-12 code-snippet-container">
   <nb-card class="code-snippet-container">
     <nb-card-header>
-      <h5>{{snippet.description}}</h5>
+      <h5>{{snippet.title}}</h5>
     </nb-card-header>
     <nb-card-body>
-      <div class="desc-container">
-        {{snippet.description}}
-      </div>
+      <div class="desc-container" [innerHTML]="snippet.description"></div>
       <ngx-tags [tags]="snippet.tags"></ngx-tags>
       <ngx-code-viewer [code]="snippet.code"></ngx-code-viewer>
     </nb-card-body>

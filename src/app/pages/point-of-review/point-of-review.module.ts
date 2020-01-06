@@ -36,6 +36,7 @@ import { CodeReviewsViewComponent } from './code-reviews-view/code-reviews-view.
 import { LoginPageComponent } from './login-page/login-page.component';
 import { AuthorizedComponentComponent } from './authorized-component/authorized-component.component';
 import { PersonalFeedComponent } from './personal-feed/personal-feed.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import { PersonalFeedComponent } from './personal-feed/personal-feed.component';
     PointOfReviewRoutingModule,
     NgMultiSelectDropDownModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    AngularEditorModule,
   ],
   declarations: [
     PointOfReviewComponent,

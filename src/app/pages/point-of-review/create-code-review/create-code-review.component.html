@@ -17,9 +17,8 @@
     <nb-card>
       <nb-card-header>Add code review section number {{section.id}}</nb-card-header>
       <nb-card-body>
-        <textarea nbInput fullWidth shape="round" placeholder="Description" [(ngModel)]="section.content"
-          rows="5"></textarea>
-
+        <angular-editor [config]="editorConfig" [placeholder]="'Enter text here...'" [(ngModel)]="section.content">
+        </angular-editor>
         <div class="row">
           <div class="col-lg-2">
             <nb-select [(selected)]="language">
