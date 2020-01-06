@@ -20,6 +20,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'plus',
     link: '/pages/point-of-review/create-code-snippet',
   },
+
+  {
+    title: 'Statistics',
+    icon: 'pie-chart-outline',
+    link: '/pages/point-of-review/statistics',
+  },
   // {
   //   title: 'E-commerce',
   //   icon: 'shopping-cart-outline',

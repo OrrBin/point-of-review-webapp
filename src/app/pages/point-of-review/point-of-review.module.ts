@@ -37,6 +37,10 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { AuthorizedComponentComponent } from './authorized-component/authorized-component.component';
 import { PersonalFeedComponent } from './personal-feed/personal-feed.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { ChartComponent } from './chart/chart.component';
+import { ChartsModule } from '../charts/charts.module';
+import { ChartModule } from 'angular2-chartjs';
+import { ChartPieComponent } from './chart/chart-pie.component';
 
 
 @NgModule({
@@ -66,6 +70,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     MatButtonModule,
     MatIconModule,
     AngularEditorModule,
+    ChartsModule,
+    ChartModule
   ],
   declarations: [
     PointOfReviewComponent,
@@ -85,6 +91,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     CodeReviewsViewComponent,
     AuthorizedComponentComponent,
     PersonalFeedComponent,
+    ChartComponent,
+    ChartPieComponent,
   ],
   providers: [
     NewsService,

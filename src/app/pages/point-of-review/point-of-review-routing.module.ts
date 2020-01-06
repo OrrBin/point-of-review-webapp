@@ -9,6 +9,7 @@ import { CreateCodeReviewComponent } from './create-code-review/create-code-revi
 import { CodeReviewsViewComponent } from './code-reviews-view/code-reviews-view.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { PersonalFeedComponent } from './personal-feed/personal-feed.component';
+import {ChartComponent} from './chart/chart.component';
 
 const routes: Routes = [{
   path: '',
@@ -38,6 +39,10 @@ const routes: Routes = [{
       path: 'code-review-view',
       component: CodeReviewsViewComponent
     },
+    {
+      path: 'statistics',
+      component: ChartComponent,
+    }
   ],
 }];
 

@@ -54,6 +54,8 @@ import { MockDataModule } from './mock/mock-data.module';
 import { CodeSnippetsData } from './data/code-snippets';
 import { CodeSnippetsService } from './services/code-snippets.service';
 import { AuthService } from './services/auth.service';
+import {StatisticsData} from './data/statistics';
+import {StatisticsService} from './services/statistics.service';
 
 const socialLinks = [
   {
@@ -94,6 +96,7 @@ const DATA_SERVICES = [
   { provide: VisitorsAnalyticsData, useClass: VisitorsAnalyticsService },
   { provide: SecurityCamerasData, useClass: SecurityCamerasService },
   { provide: CodeSnippetsData, useClass: CodeSnippetsService },
+  { provide: StatisticsData, useClass: StatisticsService },
   { provide: AuthService, useClass: AuthService },
   { provide: StateService, useClass: StateService },
 ];
