@@ -31,7 +31,7 @@ export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
     editable: true,
     spellcheck: true,
     height: 'auto',
-    minHeight: '100',
+    minHeight: '200',
     maxHeight: 'auto',
     width: 'auto',
     minWidth: '0',
