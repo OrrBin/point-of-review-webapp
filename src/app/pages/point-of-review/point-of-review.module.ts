@@ -30,6 +30,10 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CodeViewerComponent } from './code-viewer/code-viewer.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { ChartComponent } from './chart/chart.component';
+import {ChartsModule} from '../charts/charts.module';
+import {ChartModule} from 'angular2-chartjs';
+import {ChartPieComponent} from './chart/chart-pie.component';
 
 
 @NgModule({
@@ -57,7 +61,9 @@ import { MatIconModule } from '@angular/material/icon';
     PointOfReviewRoutingModule,
     NgMultiSelectDropDownModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    ChartsModule,
+    ChartModule
   ],
   declarations: [
     PointOfReviewComponent,
@@ -72,6 +78,8 @@ import { MatIconModule } from '@angular/material/icon';
     TagsComponent,
     CreateCodeSnippetComponent,
     CodeViewerComponent,
+    ChartComponent,
+    ChartPieComponent,
   ],
   providers: [
     NewsService,

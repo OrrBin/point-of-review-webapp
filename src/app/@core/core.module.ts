@@ -53,6 +53,8 @@ import { SecurityCamerasService } from './mock/security-cameras.service';
 import { MockDataModule } from './mock/mock-data.module';
 import { CodeSnippetsData } from './data/code-snippets';
 import { CodeSnippetsService } from './services/code-snippets.service';
+import {StatisticsData} from './data/statistics';
+import {StatisticsService} from './services/statistics.service';
 
 const socialLinks = [
   {
@@ -93,6 +95,7 @@ const DATA_SERVICES = [
   { provide: VisitorsAnalyticsData, useClass: VisitorsAnalyticsService },
   { provide: SecurityCamerasData, useClass: SecurityCamerasService },
   { provide: CodeSnippetsData, useClass: CodeSnippetsService },
+  { provide: StatisticsData, useClass: StatisticsService },
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {
