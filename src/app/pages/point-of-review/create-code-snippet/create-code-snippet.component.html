@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-12">
     <nb-card>
-      <nb-card-header>Default Inputs</nb-card-header>
+      <nb-card-header>Add new code snippet</nb-card-header>
       <nb-card-body>
         <input class="title" type="text" nbInput fullWidth placeholder="Title" [(ngModel)]="snippet.title">
         <angular-editor [config]="editorConfig" [placeholder]="'Enter text here...'" [(ngModel)]="snippet.description">
@@ -18,7 +18,7 @@
 
           <div class="col-lg-10 drop-down-list-container">
             <ng-multiselect-dropdown [placeholder]="'Tags'" [data]="dropdownList" [(ngModel)]="selectedTags"
-              [settings]="dropdownSettings">
+              [settings]="dropdownSettings" (onSelect)="onItemSelect($event)">
             </ng-multiselect-dropdown>
           </div>
         </div>

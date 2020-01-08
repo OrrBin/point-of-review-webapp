@@ -21,12 +21,14 @@ export class CreateCodeSnippetComponent extends AuthorizedComponentComponent {
   dropdownList = [];
   selectedTags: any[] = [];
   dropdownSettings = {};
+  nameToType = new Map<string, string>();
+
   constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router, private toastrService: NbToastrService) {
     super(state, router);
-    this.snippet = new CodeSnippet('', '', '', new Code('', 'javascript'), [], new Score(85, null, null));
+    this.snippet = new CodeSnippet('', 0, '', '', new Code('', 'javascript'), [], new Score(85, null, null));
     this.state.user.subscribe(user => {
       if (user) {
-        this.snippet = new CodeSnippet('', this.currentUserName(), '', new Code('', 'javascript'), [], new Score(85, null, null));
+        this.snippet = new CodeSnippet('', 0, this.currentUserName(), '', new Code('', 'javascript'), [], new Score(85, null, null));
       }
     });
   }
@@ -53,21 +55,24 @@ export class CreateCodeSnippetComponent extends AuthorizedComponentComponent {
       { class: 'comic-sans-ms', name: 'Comic Sans MS' }
     ]
   };
+  onItemSelect(item: any) {
+    console.log(item);
+  }
 
   ngOnInit() {
-    this.dropdownList = [
-      { item_id: 1, item_text: 'javascript' },
-      { item_id: 2, item_text: 'java' },
-      { item_id: 3, item_text: 'typescript' },
-      { item_id: 4, item_text: 'algorithm' },
-      { item_id: 5, item_text: 'sorting' },
-      { item_id: 6, item_text: 'graph' },
-      { item_id: 7, item_text: 'tree' },
-      { item_id: 8, item_text: 'heap' },
-      { item_id: 9, item_text: 'array' },
-      { item_id: 10, item_text: 'oop' },
-      { item_id: 11, item_text: 'functional programming' },
-    ];
+    this.codeSnippetsService.getTagList().subscribe(tags => {
+      const dropdownList: any[] = []
+
+      for (let i = 0; i < tags.length; i++) {
+        dropdownList[i] = {};
+        dropdownList[i].item_id = i + 1;
+        dropdownList[i].item_text = tags[i].name;
+        this.nameToType.set(tags[i].name, tags[i].type);
+      }
+      this.dropdownList = dropdownList;
+      console.log(this.dropdownList);
+    });
+
     this.selectedTags = [
     ];
     this.dropdownSettings = <IDropdownSettings>{
@@ -97,13 +102,15 @@ export class CreateCodeSnippetComponent extends AuthorizedComponentComponent {
 
     if (!this.snippet.tags)
       this.snippet.tags = [];
+    this.snippet.tags.push(new Tag(this.snippet.code.language, 'language'));
     for (let index = 0; index < this.selectedTags.length; index++) {
-      this.snippet.tags.push(new Tag(this.selectedTags[index].item_text));
+      const tagName: string = this.selectedTags[index].item_text;
+      this.snippet.tags.push(new Tag(tagName, this.nameToType.get(tagName)));
     }
 
     this.codeSnippetsService.postSnippet(this.snippet).subscribe((snippet) => {
       this.successToast();
-      this.snippet = new CodeSnippet('', this.currentUserName(), '', new Code('', 'javascript'), [], new Score(0, null, null));
+      this.snippet = new CodeSnippet('', 0, this.currentUserName(), '', new Code('', 'javascript'), [], new Score(0, null, null));
     }
     );
   }

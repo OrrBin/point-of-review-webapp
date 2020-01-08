@@ -9,6 +9,7 @@ import { catchError } from 'rxjs/operators';
 import { CodeReview } from '../lib/objects/code-review';
 import { Impression } from '../lib/objects/impression';
 import { ImpressionRequest } from '../lib/objects/impression-request';
+import {Tag} from '../lib/objects/tag';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -54,6 +55,30 @@ export class CodeSnippetsService extends CodeSnippetsData {
         catchError(this.handleError),
       );
 
+  }
+
+  getCodeSnippetsByTag(tagName: string): Observable<CodeSnippet[]> {
+    console.log('Requesting snippets with tag: ' + tagName);
+    return this.http.post<CodeSnippet[]>('http://localhost:8080/snippets/tag', tagName, httpOptions)
+      .pipe(
+        catchError(this.handleError),
+      );
+  }
+
+  getCodeSnippetsByTags(tagNames: string[]): Observable<CodeSnippet[]> {
+    console.log('Requesting snippets with tags: ' + tagNames);
+    return this.http.post<CodeSnippet[]>('http://localhost:8080/snippets/tags', tagNames, httpOptions)
+      .pipe(
+        catchError(this.handleError),
+      );
+  }
+
+  getTagList(): Observable<Tag[]> {
+    console.log('Requesting tags');
+    return this.http.get<Tag[]>('http://localhost:8080/tags')
+      .pipe(
+        catchError(this.handleError),
+      );
   }
 
   private handleError(error: HttpErrorResponse) {
