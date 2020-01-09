@@ -8,6 +8,7 @@ import { ImpressionRequest } from '../../../@core/lib/objects/impression-request
 import { StateService } from '../../../@core/utils';
 import { AuthorizedComponentComponent } from '../authorized-component/authorized-component.component';
 import { Router } from '@angular/router';
+import {CodeReviewSection} from '../../../@core/lib/objects/code-review-section';
 
 @Component({
   selector: 'ngx-score',
@@ -17,9 +18,10 @@ import { Router } from '@angular/router';
 export class ScoreComponent extends AuthorizedComponentComponent {
   @Input() score: Score;
   @Input() snippet: CodeSnippet;
+  @Input() section: CodeReviewSection;
   toggle1 = false;
   toggle2 = false;
-
+  limit = 5;
   constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router, iconsLibrary: NbIconLibraries) {
     super(state, router);
     iconsLibrary.registerFontPack('fa', { packClass: 'fa', iconClassPrefix: 'fa' });
@@ -46,12 +48,21 @@ export class ScoreComponent extends AuthorizedComponentComponent {
         this.toggle1 = false;
       }
     }
-    this.codeSnippetsService.updateSnippetImpressions(
-      new ImpressionRequest(this.snippet, this.currentUserName(), impression)).subscribe(
+   if (this.section == null) {
+      this.codeSnippetsService.updateSnippetImpressions(
+        new ImpressionRequest(this.snippet.id, this.currentUserName(), impression, null, null)).subscribe(
         (score) => {
           this.score = score;
           this.snippet.score = score;
         });
+    } else {
+      this.codeSnippetsService.updateSectionImpressions(
+        new ImpressionRequest(this.snippet.id, this.currentUserName(), impression, this.section.codeReviewId, this.section.id)).subscribe(
+        (score) => {
+          this.score = score;
+          this.section.score = score;
+        });
+   }
   }
   getImpression(impression: Impression): number {
     if (this.score.impressions[impression] == null) {
@@ -63,6 +74,8 @@ export class ScoreComponent extends AuthorizedComponentComponent {
   getScore(): number {
     let likesPowered;
     let dislikes;
+    let hasEnoughPosts;
+    let likesRatio;
     if (this.score.impressions['LIKE'] == null) {
       likesPowered = 0;
     } else {
@@ -73,14 +86,9 @@ export class ScoreComponent extends AuthorizedComponentComponent {
     } else {
       dislikes = this.score.impressions['DISLIKE'];
     }
-    if (this.snippet.title == "dfdfgsdg") {
-      console.log('likesPowered');
-      console.log(likesPowered);
-      console.log('dislikes');
-      console.log(dislikes);
-    }
-
-    return Math.ceil((dislikes == 0 && likesPowered == 0) ? 0 : 100 * (likesPowered / (likesPowered + dislikes)));
+    hasEnoughPosts = this.score.voterToImpression.size > this.limit ? 1 : 0 ;
+    likesRatio = likesPowered / (likesPowered + dislikes);
+    return Math.ceil((dislikes == 0 && likesPowered == 0) ? 0 : 100 * (0.4 * hasEnoughPosts + 0.6 * likesRatio));
   }
 
 }

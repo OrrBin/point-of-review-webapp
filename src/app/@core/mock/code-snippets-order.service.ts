@@ -43,18 +43,17 @@ export class CodeSnippetsService extends CodeSnippetsData {
 
   updateSnippetImpressions(impressionRequest: ImpressionRequest): Observable<Score> {
     return undefined; // TODO
-
   }
-
-  getCodeSnippetsByTag(tagName: string): Observable<CodeSnippet[]> {
-    return undefined; // TODO
-  }
-
   getCodeSnippetsByTags(tagNames: string[]): Observable<CodeSnippet[]> {
     return undefined;
   }
-
   getTagList(): Observable<Tag[]> {
+    return undefined;
+  }
+  getCodeSnippetsByTag(tagName: string): Observable<CodeSnippet[]> {
+    return undefined;
+  }
+  updateSectionImpressions(impressionRequest: ImpressionRequest): Observable<Score> {
     return undefined;
   }
 }

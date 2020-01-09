@@ -13,6 +13,7 @@ export abstract class CodeSnippetsData {
   abstract postSnippet(snippet: CodeSnippet): Observable<CodeSnippet>;
   abstract postReview(review: CodeReview): Observable<CodeReview>;
   abstract updateSnippetImpressions(impressionRequest: ImpressionRequest): Observable<Score>;
+  abstract updateSectionImpressions(impressionRequest: ImpressionRequest): Observable<Score>;
   abstract getCodeSnippetsByTag(tagName: string): Observable<CodeSnippet[]>;
   abstract getCodeSnippetsByTags(tagNames: string[]): Observable<CodeSnippet[]>;
   abstract getTagList(): Observable<Tag[]>;
