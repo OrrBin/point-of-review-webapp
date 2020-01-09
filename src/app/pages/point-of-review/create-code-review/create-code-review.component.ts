@@ -65,7 +65,7 @@ export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
       this.review = review;
       if (this.review) {
         this.section.codeReviewId = review.id;
-        if (review.sections)
+        if (review.sections != null)
           this.section.id = '' + review.sections.length;
         else
           this.section.id = '' + 1;
