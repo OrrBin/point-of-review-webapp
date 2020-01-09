@@ -24,7 +24,7 @@ export class CodeSnippetsService extends CodeSnippetsData {
   }
 
   getCodeSnippets(): Observable<CodeSnippet[]> {
-    return this.http.get<CodeSnippet[]>('http://localhost:8080/snippets/popular');
+    return this.http.get<CodeSnippet[]>('http://localhost:8080/snippets/recent');
   }
 
   getCodeSnippetsByUserName(username: string): Observable<CodeSnippet[]> {

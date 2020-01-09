@@ -108,6 +108,10 @@ export class ChartPieComponent implements OnDestroy {
       });
   }
   ngOnDestroy(): void {
-    this.themeSubscription.unsubscribe();
+    try {
+      this.themeSubscription.unsubscribe();
+    } catch (e) {
+      console.log('chart-bar finished');
+    }
   }
 }

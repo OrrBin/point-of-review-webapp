@@ -43,6 +43,7 @@ import { ChartModule } from 'angular2-chartjs';
 import { ChartPieComponent } from './chart/chart-pie.component';
 import {ChartBarComponent} from './chart/chart-bar.component';
 import {NgxEchartsModule} from 'ngx-echarts';
+import { ReportComponent } from './report/report.component';
 
 
 @NgModule({
@@ -97,6 +98,7 @@ import {NgxEchartsModule} from 'ngx-echarts';
         ChartComponent,
         ChartPieComponent,
         ChartBarComponent,
+        ReportComponent,
     ],
   providers: [
     NewsService,
