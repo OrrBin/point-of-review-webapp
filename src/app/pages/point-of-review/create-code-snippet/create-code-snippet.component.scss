@@ -4,6 +4,8 @@
   margin-bottom: 2vh;
 }
 
+.submit_button{margin-top:2vh;}
+
 @include nb-install-component() {
 
   nb-card-body {

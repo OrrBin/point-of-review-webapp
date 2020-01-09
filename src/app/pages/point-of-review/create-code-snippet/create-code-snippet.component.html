@@ -4,8 +4,6 @@
       <nb-card-header>Add new code snippet</nb-card-header>
       <nb-card-body>
         <input class="title" type="text" nbInput fullWidth placeholder="Title" [(ngModel)]="snippet.title">
-        <angular-editor [config]="editorConfig" [placeholder]="'Enter text here...'" [(ngModel)]="snippet.description">
-        </angular-editor>
 
         <div class="row">
           <div class="col-lg-2">
@@ -26,7 +24,9 @@
         <ngx-code-editor [(code)]="snippet.code"></ngx-code-editor>
       </nb-card-body>
       <nb-card-footer>
-        <button nbButton status="primary" hero (click)="submit()">
+        <angular-editor [config]="editorConfig" [placeholder]="'Enter text here...'" [(ngModel)]="snippet.description">
+        </angular-editor>
+        <button nbButton status="primary" class="submit_button" hero (click)="submit()">
           Submit
         </button>
       </nb-card-footer>
