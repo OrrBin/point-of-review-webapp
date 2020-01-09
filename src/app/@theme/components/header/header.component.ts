@@ -2,20 +2,21 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
 import { UserData } from '../../../@core/data/users';
-import { LayoutService } from '../../../@core/utils';
+import {LayoutService, StateService} from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import {AuthorizedComponentComponent} from "../../../pages/point-of-review/authorized-component/authorized-component.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
   templateUrl: './header.component.html',
 })
-export class HeaderComponent implements OnInit, OnDestroy {
+export class HeaderComponent extends AuthorizedComponentComponent implements OnInit, OnDestroy  {
 
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
-  user: any;
 
   themes = [
     {
@@ -45,15 +46,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private themeService: NbThemeService,
     private userService: UserData,
     private layoutService: LayoutService,
+              state: StateService,
+              router: Router,
     private breakpointService: NbMediaBreakpointsService) {
+    super(state, router);
   }
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
-
-    this.userService.getUsers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.nick);
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
