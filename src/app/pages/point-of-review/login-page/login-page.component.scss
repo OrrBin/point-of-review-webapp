@@ -1,9 +1,10 @@
 .title-container {
   margin-bottom: 6vh;
+  text-align: center;
 }
 
 .inputs-container {
-  margin-bottom: 6vh;
+  margin-bottom: 4vh;
 }
 
 .actions-container {
@@ -14,6 +15,28 @@
   color: red;
 }
 
+.userinput {
+  margin-bottom: 1vh
+}
+
 .aligncenter {
   text-align: center;
+}
+
+.divider_width{
+  width:50px;
+  height:auto;
+  display:inline-block;
+}
+
+.divider_height{
+  width:10px;
+  height:auto;
+  display:inline-block;
+}
+
+.col-lg-3 {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
 }

@@ -1,7 +1,8 @@
 <div class="col-md-12 col-lg-12 col-xxxl-12">
   <nb-card *ngIf="snippet; else placeHolder">
     <nb-card-header (click)="choosePost()">
-      <h5>{{snippet.title}}</h5>
+      <div style="float: left;"><h5>{{snippet.title}}</h5></div>
+      <div style="float: right;"><h5>{{getDate()}}</h5></div>
     </nb-card-header>
     <nb-card-body (click)="choosePost()">
       <div class="desc-container" [innerHTML]="snippet.description"></div>

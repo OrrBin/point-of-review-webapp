@@ -30,21 +30,26 @@ export class ChartPieComponent implements OnDestroy {
       const echarts: any = config.variables.echarts;
       const stats: Stat[] = this.stats;
 
-      const labels: String[] = []
-      const distribution: Number[] = []
-      const data: any[] = []
-
-      console.log('create pie from: ' + this.stats);
+      let labels: String[] = [];
+      let data: any[] = [];
 
       for (let i = 0; i < stats.length; i++) {
         labels[i] = stats[i].tagName;
       }
 
       for (let i = 0; i <  stats.length; i++) {
-        data[i] = {}
+        data[i] = {};
         data[i].name = stats[i].tagName;
         data[i].value = stats[i].amount;
       }
+
+      if (stats.length == 0) {
+        labels = ['No data available'];
+        data = [{}];
+        data[0].name = 'No data available';
+        data[0].value = 1;
+      }
+
 
       this.options = {
         backgroundColor: echarts.bg,
@@ -63,7 +68,7 @@ export class ChartPieComponent implements OnDestroy {
         },
         series: [
           {
-            name: 'Programming languages',
+            name: this.statType,
             type: 'pie',
             radius: '80%',
             center: ['50%', '50%'],
@@ -98,8 +103,6 @@ export class ChartPieComponent implements OnDestroy {
   ngOnInit() {
     this.statisticsService.getStatistics(this.statType)
       .subscribe(stat => {
-        console.log('stat from server');
-        console.log(stat);
         this.stats = stat;
         this.createPie();
       });

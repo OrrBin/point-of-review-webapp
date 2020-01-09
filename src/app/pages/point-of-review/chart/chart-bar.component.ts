@@ -26,8 +26,9 @@ export class ChartBarComponent implements OnDestroy {
       const echarts: any = config.variables.echarts;
       const stats: Stat[] = this.stats;
 
-      const labels: String[] = []
-      const amount: Number[] = []
+      let labels: String[] = []
+      let amount: Number[] = []
+
       for (let i = 0; i < stats.length; i++) {
         labels[i] = stats[i].tagName;
       }
@@ -36,7 +37,10 @@ export class ChartBarComponent implements OnDestroy {
         amount[i] = stats[i].amount;
       }
 
-      console.log('create bar from: ' + this.stats);
+      if (stats.length == 0) {
+        labels = ['No data available'];
+        amount = [1];
+      }
 
       this.options = {
         backgroundColor: echarts.bg,
@@ -107,8 +111,6 @@ export class ChartBarComponent implements OnDestroy {
   ngOnInit() {
     this.statisticsService.getStatistics(this.statType)
       .subscribe(stat => {
-        console.log('stat from server');
-        console.log(stat);
         this.stats = stat;
         this.createBar();
       });

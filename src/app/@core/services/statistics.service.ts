@@ -18,8 +18,6 @@ export class StatisticsService extends StatisticsData {
   }
 
   getStatistics(statType: String): Observable<Stat[]> {
-    console.log('sending get request for statistics: ');
-    console.log(statType);
     return this.http.get<Stat[]>('http://localhost:8080/statistics?statType=' + statType)
     .pipe(
       catchError(this.handleError),
@@ -27,8 +25,6 @@ export class StatisticsService extends StatisticsData {
   }
 
   getStatisticsWithLimit(statType: String, limit: Number): Observable<Stat[]> {
-    console.log('sending get request for statistics with limit: ');
-    console.log(statType);
     return this.http.get<Stat[]>('http://localhost:8080/statistics?statType=' + statType + '&limit=' + limit)
     .pipe(
       catchError(this.handleError),

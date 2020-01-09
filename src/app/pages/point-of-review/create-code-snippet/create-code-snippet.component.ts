@@ -81,7 +81,7 @@ export class CreateCodeSnippetComponent extends AuthorizedComponentComponent {
       textField: 'item_text',
       selectAllText: 'Select All',
       unSelectAllText: 'UnSelect All',
-      itemsShowLimit: 3,
+      itemsShowLimit: 6,
       allowSearchFilter: true,
     };
   }
@@ -100,6 +100,8 @@ export class CreateCodeSnippetComponent extends AuthorizedComponentComponent {
       return;
     }
 
+    this.snippet.timestamp = + new Date();
+
     if (!this.snippet.tags)
       this.snippet.tags = [];
     this.snippet.tags.push(new Tag(this.snippet.code.language, 'language'));
@@ -111,8 +113,8 @@ export class CreateCodeSnippetComponent extends AuthorizedComponentComponent {
     this.codeSnippetsService.postSnippet(this.snippet).subscribe((snippet) => {
       this.successToast();
       this.snippet = new CodeSnippet('', 0, this.currentUserName(), '', new Code('', 'javascript'), [], new Score(0, null, null));
-    }
-    );
+      this.router.navigate(['/pages/point-of-review/personal-feed']);
+    });
   }
 
   successToast() {

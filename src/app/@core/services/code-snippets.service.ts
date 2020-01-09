@@ -58,7 +58,6 @@ export class CodeSnippetsService extends CodeSnippetsData {
   }
 
   getCodeSnippetsByTag(tagName: string): Observable<CodeSnippet[]> {
-    console.log('Requesting snippets with tag: ' + tagName);
     return this.http.post<CodeSnippet[]>('http://localhost:8080/snippets/tag', tagName, httpOptions)
       .pipe(
         catchError(this.handleError),
@@ -66,7 +65,6 @@ export class CodeSnippetsService extends CodeSnippetsData {
   }
 
   getCodeSnippetsByTags(tagNames: string[]): Observable<CodeSnippet[]> {
-    console.log('Requesting snippets with tags: ' + tagNames);
     return this.http.post<CodeSnippet[]>('http://localhost:8080/snippets/tags', tagNames, httpOptions)
       .pipe(
         catchError(this.handleError),
@@ -74,7 +72,6 @@ export class CodeSnippetsService extends CodeSnippetsData {
   }
 
   getTagList(): Observable<Tag[]> {
-    console.log('Requesting tags');
     return this.http.get<Tag[]>('http://localhost:8080/tags')
       .pipe(
         catchError(this.handleError),

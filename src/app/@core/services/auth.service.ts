@@ -33,6 +33,24 @@ export class AuthService {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error.message);
     } else {
+      if (error.status === 401) {
+        console.log('Error at login: wrong username/password');
+        return throwError('no_auth');
+      }
+      if (error.status === 409) {
+        console.log('Error at registration: user already exists');
+        return throwError('conflict');
+      }
+      if (error.status === 412) {
+        console.log('Error at registration: wrong username/password format')
+        return throwError('wrong_format');
+      }
+
+      if (error.status === 0) {
+        console.log('Server is down');
+        return throwError('server_down');
+      }
+
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
       console.error(

@@ -14,7 +14,6 @@ export class ChartComponent  extends AuthorizedComponentComponent {
     super(state, router);
   }
   language: String = 'language';
-  algorithm: String = 'algorithm';
   feedback: String = 'feedback';
 
   ngOnInit() {

@@ -17,6 +17,11 @@ export class CodeSnippetPostComponent {
   constructor(private state: StateService, private router: Router) {
   }
 
+  getDate(): any {
+    const date = new Date(this.snippet.timestamp);
+    return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+  }
+
   choosePost() {
     this.state.selectCodeSnippet(this.snippet);
     this.router.navigate(['/pages/point-of-review/code-snippet']);

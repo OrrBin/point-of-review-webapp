@@ -8,11 +8,11 @@
   </div>
 
   <div class="inputs-container">
-    <input nbInput fullWidth type="text" [(ngModel)]="email" nbInput fullWidth placeholder="email">
+    <div class="userinput"> <input nbInput fullWidth type="text" [(ngModel)]="username" nbInput fullWidth placeholder="Username"></div>
     <input nbInput fullWidth type="password" [(ngModel)]="password" nbInput fullWidth placeholder="Password">
   </div>
   <div class="row actions-container">
-    <div class=" col-lg-3">
+    <div class="col-lg-3">
       <button (click)="signin()" nbButton status="primary" hero>sign in</button>
     </div>
     <div class="col-lg-3">
