@@ -3,7 +3,7 @@
     <nb-accordion>
       <nb-accordion-item *ngFor="let section of review.sections">
         <nb-accordion-item-header>
-          section number {{section.id}}
+          Section number {{section.id}}
         </nb-accordion-item-header>
         <nb-accordion-item-body>
           <ngx-code-review-view [snippet]="snippet" [review]="review" [section]="section"></ngx-code-review-view>
@@ -30,7 +30,7 @@
 
           <div class="col-lg-10 drop-down-list-container">
             <ng-multiselect-dropdown [placeholder]="'Tags'" [data]="dropdownList" [(ngModel)]="selectedTags"
-              [settings]="dropdownSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+              [settings]="dropdownSettings">
             </ng-multiselect-dropdown>
           </div>
         </div>

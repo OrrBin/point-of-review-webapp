@@ -5,6 +5,7 @@ import { Tag } from './tag';
 
 export class CodeSnippet {
   id: string;
+  timestamp: Number
   userId: string;
   title: string;
   description: string;
@@ -13,8 +14,9 @@ export class CodeSnippet {
   score: Score;
   tags: Tag[];
 
-  constructor($id: string, $userId: string, $description: string, $code: Code, $reviews: CodeReview[], $score: Score) {
+  constructor($id: string, $timestamp: Number, $userId: string, $description: string, $code: Code, $reviews: CodeReview[], $score: Score) {
     this.id = $id;
+    this.timestamp = $timestamp;
     this.userId = $userId;
     this.description = $description;
     this.code = $code;

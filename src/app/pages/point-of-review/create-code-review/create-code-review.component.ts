@@ -68,7 +68,7 @@ export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
         if (review.sections)
           this.section.id = '' + review.sections.length;
         else
-          this.section.id = '' + 0;
+          this.section.id = '' + 1;
       }
     });
   }
@@ -80,20 +80,17 @@ export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
   }
 
   ngOnInit() {
+    this.codeSnippetsService.getTagList().subscribe(tags => {
+      const dropdownList: any[] = []
+      for (let i = 0; i < tags.length; i++) {
+        dropdownList[i] = {};
+        dropdownList[i].item_id = i + 1;
+        dropdownList[i].item_text = tags[i].name;
+        dropdownList[i].type = tags[i].type;
+      }
+      this.dropdownList = dropdownList;
+    });
 
-    this.dropdownList = [
-      { item_id: 1, item_text: 'javascript' },
-      { item_id: 2, item_text: 'java' },
-      { item_id: 3, item_text: 'typescript' },
-      { item_id: 4, item_text: 'algorithm' },
-      { item_id: 5, item_text: 'sorting' },
-      { item_id: 6, item_text: 'graph' },
-      { item_id: 7, item_text: 'tree' },
-      { item_id: 8, item_text: 'heap' },
-      { item_id: 9, item_text: 'array' },
-      { item_id: 10, item_text: 'oop' },
-      { item_id: 11, item_text: 'functional programming' },
-    ];
     this.selectedTags = [
     ];
     this.dropdownSettings = <IDropdownSettings>{
@@ -125,7 +122,7 @@ export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
     if (!this.section.tags)
       this.section.tags = [];
     for (let index = 0; index < this.selectedTags.length; index++) {
-      this.section.tags.push(new Tag(this.selectedTags[index].item_text));
+      this.section.tags.push(new Tag(this.selectedTags[index].item_text, this.selectedTags[index].type));
     }
 
     this.review.sections.push(this.section);
@@ -145,7 +142,7 @@ export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
     if (!this.section.tags)
       this.section.tags = [];
     for (let index = 0; index < this.selectedTags.length; index++) {
-      this.section.tags.push(new Tag(this.selectedTags[index].item_text));
+      this.section.tags.push(new Tag(this.selectedTags[index].item_text, this.selectedTags[index].type));
     }
 
     this.review.sections.push(this.section);

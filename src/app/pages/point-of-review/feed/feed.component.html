@@ -1,4 +1,15 @@
 <div class="col-md-12 col-lg-12 col-xxxl-12">
+
+  <div class="col-lg-10 drop-down-list-container">
+    <ng-multiselect-dropdown
+      [placeholder]="'Search posts by tags...'"
+      [data]="dropdownList"
+      [(ngModel)]="selectedTags"
+      [settings]="dropdownSettings"
+      (onSelect)="onItemSelect($event)"
+      (onDeSelect)="onItemSelect($event)">
+    </ng-multiselect-dropdown>
+  </div>
   <nb-list listenWindowScroll>
     <nb-list-item *ngFor="let codeSnippetPost of snippets">
       <ngx-code-snippet-post [snippet]="codeSnippetPost">

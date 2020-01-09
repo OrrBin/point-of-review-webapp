@@ -7,6 +7,7 @@ import { CodeSnippet } from '../lib/objects/code-snippet';
 import { CodeReview } from '../lib/objects/code-review';
 import { CodeReviewSection } from '../lib/objects/code-review-section';
 import { User } from '../lib/objects/user';
+import {Tag} from '../lib/objects/tag';
 
 @Injectable()
 export class StateService implements OnDestroy {
@@ -14,8 +15,12 @@ export class StateService implements OnDestroy {
   selectedCodeSnippet = new BehaviorSubject<CodeSnippet>(null);
   selectedCodeReview = new BehaviorSubject<CodeReview>(null);
   selectedCodeReviewSection = new BehaviorSubject<CodeReviewSection>(null);
-
+  selectedTag = undefined;
   user = new BehaviorSubject<User>(null);
+
+  // selectTag(tag: Tag) {
+  //   this.selectedTag.next(tag);
+  // }
 
   selectUser(user: User) {
     this.user.next(user);
