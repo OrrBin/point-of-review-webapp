@@ -8,7 +8,7 @@ import { ImpressionRequest } from '../../../@core/lib/objects/impression-request
 import { StateService } from '../../../@core/utils';
 import { AuthorizedComponentComponent } from '../authorized-component/authorized-component.component';
 import { Router } from '@angular/router';
-import {CodeReviewSection} from "../../../@core/lib/objects/code-review-section";
+import {CodeReviewSection} from '../../../@core/lib/objects/code-review-section';
 
 @Component({
   selector: 'ngx-score',
@@ -50,14 +50,14 @@ export class ScoreComponent extends AuthorizedComponentComponent {
     }
    if (this.section == null) {
       this.codeSnippetsService.updateSnippetImpressions(
-        new ImpressionRequest(this.snippet, this.currentUserName(), impression, null, null)).subscribe(
+        new ImpressionRequest(this.snippet.id, this.currentUserName(), impression, null, null)).subscribe(
         (score) => {
           this.score = score;
           this.snippet.score = score;
         });
     } else {
       this.codeSnippetsService.updateSectionImpressions(
-        new ImpressionRequest(this.snippet, this.currentUserName(), impression, this.section.codeReviewId, this.section.id)).subscribe(
+        new ImpressionRequest(this.snippet.id, this.currentUserName(), impression, this.section.codeReviewId, this.section.id)).subscribe(
         (score) => {
           this.score = score;
           this.section.score = score;
