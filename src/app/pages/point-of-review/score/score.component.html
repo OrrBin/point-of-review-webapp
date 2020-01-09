@@ -1,9 +1,11 @@
 <div class="row show-grid">
-  <div class="col-md-3">
-    <button nbButton ghost>
-      <nb-icon icon="check" pack="fa" style="color: white;"></nb-icon>
-    </button>
-    {{getScore()}}
+  <div class="col-md-3" >
+    <div *ngIf="section == null">
+      <button nbButton ghost>
+        <nb-icon icon="check" pack="fa" style="color: white;"></nb-icon>
+      </button>
+      {{getScore()}}
+    </div>
   </div>
   <div class="col-md-3">
     <button nbButton ghost [style.background-color]="toggle1 ? 'blue' : 'rgba(0, 0, 0, 0)'" (click)="vote(0)">

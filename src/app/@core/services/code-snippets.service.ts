@@ -53,7 +53,14 @@ export class CodeSnippetsService extends CodeSnippetsData {
       .pipe(
         catchError(this.handleError),
       );
+  }
 
+  updateSectionImpressions(impressionRequest: ImpressionRequest): Observable<Score> {
+    console.log(impressionRequest);
+    return this.http.post<Score>('http://localhost:8080/reviews/sections/impressions', impressionRequest, httpOptions)
+      .pipe(
+        catchError(this.handleError),
+      );
   }
 
   private handleError(error: HttpErrorResponse) {

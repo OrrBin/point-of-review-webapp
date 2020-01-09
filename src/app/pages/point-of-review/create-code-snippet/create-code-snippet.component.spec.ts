@@ -8,7 +8,7 @@ describe('CreateCodeSnippetComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateCodeSnippetComponent ]
+      declarations: [ CreateCodeSnippetComponent ],
     })
     .compileComponents();
   }));

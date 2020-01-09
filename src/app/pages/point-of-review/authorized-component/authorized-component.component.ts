@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'ngx-authorized-component',
   templateUrl: './authorized-component.component.html',
-  styleUrls: ['./authorized-component.component.scss']
+  styleUrls: ['./authorized-component.component.scss'],
 })
 export class AuthorizedComponentComponent implements AfterViewInit, OnInit {
 

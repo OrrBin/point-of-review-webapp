@@ -42,6 +42,9 @@ export class CodeSnippetsService extends CodeSnippetsData {
 
   updateSnippetImpressions(impressionRequest: ImpressionRequest): Observable<Score> {
     return undefined; // TODO
-
   }
+  updateSectionImpressions(impressionRequest: ImpressionRequest): Observable<Score> {
+    return undefined; // TODO
+  }
+
 }
