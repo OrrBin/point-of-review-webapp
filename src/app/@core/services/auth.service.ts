@@ -46,6 +46,11 @@ export class AuthService {
         return throwError('wrong_format');
       }
 
+      if (error.status === 451) {
+        console.log('Error at login: user is banned')
+        return throwError('banned');
+      }
+
       if (error.status === 0) {
         console.log('Server is down');
         return throwError('server_down');

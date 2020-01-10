@@ -5,9 +5,9 @@ import { CodeSnippet } from '../lib/objects/code-snippet';
 import { CodeReview } from '../lib/objects/code-review';
 import { Code } from '../lib/objects/code';
 import { Score } from '../lib/objects/score';
-import { Impression } from '../lib/objects/impression';
 import { ImpressionRequest } from '../lib/objects/impression-request';
-import {Tag} from '../lib/objects/tag';
+import { Tag } from '../lib/objects/tag';
+import { User } from '../lib/objects/user';
 
 @Injectable()
 export class CodeSnippetsService extends CodeSnippetsData {
@@ -39,6 +39,10 @@ export class CodeSnippetsService extends CodeSnippetsData {
     }
 
     return observableOf(review);
+  }
+
+  report(userId: string, reportType: string): Observable<User> {
+    throw new Error("Method not implemented.");
   }
 
   updateSnippetImpressions(impressionRequest: ImpressionRequest): Observable<Score> {

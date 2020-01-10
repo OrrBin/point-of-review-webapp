@@ -33,6 +33,8 @@ export class LoginPageComponent implements OnInit {
       // this.errorMessage = `Email and password do not match`;
       if (error === 'no_auth')
         this.showToast('warning', 'Authentication failed', 'Wrong username and/or password');
+      if (error === 'banned')
+          this.showToast('danger', 'User is temporarily banned', 'Please contact the staff for more information');
       if (error === 'server_down')
           this.showToast('info', 'Server is down', 'Turn on the server application');
     });

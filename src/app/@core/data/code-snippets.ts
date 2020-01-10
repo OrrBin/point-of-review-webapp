@@ -5,7 +5,8 @@ import { CodeReview } from '../lib/objects/code-review';
 import { Impression } from '../lib/objects/impression';
 import { ImpressionRequest } from '../lib/objects/impression-request';
 import { Score } from '../lib/objects/score';
-import {Tag} from '../lib/objects/tag';
+import { Tag } from '../lib/objects/tag';
+import { User } from '../lib/objects/user';
 
 export abstract class CodeSnippetsData {
   abstract getCodeSnippets(): Observable<CodeSnippet[]>;
@@ -17,4 +18,6 @@ export abstract class CodeSnippetsData {
   abstract getCodeSnippetsByTag(tagName: string): Observable<CodeSnippet[]>;
   abstract getCodeSnippetsByTags(tagNames: string[]): Observable<CodeSnippet[]>;
   abstract getTagList(): Observable<Tag[]>;
+
+  abstract report(userId: string, reportType: string): Observable<User>;
 }

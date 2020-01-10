@@ -62,19 +62,6 @@ export class FeedComponent extends AuthorizedComponentComponent {
       this.dropdownList = dropdownList;
     });
 
-    // let alreadySet: boolean = false;
-    // this.state.selectedTag.subscribe((tag) => {
-    //   if (!alreadySet) {
-    //     if (tag)
-    //       this.selectedTags = [tag.name];
-    //     else
-    //       this.selectedTags = [];
-    //     this.state.selectTag(undefined);
-    //     alreadySet = true;
-    //   }
-    //
-    // });
-
     this.selectedTags = []
     if (this.state.selectedTag) {
       this.selectedTags = [this.state.selectedTag];
@@ -90,10 +77,9 @@ export class FeedComponent extends AuthorizedComponentComponent {
       enableCheckAll: false,
       limitSelection: 4,
     };
-    console.log('created drop-down menu');
   }
 
-  onItemSelect(item: any) {
+  searchTags() {
     // console.log(this.selectedTags);
     const tagNames: string[] = this.createTaglistFromSelectedTags();
     // console.log(tagNames);
@@ -112,6 +98,7 @@ export class FeedComponent extends AuthorizedComponentComponent {
   }
 
   createTaglistFromSelectedTags() {
+    console.log('selected tags: ' + this.selectedTags);
     const tagNames: string[] = [];
     for (let i = 0; i <  this.selectedTags.length; i++) {
       tagNames[i] = this.selectedTags[i].item_text;

@@ -1,0 +1,28 @@
+<nb-card>
+  <nb-card-header>What do you want to report about?</nb-card-header>
+  <nb-card-body>
+    <div class="demo-items">
+      <nb-radio-group [(value)]="reportType">
+        <nb-radio [value]="'spam'">
+          spam
+        </nb-radio>
+        <nb-radio [value]="'badLanguage'">
+          bad language
+        </nb-radio>
+        <nb-radio [value]="'misleading'">
+          misleading information
+        </nb-radio>
+      </nb-radio-group>
+    </div>
+  </nb-card-body>
+  <nb-card-footer>
+    <div class="row">
+      <div class="col-md-6">
+        <button nbButton hero status="primary" (click)="report()">Report</button>
+      </div>
+      <div class="col-md-6">
+        <button nbButton hero status="warning" (click)="dismiss()">Cancel</button>
+      </div>
+    </div>
+  </nb-card-footer>
+</nb-card>

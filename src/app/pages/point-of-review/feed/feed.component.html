@@ -6,8 +6,8 @@
       [data]="dropdownList"
       [(ngModel)]="selectedTags"
       [settings]="dropdownSettings"
-      (onSelect)="onItemSelect($event)"
-      (onDeSelect)="onItemSelect($event)">
+      (onSelect)="searchTags()"
+      (onDeSelect)="searchTags()">
     </ng-multiselect-dropdown>
   </div>
   <nb-list listenWindowScroll>

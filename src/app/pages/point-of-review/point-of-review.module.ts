@@ -7,7 +7,7 @@ import {
   NbListModule,
   NbRouteTabsetModule,
   NbStepperModule,
-  NbTabsetModule, NbUserModule, NbIconModule, NbSelectModule, NbDatepickerModule, NbRadioModule, NbCheckboxModule, NbActionsModule, NbInputModule,
+  NbTabsetModule, NbUserModule, NbIconModule, NbSelectModule, NbDatepickerModule, NbRadioModule, NbCheckboxModule, NbActionsModule, NbInputModule, NbDialogModule,
 } from '@nebular/theme';
 
 import { ThemeModule } from '../../@theme/theme.module';
@@ -41,9 +41,10 @@ import { ChartComponent } from './chart/chart.component';
 import { ChartsModule } from '../charts/charts.module';
 import { ChartModule } from 'angular2-chartjs';
 import { ChartPieComponent } from './chart/chart-pie.component';
-import {ChartBarComponent} from './chart/chart-bar.component';
-import {NgxEchartsModule} from 'ngx-echarts';
-
+import { ChartBarComponent } from './chart/chart-bar.component';
+import { NgxEchartsModule } from 'ngx-echarts';
+import { ReportComponent } from './report/report.component';
+import { ReportDialogComponent } from './report/report-dialog/report-dialog.component';
 
 @NgModule({
   imports: [
@@ -74,32 +75,38 @@ import {NgxEchartsModule} from 'ngx-echarts';
     AngularEditorModule,
     ChartsModule,
     ChartModule,
-    NgxEchartsModule
+    NgxEchartsModule,
+    NbDialogModule.forChild(),
   ],
-    declarations: [
-        PointOfReviewComponent,
-        NewsPostPlaceholderComponent,
-        FeedComponent,
-        CodeSnippetPostComponent,
-        CodeSnippetViewComponent,
-        CommentComponent,
-        ScoreComponent,
-        CodeEditorComponent,
-        TagsComponent,
-        CreateCodeSnippetComponent,
-        CodeViewerComponent,
-        CreateCodeReviewComponent,
-        CodeReviewViewComponent,
-        CodeCompareComponent,
-        CodeReviewsViewComponent,
-        AuthorizedComponentComponent,
-        PersonalFeedComponent,
-        ChartComponent,
-        ChartPieComponent,
-        ChartBarComponent,
-    ],
+  declarations: [
+    PointOfReviewComponent,
+    NewsPostPlaceholderComponent,
+    FeedComponent,
+    CodeSnippetPostComponent,
+    CodeSnippetViewComponent,
+    CommentComponent,
+    ScoreComponent,
+    CodeEditorComponent,
+    TagsComponent,
+    CreateCodeSnippetComponent,
+    CodeViewerComponent,
+    CreateCodeReviewComponent,
+    CodeReviewViewComponent,
+    CodeCompareComponent,
+    CodeReviewsViewComponent,
+    AuthorizedComponentComponent,
+    PersonalFeedComponent,
+    ChartComponent,
+    ChartPieComponent,
+    ChartBarComponent,
+    ReportComponent,
+    ReportDialogComponent,
+  ],
   providers: [
     NewsService,
   ],
+  entryComponents: [
+    ReportDialogComponent,
+  ]
 })
 export class PointOfReviewModule { }

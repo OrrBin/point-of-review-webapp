@@ -9,7 +9,8 @@ import { catchError } from 'rxjs/operators';
 import { CodeReview } from '../lib/objects/code-review';
 import { Impression } from '../lib/objects/impression';
 import { ImpressionRequest } from '../lib/objects/impression-request';
-import {Tag} from '../lib/objects/tag';
+import { Tag } from '../lib/objects/tag';
+import { User } from '../lib/objects/user';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,7 +25,7 @@ export class CodeSnippetsService extends CodeSnippetsData {
   }
 
   getCodeSnippets(): Observable<CodeSnippet[]> {
-    return this.http.get<CodeSnippet[]>('http://localhost:8080/snippets/popular');
+    return this.http.get<CodeSnippet[]>('http://localhost:8080/snippets/recent');
   }
 
   getCodeSnippetsByUserName(username: string): Observable<CodeSnippet[]> {
@@ -83,6 +84,12 @@ export class CodeSnippetsService extends CodeSnippetsData {
       .pipe(
         catchError(this.handleError),
       );
+  }
+
+  report(userId: string, reportType: string): Observable<User> {
+    return this.http.get<User>(`http://localhost:8080/report?username=${userId}&reportType=${reportType}`).pipe(
+      catchError(this.handleError),
+    );
   }
 
   private handleError(error: HttpErrorResponse) {

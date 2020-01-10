@@ -7,7 +7,7 @@
       <nb-list-item *ngFor="let section of review.sections; let i = index">
         <nb-card>
           <nb-card-header>
-            <h6>section {{i}}</h6>
+            <h6>Section {{i+1}}</h6>
           </nb-card-header>
           <nb-card-body>
             <ngx-code-review-view [snippet]="snippet" [review]="review" [section]="section"></ngx-code-review-view>
