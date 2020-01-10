@@ -80,7 +80,7 @@ export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
   }
 
   ngOnInit() {
-    this.codeSnippetsService.getTagList().subscribe(tags => {
+    this.codeSnippetsService.getCodeSnippetTags().subscribe(tags => {
       const dropdownList: any[] = []
       for (let i = 0; i < tags.length; i++) {
         dropdownList[i] = {};

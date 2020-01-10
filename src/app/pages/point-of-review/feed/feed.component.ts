@@ -30,8 +30,8 @@ export class FeedComponent extends AuthorizedComponentComponent {
   constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router) {
     super(state, router);
     this.codeSnippetsService.getCodeSnippets()
-      .subscribe(nextSnippet => {
-        this.snippets.push(...nextSnippet);
+      .subscribe(snippets => {
+        this.snippets = snippets;
       });
   }
 
@@ -52,7 +52,7 @@ export class FeedComponent extends AuthorizedComponentComponent {
   }
 
   ngOnInit(): void {
-    this.codeSnippetsService.getTagList().subscribe(tags => {
+    this.codeSnippetsService.getFeedTags().subscribe(tags => {
       const dropdownList: any[] = []
       for (let i = 0; i < tags.length; i++) {
         dropdownList[i] = {};
@@ -62,12 +62,18 @@ export class FeedComponent extends AuthorizedComponentComponent {
       this.dropdownList = dropdownList;
     });
 
-    this.selectedTags = []
+    this.selectedTags = [];
+
     if (this.state.selectedTag) {
-      this.selectedTags = [this.state.selectedTag];
+      // this.selectedTags = [{}];
+      // this.selectedTags[0].item_text = this.state.selectedTag;
+      this.codeSnippetsService.getCodeSnippetsByTag(this.state.selectedTag)
+        .subscribe(snippets => {
+          // console.log(nextSnippet);
+          this.snippets = snippets;
+        });
       this.state.selectedTag = undefined;
     }
-
 
     this.dropdownSettings = <IDropdownSettings>{
       singleSelection: false,
@@ -81,14 +87,15 @@ export class FeedComponent extends AuthorizedComponentComponent {
 
   searchTags() {
     // console.log(this.selectedTags);
-    const tagNames: string[] = this.createTaglistFromSelectedTags();
+    const tagNames: string[] = this.createTagListFromSelectedTags();
     // console.log(tagNames);
     if (tagNames.length === 0) {
       this.codeSnippetsService.getCodeSnippets()
-        .subscribe(nextSnippet => {
-          this.snippets.push(...nextSnippet);
+        .subscribe(snippets => {
+          this.snippets = snippets;
         });
-    } else { // reset
+
+    } else {
       this.codeSnippetsService.getCodeSnippetsByTags(tagNames)
         .subscribe(nextSnippet => {
           // console.log(nextSnippet);
@@ -97,7 +104,7 @@ export class FeedComponent extends AuthorizedComponentComponent {
     }
   }
 
-  createTaglistFromSelectedTags() {
+  createTagListFromSelectedTags() {
     console.log('selected tags: ' + this.selectedTags);
     const tagNames: string[] = [];
     for (let i = 0; i <  this.selectedTags.length; i++) {

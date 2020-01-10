@@ -25,10 +25,10 @@ export class CreateCodeSnippetComponent extends AuthorizedComponentComponent {
 
   constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router, private toastrService: NbToastrService) {
     super(state, router);
-    this.snippet = new CodeSnippet('', 0, '', '', new Code('', 'javascript'), [], new Score(85, null, null));
+    this.snippet = new CodeSnippet('', 0, '', '', new Code('', 'JavaScript'), [], new Score(85, null, null));
     this.state.user.subscribe(user => {
       if (user) {
-        this.snippet = new CodeSnippet('', 0, this.currentUserName(), '', new Code('', 'javascript'), [], new Score(85, null, null));
+        this.snippet = new CodeSnippet('', 0, this.currentUserName(), '', new Code('', 'JavaScript'), [], new Score(85, null, null));
       }
     });
   }
@@ -60,7 +60,7 @@ export class CreateCodeSnippetComponent extends AuthorizedComponentComponent {
   }
 
   ngOnInit() {
-    this.codeSnippetsService.getTagList().subscribe(tags => {
+    this.codeSnippetsService.getCodeSnippetTags().subscribe(tags => {
       const dropdownList: any[] = []
 
       for (let i = 0; i < tags.length; i++) {
