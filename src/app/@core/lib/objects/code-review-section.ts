@@ -9,6 +9,7 @@ export class CodeReviewSection {
   codeSnippetId: string;
   codeReviewId: string;
   code: Code;
+  submitted: boolean;
   content: string;
   tags: Tag[];
   score: Score;
@@ -22,6 +23,7 @@ export class CodeReviewSection {
     this.score = $score;
     this.content = $content;
     this.tags = $tags;
+    this.submitted = false;
   }
 
 
