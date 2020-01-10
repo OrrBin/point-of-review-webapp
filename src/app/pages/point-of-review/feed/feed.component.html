@@ -1,5 +1,13 @@
 <div class="col-md-12 col-lg-12 col-xxxl-12">
 
+  <div class="post_view">
+    <nb-select [(selected)]="post_view">
+      <nb-option value="Recommended">Recommended</nb-option>
+      <nb-option value="Popular">Popular</nb-option>
+      <nb-option value="Recent">Recent</nb-option>
+    </nb-select>
+  </div>
+
   <div class="col-lg-10 drop-down-list-container">
     <ng-multiselect-dropdown
       [placeholder]="'Search posts by tags...'"

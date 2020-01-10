@@ -2,7 +2,7 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'Recent posts',
+    title: 'Public posts',
     icon: 'menu-outline',
     link: '/pages/point-of-review/feed',
     home: true,
