@@ -119,7 +119,7 @@ export class CreateCodeSnippetComponent extends AuthorizedComponentComponent {
 
   successToast() {
     let status: NbComponentStatus = 'primary';
-    this.showToast(status, 'congrats!', 'Your code snippet was created succesfuly');
+    this.showToast(status, 'Congrats!', 'Your code snippet was created successfully');
   }
 
   failToast() {

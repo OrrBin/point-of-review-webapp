@@ -27,12 +27,18 @@ export class FeedComponent extends AuthorizedComponentComponent {
   snippets: CodeSnippet[] = [];
   user: User;
 
+  selectedItem: string = 'Recommended';
+
   constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router) {
     super(state, router);
     this.codeSnippetsService.getCodeSnippets()
       .subscribe(snippets => {
         this.snippets = snippets;
       });
+  }
+
+  test(item: any) {
+    console.log(item);
   }
 
   loadNext(cardData) {

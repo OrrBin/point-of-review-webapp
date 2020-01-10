@@ -79,8 +79,15 @@ export class CodeSnippetsService extends CodeSnippetsData {
       );
   }
 
-  getTagList(): Observable<Tag[]> {
-    return this.http.get<Tag[]>('http://localhost:8080/tags')
+  getCodeSnippetTags(): Observable<Tag[]> {
+    return this.http.get<Tag[]>('http://localhost:8080/tags/snippet')
+      .pipe(
+        catchError(this.handleError),
+      );
+  }
+
+  getFeedTags(): Observable<Tag[]> {
+    return this.http.get<Tag[]>('http://localhost:8080/tags/feed')
       .pipe(
         catchError(this.handleError),
       );

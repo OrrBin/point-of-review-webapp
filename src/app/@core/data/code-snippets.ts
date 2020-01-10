@@ -17,7 +17,9 @@ export abstract class CodeSnippetsData {
   abstract updateSectionImpressions(impressionRequest: ImpressionRequest): Observable<Score>;
   abstract getCodeSnippetsByTag(tagName: string): Observable<CodeSnippet[]>;
   abstract getCodeSnippetsByTags(tagNames: string[]): Observable<CodeSnippet[]>;
-  abstract getTagList(): Observable<Tag[]>;
+
+  abstract getCodeSnippetTags(): Observable<Tag[]>;
+  abstract getFeedTags(): Observable<Tag[]>;
 
   abstract report(userId: string, reportType: string): Observable<User>;
 }
