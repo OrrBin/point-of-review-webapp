@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { NbDialogService } from '@nebular/theme';
+import { ReportDialogComponent } from './report-dialog/report-dialog.component';
 
 @Component({
   selector: 'ngx-report',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  userId: string;
+
+  constructor(private dialogService: NbDialogService) { }
 
   ngOnInit() {
+  }
+
+  openDialog() {
+    this.dialogService.open(ReportDialogComponent, {
+      context: {
+        userId: this.userId,
+      },
+    });
   }
 
 }

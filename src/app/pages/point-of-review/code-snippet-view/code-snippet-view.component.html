@@ -13,7 +13,12 @@
         <div class="col-md-8">
           <ngx-score [score]="snippet.score" [snippet]="snippet" [section]="null"></ngx-score>
         </div>
-        <button nbButton status="primary" hero (click)="addCodeReview()">Add Review</button>
+        <div class="col-md-3">
+          <button nbButton status="primary" hero (click)="addCodeReview()">Add Review</button>
+        </div>
+        <div class="col-md-1">
+          <ngx-report [userId]="snippet.userId"></ngx-report>
+        </div>
       </div>
     </nb-card-footer>
   </nb-card>
