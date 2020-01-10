@@ -17,8 +17,6 @@
     <nb-card>
       <nb-card-header>Add code review section number {{section.id}}</nb-card-header>
       <nb-card-body>
-        <angular-editor [config]="editorConfig" [placeholder]="'Enter text here...'" [(ngModel)]="section.content">
-        </angular-editor>
         <div class="row">
           <div class="col-lg-2">
             <nb-select [(selected)]="language">
@@ -30,7 +28,7 @@
 
           <div class="col-lg-10 drop-down-list-container">
             <ng-multiselect-dropdown [placeholder]="'Tags'" [data]="dropdownList" [(ngModel)]="selectedTags"
-              [settings]="dropdownSettings">
+                                     [settings]="dropdownSettings">
             </ng-multiselect-dropdown>
           </div>
         </div>
@@ -38,14 +36,16 @@
         <ngx-code-editor [(code)]="section.code"></ngx-code-editor>
       </nb-card-body>
       <nb-card-footer>
+      <angular-editor [config]="editorConfig" [placeholder]="'Enter text here...'" [(ngModel)]="section.content">
+      </angular-editor>
         <div class="row">
           <div class="col-lg-4">
-            <button nbButton status="primary" hero (click)="AddCodeReviewSection()">
+            <button nbButton status="primary" class="submit_button" hero (click)="AddCodeReviewSection()">
               Add another review section
             </button>
           </div>
           <div class="col-lg-6">
-            <button nbButton status="warning" hero (click)="submit()">
+            <button nbButton status="warning" class="submit_button" hero (click)="submit()">
               Submmit Code Review
             </button>
           </div>
