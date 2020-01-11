@@ -26,8 +26,7 @@
     <nb-list-item *ngFor="let review of snippet.reviews">
       <nb-card (click)="chooseReview(review)">
         <nb-card-body>
-          Review by
-          <ngx-reputation [userId]="review.userId"></ngx-reputation>
+          Review by {{review.userId}}
         </nb-card-body>
       </nb-card>
     </nb-list-item>
