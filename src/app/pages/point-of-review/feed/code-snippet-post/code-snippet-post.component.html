@@ -13,8 +13,10 @@
         <div class="col-md-8">
           <ngx-score [score]="snippet.score" [snippet]="snippet"></ngx-score>
         </div>
-        <div class="col-md-2 offset-md-2">
-          <span class="user-id">User: {{snippet.userId}}</span>
+        <div class="col-md-3 offset-md-1">
+          <span class="user-id">
+            User: <ngx-reputation [userId]="snippet.userId"></ngx-reputation>
+          </span>
         </div>
       </div>
     </nb-card-footer>

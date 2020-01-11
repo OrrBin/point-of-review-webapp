@@ -48,21 +48,28 @@ export class ScoreComponent extends AuthorizedComponentComponent {
         this.toggle1 = false;
       }
     }
-   if (this.section == null) {
-      this.codeSnippetsService.updateSnippetImpressions(
-        new ImpressionRequest(this.snippet.id, this.currentUserName(), impression, null, null)).subscribe(
+
+    if (this.section == null) {
+      const request = new ImpressionRequest(this.snippet.id, this.currentUserName(),
+        impression, null, null, this.snippet.userId);
+      this.codeSnippetsService.updateSnippetImpressions(request).subscribe(
         (score) => {
           this.score = score;
           this.snippet.score = score;
         });
+      this.codeSnippetsService.updateUserReputation(request).subscribe(null);
+      console.log('reputation is updated');
     } else {
-      this.codeSnippetsService.updateSectionImpressions(
-        new ImpressionRequest(this.snippet.id, this.currentUserName(), impression, this.section.codeReviewId, this.section.id)).subscribe(
+      const request = new ImpressionRequest(this.snippet.id, this.currentUserName(),
+        impression, this.section.codeReviewId, this.section.id, this.section.userId)
+      this.codeSnippetsService.updateSectionImpressions(request).subscribe(
         (score) => {
           this.score = score;
           this.section.score = score;
         });
-   }
+      this.codeSnippetsService.updateUserReputation(request).subscribe(null);
+      console.log('reputation is updated');
+    }
   }
   getImpression(impression: Impression): number {
     if (this.score.impressions[impression] == null) {

@@ -45,6 +45,8 @@ import { ChartBarComponent } from './chart/chart-bar.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { ReportComponent } from './report/report.component';
 import { ReportDialogComponent } from './report/report-dialog/report-dialog.component';
+import { ReputationComponent } from './reputation/reputation.component';
+import { ReputationDialogComponent } from './reputation/reputation-dialog/reputation-dialog.component';
 
 @NgModule({
   imports: [
@@ -101,12 +103,15 @@ import { ReportDialogComponent } from './report/report-dialog/report-dialog.comp
     ChartBarComponent,
     ReportComponent,
     ReportDialogComponent,
+    ReputationComponent,
+    ReputationDialogComponent,
   ],
   providers: [
     NewsService,
   ],
   entryComponents: [
     ReportDialogComponent,
+    ReputationDialogComponent
   ]
 })
 export class PointOfReviewModule { }
