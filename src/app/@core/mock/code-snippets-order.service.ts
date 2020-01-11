@@ -22,7 +22,7 @@ export class CodeSnippetsService extends CodeSnippetsData {
     new CodeSnippet('testId4', 0, 'Yahav', 'HELP !', new Code('test code asd \nasidjasd jasd2a;', 'javascript'), [], new Score(30, null, null)),
   ];
 
-  getCodeSnippets(): Observable<CodeSnippet[]> {
+  getRecentSnippets(): Observable<CodeSnippet[]> {
     return observableOf(this.snippets);
   }
 
@@ -62,6 +62,14 @@ export class CodeSnippetsService extends CodeSnippetsData {
   }
 
   getFeedTags(): Observable<Tag[]> {
+    return undefined;
+  }
+
+  getPopularSnippets(): Observable<CodeSnippet[]> {
+    return undefined;
+  }
+
+  getRecommendedSnippets(username: string): Observable<CodeSnippet[]> {
     return undefined;
   }
 }

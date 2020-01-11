@@ -9,7 +9,9 @@ import { Tag } from '../lib/objects/tag';
 import { User } from '../lib/objects/user';
 
 export abstract class CodeSnippetsData {
-  abstract getCodeSnippets(): Observable<CodeSnippet[]>;
+  abstract getRecentSnippets(): Observable<CodeSnippet[]>;
+  abstract getPopularSnippets(): Observable<CodeSnippet[]>;
+  abstract getRecommendedSnippets(username: string): Observable<CodeSnippet[]>;
   abstract getCodeSnippetsByUserName(username: string): Observable<CodeSnippet[]>;
   abstract postSnippet(snippet: CodeSnippet): Observable<CodeSnippet>;
   abstract postReview(review: CodeReview): Observable<CodeReview>;

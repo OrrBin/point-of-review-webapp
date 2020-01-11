@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { User } from '../../../@core/lib/objects/user';
 import { AuthorizedComponentComponent } from '../authorized-component/authorized-component.component';
 import {IDropdownSettings} from 'ng-multiselect-dropdown';
+import {Code} from '../../../@core/lib/objects/code';
+import {Score} from '../../../@core/lib/objects/score';
 
 @Component({
   selector: 'ngx-infinite-list',
@@ -25,20 +27,42 @@ export class FeedComponent extends AuthorizedComponentComponent {
   dropdownSettings = {};
 
   snippets: CodeSnippet[] = [];
-  user: User;
+  // user: User;
 
   selectedItem: string = 'Recommended';
 
   constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router) {
     super(state, router);
-    this.codeSnippetsService.getCodeSnippets()
+    this.codeSnippetsService.getRecommendedSnippets(this.user.username)
       .subscribe(snippets => {
         this.snippets = snippets;
       });
   }
 
-  test(item: any) {
-    console.log(item);
+  matchPosts(item: any) {
+    if (item === 'Recommended') {
+      console.log(`viewing recommended snippets for ${this.user.username}`);
+      this.codeSnippetsService.getRecommendedSnippets(this.user.username)
+        .subscribe(snippets => {
+          this.snippets = snippets;
+        });
+    }
+
+    if (item === 'Popular') {
+      console.log('viewing popular snippets')
+      this.codeSnippetsService.getPopularSnippets()
+        .subscribe(snippets => {
+          this.snippets = snippets;
+        });
+    }
+
+    if (item === 'Recent') {
+      console.log('viewing recent snippets')
+      this.codeSnippetsService.getRecentSnippets()
+        .subscribe(snippets => {
+          this.snippets = snippets;
+        });
+    }
   }
 
   loadNext(cardData) {
@@ -48,7 +72,7 @@ export class FeedComponent extends AuthorizedComponentComponent {
 
     cardData.loading = true;
     cardData.placeholders = new Array(this.pageSize);
-    this.codeSnippetsService.getCodeSnippets()
+    this.codeSnippetsService.getRecentSnippets()
       .subscribe(nextSnippet => {
         cardData.placeholders = [];
         cardData.news.push(...nextSnippet);
@@ -78,6 +102,7 @@ export class FeedComponent extends AuthorizedComponentComponent {
           // console.log(nextSnippet);
           this.snippets = snippets;
         });
+
       this.state.selectedTag = undefined;
     }
 
@@ -96,7 +121,7 @@ export class FeedComponent extends AuthorizedComponentComponent {
     const tagNames: string[] = this.createTagListFromSelectedTags();
     // console.log(tagNames);
     if (tagNames.length === 0) {
-      this.codeSnippetsService.getCodeSnippets()
+      this.codeSnippetsService.getRecentSnippets()
         .subscribe(snippets => {
           this.snippets = snippets;
         });

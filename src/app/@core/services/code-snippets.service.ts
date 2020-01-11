@@ -24,8 +24,16 @@ export class CodeSnippetsService extends CodeSnippetsData {
     super();
   }
 
-  getCodeSnippets(): Observable<CodeSnippet[]> {
+  getRecentSnippets(): Observable<CodeSnippet[]> {
     return this.http.get<CodeSnippet[]>('http://localhost:8080/snippets/recent');
+  }
+
+  getPopularSnippets(): Observable<CodeSnippet[]> {
+    return this.http.get<CodeSnippet[]>('http://localhost:8080/snippets/popular');
+  }
+
+  getRecommendedSnippets(username: string): Observable<CodeSnippet[]> {
+    return this.http.get<CodeSnippet[]>(`http://localhost:8080/snippets/recommended/${username}`);
   }
 
   getCodeSnippetsByUserName(username: string): Observable<CodeSnippet[]> {
@@ -98,6 +106,8 @@ export class CodeSnippetsService extends CodeSnippetsData {
       catchError(this.handleError),
     );
   }
+
+
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
