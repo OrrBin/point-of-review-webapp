@@ -25,10 +25,10 @@ export class CreateCodeSnippetComponent extends AuthorizedComponentComponent {
 
   constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router, private toastrService: NbToastrService) {
     super(state, router);
-    this.snippet = new CodeSnippet('', 0, '', '', new Code('', 'JavaScript'), [], new Score(85, null, null));
+    this.snippet = new CodeSnippet('', 0, '', '', new Code('', 'javascript'), [], new Score(85, null, null));
     this.state.user.subscribe(user => {
       if (user) {
-        this.snippet = new CodeSnippet('', 0, this.currentUserName(), '', new Code('', 'JavaScript'), [], new Score(85, null, null));
+        this.snippet = new CodeSnippet('', 0, this.currentUserName(), '', new Code('', 'javascript'), [], new Score(85, null, null));
       }
     });
   }
@@ -67,7 +67,8 @@ export class CreateCodeSnippetComponent extends AuthorizedComponentComponent {
         dropdownList[i] = {};
         dropdownList[i].item_id = i + 1;
         dropdownList[i].item_text = tags[i].name;
-        this.nameToType.set(tags[i].name, tags[i].type);
+        dropdownList[i].item_text = dropdownList[i].item_text.charAt(0).toUpperCase() + dropdownList[i].item_text.slice(1);
+        this.nameToType.set(dropdownList[i].item_text, tags[i].type);
       }
       this.dropdownList = dropdownList;
       console.log(this.dropdownList);
@@ -107,7 +108,7 @@ export class CreateCodeSnippetComponent extends AuthorizedComponentComponent {
     this.snippet.tags.push(new Tag(this.snippet.code.language, 'language'));
     for (let index = 0; index < this.selectedTags.length; index++) {
       const tagName: string = this.selectedTags[index].item_text;
-      this.snippet.tags.push(new Tag(tagName, this.nameToType.get(tagName)));
+      this.snippet.tags.push(new Tag(tagName.toLowerCase(), this.nameToType.get(tagName)));
     }
 
     this.codeSnippetsService.postSnippet(this.snippet).subscribe((snippet) => {

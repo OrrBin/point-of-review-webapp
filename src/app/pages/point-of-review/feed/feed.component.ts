@@ -88,6 +88,7 @@ export class FeedComponent extends AuthorizedComponentComponent {
         dropdownList[i] = {};
         dropdownList[i].item_id = i + 1;
         dropdownList[i].item_text = tags[i].name;
+        dropdownList[i].item_text = dropdownList[i].item_text.charAt(0).toUpperCase() + dropdownList[i].item_text.slice(1);
       }
       this.dropdownList = dropdownList;
     });
@@ -139,7 +140,7 @@ export class FeedComponent extends AuthorizedComponentComponent {
     console.log('selected tags: ' + this.selectedTags);
     const tagNames: string[] = [];
     for (let i = 0; i <  this.selectedTags.length; i++) {
-      tagNames[i] = this.selectedTags[i].item_text;
+      tagNames[i] = this.selectedTags[i].item_text.toLowerCase();
     }
     return tagNames;
 }
