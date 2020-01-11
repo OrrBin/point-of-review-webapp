@@ -108,6 +108,17 @@ export class CodeSnippetsService extends CodeSnippetsData {
   }
 
 
+  getReputation(username: string): Observable<number> {
+    return this.http.get<number>(`http://localhost:8080/reputation?username=${username}`).pipe(
+      catchError(this.handleError),
+    );
+  }
+  updateUserReputation(request: ImpressionRequest): Observable<User> {
+    return this.http.post<User>('http://localhost:8080/reputation', request, httpOptions)
+      .pipe(
+        catchError(this.handleError),
+      );
+  }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

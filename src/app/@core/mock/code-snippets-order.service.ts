@@ -8,6 +8,7 @@ import { Score } from '../lib/objects/score';
 import { ImpressionRequest } from '../lib/objects/impression-request';
 import { Tag } from '../lib/objects/tag';
 import { User } from '../lib/objects/user';
+import {Impression} from "../lib/objects/impression";
 
 @Injectable()
 export class CodeSnippetsService extends CodeSnippetsData {
@@ -60,8 +61,14 @@ export class CodeSnippetsService extends CodeSnippetsData {
   updateSectionImpressions(impressionRequest: ImpressionRequest): Observable<Score> {
     return undefined;
   }
+  updateUserReputation(request: ImpressionRequest): Observable<User> {
+    return undefined;
+  }
 
   getFeedTags(): Observable<Tag[]> {
+    return undefined;
+  }
+  getReputation(userId: String): Observable<number> {
     return undefined;
   }
 

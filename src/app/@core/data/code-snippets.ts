@@ -23,5 +23,8 @@ export abstract class CodeSnippetsData {
   abstract getCodeSnippetTags(): Observable<Tag[]>;
   abstract getFeedTags(): Observable<Tag[]>;
 
+  abstract updateUserReputation(request: ImpressionRequest): Observable<User>;
+  abstract getReputation(userId: String): Observable<number>;
+
   abstract report(userId: string, reportType: string): Observable<User>;
 }
