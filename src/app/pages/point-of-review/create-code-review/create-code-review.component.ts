@@ -26,6 +26,8 @@ export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
   dropdownList = [];
   selectedTags: any[] = [];
   dropdownSettings = {};
+  nameToType = new Map<string, string>();
+  codeLang = undefined;
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -56,6 +58,7 @@ export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
     this.section = this.newSection();
     this.state.selectedCodeSnippet.subscribe((snippet) => {
       this.snippet = snippet;
+      this.codeLang = this.snippet.code.language.charAt(0).toUpperCase() + this.snippet.code.language.slice(1);
       if (this.snippet) {
         this.section.codeSnippetId = snippet.id;
         this.section.code = new Code(this.snippet.code.text, this.snippet.code.language);
@@ -80,15 +83,17 @@ export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
   }
 
   ngOnInit() {
+    const dropdownList: any[] = []
     this.codeSnippetsService.getCodeSnippetTags().subscribe(tags => {
-      const dropdownList: any[] = []
       for (let i = 0; i < tags.length; i++) {
         dropdownList[i] = {};
         dropdownList[i].item_id = i + 1;
         dropdownList[i].item_text = tags[i].name;
-        dropdownList[i].type = tags[i].type;
+        dropdownList[i].item_text = dropdownList[i].item_text.charAt(0).toUpperCase() + dropdownList[i].item_text.slice(1);
+        this.nameToType.set(dropdownList[i].item_text, tags[i].type);
       }
       this.dropdownList = dropdownList;
+      console.log(this.dropdownList);
     });
 
     this.selectedTags = [
@@ -113,19 +118,23 @@ export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
   }
 
   submit(): void {
+    // if (!this.section.validate()) {
+    //   this.failToast();
+    //   return;
+    // }
 
-    if (!this.section.validate()) {
-      this.failToast();
+   /* if (!this.section.tags)
+      this.section.tags = [];
+    for (let index = 0; index < this.selectedTags.length; index++) {
+      const tagName: string = this.selectedTags[index].item_text;
+      this.section.tags.push(new Tag(this.selectedTags[index].item_text, this.nameToType.get(tagName)));
+    }*/
+    if (this.review.sections.length == 0) {
+      this.reviewFailToast();
       return;
     }
 
-    if (!this.section.tags)
-      this.section.tags = [];
-    for (let index = 0; index < this.selectedTags.length; index++) {
-      this.section.tags.push(new Tag(this.selectedTags[index].item_text, this.selectedTags[index].type));
-    }
-
-    this.review.sections.push(this.section);
+    // this.review.sections.push(this.section);
     this.codeSnippetsService.postReview(this.review).subscribe((review) => {
       this.successToast();
       this.router.navigate(['/pages/point-of-review/feed']);
@@ -135,25 +144,38 @@ export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
   AddCodeReviewSection() {
 
     if (!this.section.validate()) {
-      this.failToast();
+      this.sectionFailToast();
       return;
     }
 
     if (!this.section.tags)
       this.section.tags = [];
     for (let index = 0; index < this.selectedTags.length; index++) {
-      this.section.tags.push(new Tag(this.selectedTags[index].item_text, this.selectedTags[index].type));
+      const tagName: string = this.selectedTags[index].item_text;
+      this.section.tags.push(new Tag(this.selectedTags[index].item_text, this.nameToType.get(tagName)));
     }
 
     this.review.sections.push(this.section);
+    this.sectionSuccessToast();
     this.section = this.newSection();
   }
-  successToast() {
+
+  sectionSuccessToast() {
     let status: NbComponentStatus = 'primary';
-    this.showToast(status, 'congrats!', 'Your code review was created succesfuly');
+    this.showToast(status, 'Your section was added', 'Add more sections, or submit the code review to finish');
   }
 
-  failToast() {
+  reviewFailToast() {
+    let status: NbComponentStatus = 'danger';
+    this.showToast(status, 'Your code review is empty', 'Please add at least one section');
+  }
+
+  successToast() {
+    let status: NbComponentStatus = 'success';
+    this.showToast(status, 'Congrats!', 'Your code review was created successfully');
+  }
+
+  sectionFailToast() {
     let status: NbComponentStatus = 'danger';
     this.showToast(status, 'Oops!', 'Some fields are missing, please fill them and try again');
   }
@@ -161,7 +183,7 @@ export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
     const config = {
       status: type,
       destroyByClick: true,
-      duration: 5000,
+      duration: 6500,
       hasIcon: true,
       position: NbGlobalPhysicalPosition.TOP_RIGHT,
       preventDuplicates: true,

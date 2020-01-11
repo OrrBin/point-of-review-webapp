@@ -20,9 +20,7 @@
         <div class="row">
           <div class="col-lg-2">
             <nb-select [(selected)]="language">
-              <nb-option value="javascript">Javascript</nb-option>
-              <nb-option value="java">Java</nb-option>
-              <nb-option value="typescript">TypeScript</nb-option>
+              <nb-option [value]="this.snippet.code.language">{{codeLang}}</nb-option>
             </nb-select>
           </div>
 
@@ -43,7 +41,7 @@
         <div class="row">
           <div class="col-lg-4">
             <button nbButton status="primary" class="submit_button" hero (click)="AddCodeReviewSection()">
-              Add another review section
+              Add Current Section
             </button>
           </div>
           <div class="col-lg-6">

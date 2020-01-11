@@ -8,6 +8,7 @@ import { AuthorizedComponentComponent } from '../authorized-component/authorized
 import {IDropdownSettings} from 'ng-multiselect-dropdown';
 import {Code} from '../../../@core/lib/objects/code';
 import {Score} from '../../../@core/lib/objects/score';
+import {NbComponentStatus, NbGlobalPhysicalPosition, NbToastrService} from '@nebular/theme';
 
 @Component({
   selector: 'ngx-infinite-list',
@@ -31,7 +32,7 @@ export class FeedComponent extends AuthorizedComponentComponent {
 
   selectedItem: string = 'Recommended';
 
-  constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router) {
+  constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router, private toastrService: NbToastrService) {
     super(state, router);
     this.codeSnippetsService.getRecommendedSnippets(this.user.username)
       .subscribe(snippets => {
@@ -98,11 +99,13 @@ export class FeedComponent extends AuthorizedComponentComponent {
     if (this.state.selectedTag) {
       // this.selectedTags = [{}];
       // this.selectedTags[0].item_text = this.state.selectedTag;
+
       this.codeSnippetsService.getCodeSnippetsByTag(this.state.selectedTag)
         .subscribe(snippets => {
           // console.log(nextSnippet);
           this.snippets = snippets;
         });
+      this.searchToast(this.state.selectedTag);
 
       this.state.selectedTag = undefined;
     }
@@ -143,7 +146,31 @@ export class FeedComponent extends AuthorizedComponentComponent {
       tagNames[i] = this.selectedTags[i].item_text.toLowerCase();
     }
     return tagNames;
+  }
+
+
+  searchToast(tagName: string) {
+    let status: NbComponentStatus = 'primary';
+    this.showToast(status, `Displaying search results for "${tagName}"`, '');
+  }
+
+  private showToast(type: NbComponentStatus, title: string, body: string) {
+    const config = {
+      status: type,
+      destroyByClick: true,
+      duration: 5000,
+      hasIcon: true,
+      position: NbGlobalPhysicalPosition.TOP_RIGHT,
+      preventDuplicates: true,
+    };
+
+    this.toastrService.show(
+      body,
+      title,
+      config);
+  }
 }
-}
+
+
 
 

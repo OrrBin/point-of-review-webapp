@@ -10,7 +10,7 @@ import { ReportDialogComponent } from './report-dialog/report-dialog.component';
 export class ReportComponent implements OnInit {
 
   @Input()
-  userId: string;
+  username: string;
 
   constructor(private dialogService: NbDialogService) { }
 
@@ -20,7 +20,7 @@ export class ReportComponent implements OnInit {
   openDialog() {
     this.dialogService.open(ReportDialogComponent, {
       context: {
-        userId: this.userId,
+        username: this.username,
       },
     });
   }

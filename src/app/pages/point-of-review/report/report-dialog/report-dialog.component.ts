@@ -11,7 +11,7 @@ import {StateService} from '../../../../@core/utils';
 export class ReportDialogComponent {
 
   @Input()
-  userId: string;
+  username: string;
 
   reportType = 'spam';
 
@@ -23,15 +23,15 @@ export class ReportDialogComponent {
 
   report() {
     let isSelf: boolean = false;
-    console.log(`reporting: ${this.reportType} on user ${this.userId}`)
+    console.log(`reporting: ${this.reportType} on user ${this.username}`)
     this.state.user.subscribe((user) => {
-      if (this.userId === user.username) {
+      if (this.username === user.username) {
         this.showToast('warning', "You can't report your own post", '');
         isSelf = true;
       }
     });
     if (!isSelf) {
-      this.snippetsService.report(this.userId, this.reportType).subscribe((user) => {
+      this.snippetsService.report(this.username, this.reportType).subscribe((user) => {
         this.successToast();
         this.dismiss();
       });

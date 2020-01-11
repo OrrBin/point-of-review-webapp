@@ -51,7 +51,7 @@ export class ScoreComponent extends AuthorizedComponentComponent {
 
     if (this.section == null) {
       const request = new ImpressionRequest(this.snippet.id, this.currentUserName(),
-        impression, null, null, this.snippet.userId);
+        impression, null, null, this.snippet.username);
       this.codeSnippetsService.updateSnippetImpressions(request).subscribe(
         (score) => {
           this.score = score;

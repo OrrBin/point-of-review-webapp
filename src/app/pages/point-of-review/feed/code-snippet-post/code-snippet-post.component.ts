@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 
 import { CodeSnippet } from '../../../../@core/lib/objects/code-snippet';
-import { CodeSnippetsData } from "../../../../@core/data/code-snippets";
-import { StateService } from "../../../../@core/utils";
-import { Router } from "@angular/router";
+import { CodeSnippetsData } from '../../../../@core/data/code-snippets';
+import { StateService } from '../../../../@core/utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-code-snippet-post',
@@ -19,7 +19,10 @@ export class CodeSnippetPostComponent {
 
   getDate(): any {
     const date = new Date(this.snippet.timestamp);
-    return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    const dateString: string = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
+    const hours: string = date.getHours() >= 10 ? '' + date.getHours() :  '0' + date.getHours();
+    const minutes: string = date.getMinutes() >= 10 ? '' + date.getMinutes() :  '0' + date.getMinutes();
+    return dateString + ' ' + hours + ':' + minutes;
   }
 
   choosePost() {
