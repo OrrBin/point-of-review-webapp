@@ -19,6 +19,7 @@ export class ReputationComponent implements OnInit {
   constructor(private dialogService: NbDialogService, protected snippetsService: CodeSnippetsData) { }
 
   ngOnInit() {
+    this.getReputation();
   }
 
   getReputation(): number {
