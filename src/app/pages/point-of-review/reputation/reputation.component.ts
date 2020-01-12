@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NbDialogService} from "@nebular/theme";
-import {ReportDialogComponent} from "../report/report-dialog/report-dialog.component";
-import {ReputationDialogComponent} from "./reputation-dialog/reputation-dialog.component";
-import {CodeSnippetsData} from "../../../@core/data/code-snippets";
+import { Component, Input, OnInit } from '@angular/core';
+import { NbDialogService } from "@nebular/theme";
+import { ReportDialogComponent } from "../report/report-dialog/report-dialog.component";
+import { ReputationDialogComponent } from "./reputation-dialog/reputation-dialog.component";
+import { CodeSnippetsData } from "../../../@core/data/code-snippets";
 
 @Component({
   selector: 'ngx-reputation',
@@ -22,14 +22,15 @@ export class ReputationComponent implements OnInit {
   }
 
   getReputation(): number {
-    this.snippetsService.getReputation(this.userId).subscribe( num => {
+    this.snippetsService.getReputation(this.userId).subscribe(num => {
       this.reputation = num;
-      },
+    },
     );
     return this.reputation;
   }
 
-  async openDialog() {
+  async openDialog(event) {
+    event.stopPropagation();
     this.reputation = this.getReputation();
     await new Promise(resolve => setTimeout(resolve, 300));
     this.dialogService.open(ReputationDialogComponent, {
@@ -38,6 +39,7 @@ export class ReputationComponent implements OnInit {
         userId: this.userId,
       },
     });
+
   }
 
 }
