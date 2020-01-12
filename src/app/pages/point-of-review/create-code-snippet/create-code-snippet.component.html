@@ -23,12 +23,11 @@
             </ng-multiselect-dropdown>
           </div>
         </div>
-        <h6>Code:</h6>
-        <ngx-code-editor [(code)]="snippet.code"></ngx-code-editor>
         <h6>Description:</h6>
         <angular-editor [config]="editorConfig" [placeholder]="'Enter description here...'"
-          [(ngModel)]="snippet.description">
-        </angular-editor>
+          [(ngModel)]="snippet.description"></angular-editor>
+        <h6>Code:</h6>
+        <ngx-code-editor [(code)]="snippet.code"></ngx-code-editor>
       </nb-card-body>
       <nb-card-footer>
         <button nbButton status="primary" class="submit_button" hero (click)="submit()">

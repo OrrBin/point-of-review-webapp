@@ -30,12 +30,11 @@
             </ng-multiselect-dropdown>
           </div>
         </div>
-        <h6>Code:</h6>
-        <ngx-code-editor [(code)]="section.code"></ngx-code-editor>
         <h6>Description:</h6>
         <angular-editor [config]="editorConfig" [placeholder]="'Enter description here...'"
-          [(ngModel)]="section.content">
-        </angular-editor>
+          [(ngModel)]="section.content"> </angular-editor>
+        <h6>Code:</h6>
+        <ngx-code-editor [(code)]="section.code"></ngx-code-editor>
       </nb-card-body>
       <nb-card-footer>
         <div class="row">
