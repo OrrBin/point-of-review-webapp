@@ -1,10 +1,10 @@
 <div class="col-md-12 col-lg-12 col-xxxl-12">
   <nb-card *ngIf="snippet; else placeHolder">
-    <nb-card-header (click)="choosePost()">
+    <nb-card-header (click)="choosePost()" class="header">
       <div style="float: left;"><h5>{{snippet.title}}</h5></div>
       <div style="float: right;"><h5>{{getDate()}}</h5></div>
     </nb-card-header>
-    <nb-card-body (click)="choosePost()">
+    <nb-card-body>
       <div class="desc-container" [innerHTML]="snippet.description"></div>
       <ngx-tags [tags]="snippet.tags"></ngx-tags>
     </nb-card-body>
@@ -15,7 +15,7 @@
         </div>
         <div class="col-md-3 offset-md-1">
           <span class="user-id">
-            User: <ngx-reputation [userId]="snippet.username"></ngx-reputation>
+            User: <ngx-reputation [userId]="snippet.username" class="user"></ngx-reputation>
           </span>
         </div>
       </div>

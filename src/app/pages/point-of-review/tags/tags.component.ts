@@ -17,9 +17,9 @@ export class TagsComponent implements OnInit {
   ngOnInit() {
   }
 
-  searchTag(tag: Tag) {
-    this.state.selectedTag = tag.name;
+  searchTag(event, tag: Tag) {
+    event.stopPropagation();
+    this.state.selectTag(tag.name);
     this.router.navigate(['/pages/point-of-review/feed']);
-}
-
+  }
 }

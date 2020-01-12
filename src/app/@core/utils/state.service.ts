@@ -15,12 +15,12 @@ export class StateService implements OnDestroy {
   selectedCodeSnippet = new BehaviorSubject<CodeSnippet>(null);
   selectedCodeReview = new BehaviorSubject<CodeReview>(null);
   selectedCodeReviewSection = new BehaviorSubject<CodeReviewSection>(null);
-  selectedTag = undefined;
+  selectedTag = new BehaviorSubject<string>(null);
   user = new BehaviorSubject<User>(null);
 
-  // selectTag(tag: Tag) {
-  //   this.selectedTag.next(tag);
-  // }
+  selectTag(tagName: string) {
+    this.selectedTag.next(tagName);
+  }
 
   selectUser(user: User) {
     this.user.next(user);

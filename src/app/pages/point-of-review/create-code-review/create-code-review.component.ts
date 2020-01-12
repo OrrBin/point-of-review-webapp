@@ -152,7 +152,7 @@ export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
       this.section.tags = [];
     for (let index = 0; index < this.selectedTags.length; index++) {
       const tagName: string = this.selectedTags[index].item_text;
-      this.section.tags.push(new Tag(this.selectedTags[index].item_text, this.nameToType.get(tagName)));
+      this.section.tags.push(new Tag(tagName.toLowerCase(), this.nameToType.get(tagName)));
     }
 
     this.review.sections.push(this.section);

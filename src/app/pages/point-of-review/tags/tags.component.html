@@ -1,6 +1,6 @@
 <div class="row">
   <div *ngFor="let tag of tags" class="tag-container">
-    <button nbButton status="primary" hero (click)="searchTag(tag)">
+    <button nbButton status="primary" hero (click)="searchTag($event, tag)">
       {{tag.name}}
     </button>
   </div>

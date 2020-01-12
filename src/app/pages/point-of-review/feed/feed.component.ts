@@ -96,19 +96,17 @@ export class FeedComponent extends AuthorizedComponentComponent {
 
     this.selectedTags = [];
 
-    if (this.state.selectedTag) {
-      // this.selectedTags = [{}];
-      // this.selectedTags[0].item_text = this.state.selectedTag;
+    this.state.selectedTag.subscribe((selectedTag) => {
+      if (selectedTag != null) {
+        this.codeSnippetsService.getCodeSnippetsByTag(selectedTag)
+          .subscribe(snippets => {
+            this.snippets = snippets;
+          });
+        this.searchToast(selectedTag);
+        this.state.selectedTag.next(null);
+      }
+    });
 
-      this.codeSnippetsService.getCodeSnippetsByTag(this.state.selectedTag)
-        .subscribe(snippets => {
-          // console.log(nextSnippet);
-          this.snippets = snippets;
-        });
-      this.searchToast(this.state.selectedTag);
-
-      this.state.selectedTag = undefined;
-    }
 
     this.dropdownSettings = <IDropdownSettings>{
       singleSelection: false,

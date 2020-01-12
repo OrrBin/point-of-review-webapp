@@ -79,4 +79,9 @@ export class CodeSnippetsService extends CodeSnippetsData {
   getRecommendedSnippets(username: string): Observable<CodeSnippet[]> {
     return undefined;
   }
+
+  getTopTags(username: string): Observable<Tag[]> {
+    return undefined;
+  }
+
 }

@@ -1,7 +1,12 @@
 <div *ngIf="snippet; else placeHolder" class="col-md-12 col-lg-12 col-xxxl-12 code-snippet-container">
   <nb-card class="code-snippet-container">
     <nb-card-header>
-      <h5>{{snippet.title}}</h5>
+      <div style="float: left;"><h5>{{snippet.title}}</h5></div>
+      <div style="float: right;">
+        <span class="user-id">
+            User: <ngx-reputation [userId]="snippet.username" class="user"></ngx-reputation>
+          </span>
+      </div>
     </nb-card-header>
     <nb-card-body>
       <div class="desc-container" [innerHTML]="snippet.description"></div>

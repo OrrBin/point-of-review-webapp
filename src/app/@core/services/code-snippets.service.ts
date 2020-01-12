@@ -120,6 +120,13 @@ export class CodeSnippetsService extends CodeSnippetsData {
       );
   }
 
+  getTopTags(username: string): Observable<Tag[]> {
+    return this.http.get<Tag[]>(`http://localhost:8080/snippets/{username}/tags`)
+      .pipe(
+        catchError(this.handleError),
+      );
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
