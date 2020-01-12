@@ -1,7 +1,12 @@
 <nb-card>
-  <nb-card-header>User: {{this.userId}}</nb-card-header>
+  <nb-card-header>
+    User: {{this.userId}}
+  </nb-card-header>
   <nb-card-body>
     Reputation: {{reputation}}
+    <div *ngIf="this.tags.length > 0">
+      Favorite tags: <ngx-tags [tags]="this.tags"></ngx-tags>
+    </div>
   </nb-card-body>
   <nb-card-footer>
     <div class="col-md-6">

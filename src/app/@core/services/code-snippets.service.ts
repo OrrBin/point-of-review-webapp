@@ -121,7 +121,7 @@ export class CodeSnippetsService extends CodeSnippetsData {
   }
 
   getTopTags(username: string): Observable<Tag[]> {
-    return this.http.get<Tag[]>(`http://localhost:8080/snippets/{username}/tags`)
+    return this.http.get<Tag[]>(`http://localhost:8080/snippets/${username}/tags`)
       .pipe(
         catchError(this.handleError),
       );
