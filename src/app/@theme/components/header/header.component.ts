@@ -1,19 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
-import { UserData } from '../../../@core/data/users';
-import {LayoutService, StateService} from '../../../@core/utils';
+import { LayoutService, StateService } from '../../../@core/utils';
 import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import {AuthorizedComponentComponent} from "../../../pages/point-of-review/authorized-component/authorized-component.component";
-import {Router} from "@angular/router";
+import { AuthorizedComponentComponent } from "../../../pages/point-of-review/authorized-component/authorized-component.component";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
   templateUrl: './header.component.html',
 })
-export class HeaderComponent extends AuthorizedComponentComponent implements OnInit, OnDestroy  {
+export class HeaderComponent extends AuthorizedComponentComponent implements OnInit, OnDestroy {
 
   private destroy$: Subject<void> = new Subject<void>();
   userPictureOnly: boolean = false;
@@ -44,10 +43,9 @@ export class HeaderComponent extends AuthorizedComponentComponent implements OnI
   constructor(private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
     private themeService: NbThemeService,
-    private userService: UserData,
     private layoutService: LayoutService,
-              state: StateService,
-              router: Router,
+    state: StateService,
+    router: Router,
     private breakpointService: NbMediaBreakpointsService) {
     super(state, router);
   }
