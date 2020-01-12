@@ -79,23 +79,19 @@ export class ScoreComponent extends AuthorizedComponentComponent {
     }
   }
   getScore(): number {
-    let likesPowered;
+    let likes;
     let dislikes;
-    let hasEnoughPosts;
-    let likesRatio;
     if (this.score.impressions['LIKE'] == null) {
-      likesPowered = 0;
+      likes = 0;
     } else {
-      likesPowered = Math.pow(this.score.impressions['LIKE'], 2);
+      likes = this.score.impressions['LIKE'];
     }
     if (this.score.impressions['DISLIKE'] == null) {
       dislikes = 0;
     } else {
       dislikes = this.score.impressions['DISLIKE'];
     }
-    hasEnoughPosts = this.score.voterToImpression.size > this.limit ? 1 : 0 ;
-    likesRatio = likesPowered / (likesPowered + dislikes);
-    return Math.ceil((dislikes == 0 && likesPowered == 0) ? 0 : 100 * (0.4 * hasEnoughPosts + 0.6 * likesRatio));
+    return <number>(10 * (2 * likes - dislikes));
   }
 
 }
