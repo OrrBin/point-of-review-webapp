@@ -28,10 +28,17 @@
     </nb-card-footer>
   </nb-card>
   <nb-list listenWindowScroll>
-    <nb-list-item *ngFor="let review of snippet.reviews">
+    <nb-list-item *ngFor="let review of snippet.reviews" class="review-item">
       <nb-card (click)="chooseReview(review)">
         <nb-card-body>
-          Review by {{review.userId}}
+          <div class="row review-body">
+            <div class="review-title">
+              <h6>Review by:</h6>
+            </div>
+            <div>
+              <ngx-reputation [userId]="review.userId"></ngx-reputation>
+            </div>
+          </div>
         </nb-card-body>
       </nb-card>
     </nb-list-item>
