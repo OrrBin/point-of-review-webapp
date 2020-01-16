@@ -47,6 +47,8 @@ import { ReportComponent } from './report/report.component';
 import { ReportDialogComponent } from './report/report-dialog/report-dialog.component';
 import { ReputationComponent } from './reputation/reputation.component';
 import { ReputationDialogComponent } from './reputation/reputation-dialog/reputation-dialog.component';
+import { LogoutComponent } from './logout/logout.component';
+import { UserReputationViewComponent } from './user-reputation-view/user-reputation-view.component';
 
 @NgModule({
   imports: [
@@ -105,6 +107,8 @@ import { ReputationDialogComponent } from './reputation/reputation-dialog/reputa
     ReportDialogComponent,
     ReputationComponent,
     ReputationDialogComponent,
+    LogoutComponent,
+    UserReputationViewComponent,
   ],
   providers: [
     NewsService,

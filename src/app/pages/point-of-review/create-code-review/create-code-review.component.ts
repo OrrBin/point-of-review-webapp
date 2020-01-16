@@ -12,6 +12,7 @@ import { StateService } from '../../../@core/utils';
 import { Router } from '@angular/router';
 import { AuthorizedComponentComponent } from '../authorized-component/authorized-component.component';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import {AuthService} from '../../../@core/services/auth.service';
 
 
 @Component({
@@ -52,9 +53,9 @@ export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
     ]
   };
 
-  constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, private toastrService: NbToastrService,
+  constructor(auth: AuthService, private codeSnippetsService: CodeSnippetsData, state: StateService, private toastrService: NbToastrService,
     router: Router) {
-    super(state, router);
+    super(auth, state, router);
     this.section = this.newSection();
     this.state.selectedCodeSnippet.subscribe((snippet) => {
       this.snippet = snippet;

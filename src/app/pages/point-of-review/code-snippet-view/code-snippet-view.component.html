@@ -22,7 +22,7 @@
           <button nbButton status="primary" hero (click)="addCodeReview()">Add Review</button>
         </div>
         <div class="col-md-1">
-          <ngx-report [username]="snippet.username"></ngx-report>
+          <ngx-report [username]="snippet.username" class="snipp"></ngx-report>
         </div>
       </div>
     </nb-card-footer>
@@ -30,13 +30,20 @@
   <nb-list listenWindowScroll>
     <nb-list-item *ngFor="let review of snippet.reviews" class="review-item">
       <nb-card (click)="chooseReview(review)">
-        <nb-card-body>
-          <div class="row review-body">
-            <div class="review-title">
-              <h6>Review by:</h6>
+        <nb-card-body class="review-all"y>
+          <div style="float: left;">
+            <div class="row review-body">
+              <div class="review-title">
+                <h6>Review by:</h6>
+              </div>
+              <div>
+                <ngx-reputation [userId]="review.userId"></ngx-reputation>
+              </div>
             </div>
-            <div>
-              <ngx-reputation [userId]="review.userId"></ngx-reputation>
+          </div>
+          <div>
+            <div style="float: right;" class="reputation-view">
+              <ngx-user-reputation-view [username]="review.userId"></ngx-user-reputation-view>
             </div>
           </div>
         </nb-card-body>

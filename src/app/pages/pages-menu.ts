@@ -26,12 +26,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'pie-chart-outline',
     link: '/pages/point-of-review/statistics',
   },
-  // {
-  //   title: 'E-commerce',
-  //   icon: 'shopping-cart-outline',
-  //   link: '/pages/dashboard',
-  //   home: true,
-  // },
+  {
+    title: 'Logout',
+    icon: 'lock-outline',
+    link: '/pages/point-of-review/logout',
+  },
   // {
   //   title: 'IoT Dashboard',
   //   icon: 'home-outline',

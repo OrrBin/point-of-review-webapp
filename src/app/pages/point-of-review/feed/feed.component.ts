@@ -9,6 +9,7 @@ import {IDropdownSettings} from 'ng-multiselect-dropdown';
 import {Code} from '../../../@core/lib/objects/code';
 import {Score} from '../../../@core/lib/objects/score';
 import {NbComponentStatus, NbGlobalPhysicalPosition, NbToastrService} from '@nebular/theme';
+import {AuthService} from '../../../@core/services/auth.service';
 
 @Component({
   selector: 'ngx-infinite-list',
@@ -32,8 +33,8 @@ export class FeedComponent extends AuthorizedComponentComponent {
 
   selectedItem: string = 'Recommended';
 
-  constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router, private toastrService: NbToastrService) {
-    super(state, router);
+  constructor(auth: AuthService, private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router, private toastrService: NbToastrService) {
+    super(auth, state, router);
     this.codeSnippetsService.getRecommendedSnippets(this.user.username)
       .subscribe(snippets => {
         this.snippets = snippets;

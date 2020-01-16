@@ -9,6 +9,7 @@ import { StateService } from '../../../@core/utils';
 import { AuthorizedComponentComponent } from '../authorized-component/authorized-component.component';
 import { Router } from '@angular/router';
 import {CodeReviewSection} from '../../../@core/lib/objects/code-review-section';
+import {AuthService} from '../../../@core/services/auth.service';
 
 @Component({
   selector: 'ngx-score',
@@ -22,8 +23,8 @@ export class ScoreComponent extends AuthorizedComponentComponent {
   toggle1 = false;
   toggle2 = false;
   limit = 5;
-  constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router, iconsLibrary: NbIconLibraries) {
-    super(state, router);
+  constructor(auth: AuthService, private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router, iconsLibrary: NbIconLibraries) {
+    super(auth, state, router);
     iconsLibrary.registerFontPack('fa', { packClass: 'fa', iconClassPrefix: 'fa' });
     iconsLibrary.registerFontPack('fas', { packClass: 'fas', iconClassPrefix: 'fa' });
     iconsLibrary.registerFontPack('ion', { iconClassPrefix: 'ion' });

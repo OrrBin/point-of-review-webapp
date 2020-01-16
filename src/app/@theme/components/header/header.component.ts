@@ -6,6 +6,7 @@ import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { AuthorizedComponentComponent } from "../../../pages/point-of-review/authorized-component/authorized-component.component";
 import { Router } from "@angular/router";
+import {AuthService} from '../../../@core/services/auth.service';
 
 @Component({
   selector: 'ngx-header',
@@ -46,8 +47,9 @@ export class HeaderComponent extends AuthorizedComponentComponent implements OnI
     private layoutService: LayoutService,
     state: StateService,
     router: Router,
-    private breakpointService: NbMediaBreakpointsService) {
-    super(state, router);
+    private breakpointService: NbMediaBreakpointsService,
+    auth: AuthService) {
+    super(auth, state, router);
   }
 
   ngOnInit() {

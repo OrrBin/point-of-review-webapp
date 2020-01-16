@@ -3,7 +3,7 @@
     User: {{this.userId}}
   </nb-card-header>
   <nb-card-body>
-    Reputation: {{reputation}}
+    <div class="rep">Reputation: {{reputation}}</div>
     <div *ngIf="this.tags.length > 0">
       Favorite tags: <ngx-tags [tags]="this.tags"></ngx-tags>
     </div>

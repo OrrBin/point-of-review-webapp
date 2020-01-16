@@ -5,6 +5,7 @@ import { CodeSnippetsData } from '../../../@core/data/code-snippets';
 import { StateService } from '../../../@core/utils';
 import { Router } from '@angular/router';
 import { AuthorizedComponentComponent as AuthorizedComponent } from '../authorized-component/authorized-component.component';
+import {AuthService} from '../../../@core/services/auth.service';
 
 @Component({
   selector: 'ngx-personal-feed',
@@ -22,8 +23,8 @@ export class PersonalFeedComponent extends AuthorizedComponent {
 
   snippets: CodeSnippet[] = [];
   user: User;
-  constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router) {
-    super(state, router);
+  constructor(auth: AuthService, private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router) {
+    super(auth, state, router);
     this.codeSnippetsService.getCodeSnippetsByUserName(this.currentUserName())
       .subscribe(nextSnippet => {
         this.snippets.push(...nextSnippet);

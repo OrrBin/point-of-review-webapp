@@ -5,6 +5,8 @@ import { Score } from '../../../@core/lib/objects/score';
 import { Router } from '@angular/router';
 import { CodeReview } from '../../../@core/lib/objects/code-review';
 import { AuthorizedComponentComponent } from '../authorized-component/authorized-component.component';
+import {AuthService} from '../../../@core/services/auth.service';
+import {CodeSnippetsData} from '../../../@core/data/code-snippets';
 
 @Component({
   selector: 'ngx-code-snippet-view',
@@ -14,8 +16,8 @@ import { AuthorizedComponentComponent } from '../authorized-component/authorized
 export class CodeSnippetViewComponent extends AuthorizedComponentComponent {
 
   private snippet: CodeSnippet;
-  constructor(state: StateService, router: Router) {
-    super(state, router);
+  constructor(auth: AuthService, state: StateService, router: Router) {
+    super(auth, state, router);
   }
 
   ngOnInit() {
@@ -34,5 +36,4 @@ export class CodeSnippetViewComponent extends AuthorizedComponentComponent {
     this.state.selectCodeSnippet(this.snippet);
     this.router.navigate(['/pages/point-of-review/code-review-view']);
   }
-
 }

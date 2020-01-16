@@ -4,6 +4,7 @@ import { CodeReview } from '../../../@core/lib/objects/code-review';
 import { StateService } from '../../../@core/utils';
 import { AuthorizedComponentComponent } from '../authorized-component/authorized-component.component';
 import { Router } from '@angular/router';
+import {AuthService} from '../../../@core/services/auth.service';
 
 @Component({
   selector: 'ngx-code-reviews-view',
@@ -15,8 +16,8 @@ export class CodeReviewsViewComponent extends AuthorizedComponentComponent {
   snippet: CodeSnippet;
   review: CodeReview;
 
-  constructor(state: StateService, router: Router) {
-    super(state, router);
+  constructor(auth: AuthService, state: StateService, router: Router) {
+    super(auth, state, router);
     state.selectedCodeReview.subscribe((review) => {
       this.review = review;
     });

@@ -10,6 +10,7 @@ import { StateService } from '../../../@core/utils';
 import { Router } from '@angular/router';
 import { AuthorizedComponentComponent } from '../authorized-component/authorized-component.component';
 import { AngularEditorConfig } from '@kolkov/angular-editor/lib/config';
+import {AuthService} from '../../../@core/services/auth.service';
 @Component({
   selector: 'ngx-create-code-snippet',
   templateUrl: './create-code-snippet.component.html',
@@ -23,8 +24,8 @@ export class CreateCodeSnippetComponent extends AuthorizedComponentComponent {
   dropdownSettings = {};
   nameToType = new Map<string, string>();
 
-  constructor(private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router, private toastrService: NbToastrService) {
-    super(state, router);
+  constructor(auth: AuthService, private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router, private toastrService: NbToastrService) {
+    super(auth, state, router);
     this.snippet = new CodeSnippet('', 0, '', '', new Code('', 'javascript'), [], new Score(85, null, null));
     this.state.user.subscribe(user => {
       if (user) {

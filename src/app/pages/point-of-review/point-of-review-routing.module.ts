@@ -10,6 +10,7 @@ import { CodeReviewsViewComponent } from './code-reviews-view/code-reviews-view.
 import { LoginPageComponent } from './login-page/login-page.component';
 import { PersonalFeedComponent } from './personal-feed/personal-feed.component';
 import {ChartComponent} from './chart/chart.component';
+import {LogoutComponent} from './logout/logout.component';
 
 const routes: Routes = [{
   path: '',
@@ -33,15 +34,19 @@ const routes: Routes = [{
     },
     {
       path: 'create-code-review',
-      component: CreateCodeReviewComponent
+      component: CreateCodeReviewComponent,
     },
     {
       path: 'code-review-view',
-      component: CodeReviewsViewComponent
+      component: CodeReviewsViewComponent,
     },
     {
       path: 'statistics',
       component: ChartComponent,
+    },
+    {
+      path: 'logout',
+      component: LogoutComponent,
     }
   ],
 }];
