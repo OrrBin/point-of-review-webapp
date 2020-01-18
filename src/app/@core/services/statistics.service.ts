@@ -24,6 +24,13 @@ export class StatisticsService extends StatisticsData {
     );
   }
 
+  getReviewStatistics(): Observable<Stat[]> {
+    return this.http.get<Stat[]>('http://localhost:8080/statistics/reviews')
+      .pipe(
+        catchError(this.handleError),
+      );
+  }
+
   getStatisticsWithLimit(statType: String, limit: Number): Observable<Stat[]> {
     return this.http.get<Stat[]>('http://localhost:8080/statistics?statType=' + statType + '&limit=' + limit)
     .pipe(

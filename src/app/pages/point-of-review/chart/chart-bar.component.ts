@@ -11,6 +11,7 @@ import {Stat} from '../../../@core/lib/objects/stat';
 })
 export class ChartBarComponent implements OnDestroy {
   @Input() statType: String;
+  @Input() reviews: boolean;
   data: any;
   options: any;
   themeSubscription: any;
@@ -109,11 +110,19 @@ export class ChartBarComponent implements OnDestroy {
   }
 
   ngOnInit() {
-    this.statisticsService.getStatistics(this.statType)
-      .subscribe(stat => {
-        this.stats = stat;
-        this.createBar();
-      });
+    if (!this.reviews) {
+      this.statisticsService.getStatistics(this.statType)
+        .subscribe(stat => {
+          this.stats = stat;
+          this.createBar();
+        });
+    } else {
+      this.statisticsService.getReviewStatistics()
+        .subscribe(stat => {
+          this.stats = stat;
+          this.createBar();
+        });
+    }
   }
 
   ngOnDestroy(): void {

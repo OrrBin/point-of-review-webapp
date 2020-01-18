@@ -15,6 +15,7 @@ import {Color, color, RGBColor, RGBColorFactory} from 'd3-color';
 })
 export class ChartPieComponent implements OnDestroy {
   @Input() statType: String;
+  @Input() reviews: boolean;
   data: any;
   options: any;
   themeSubscription: any;
@@ -101,11 +102,19 @@ export class ChartPieComponent implements OnDestroy {
   }
 
   ngOnInit() {
-    this.statisticsService.getStatistics(this.statType)
-      .subscribe(stat => {
-        this.stats = stat;
-        this.createPie();
-      });
+    if (!this.reviews) {
+      this.statisticsService.getStatistics(this.statType)
+        .subscribe(stat => {
+          this.stats = stat;
+          this.createPie();
+        });
+    } else {
+      this.statisticsService.getReviewStatistics()
+        .subscribe(stat => {
+          this.stats = stat;
+          this.createPie();
+        });
+    }
   }
   ngOnDestroy(): void {
     try {
