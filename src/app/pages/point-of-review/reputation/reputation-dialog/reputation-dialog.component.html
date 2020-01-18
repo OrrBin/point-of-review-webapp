@@ -5,7 +5,7 @@
   <nb-card-body>
     <div class="rep">Reputation: {{reputation}}</div>
     <div *ngIf="this.tags.length > 0">
-      Favorite tags: <ngx-tags [tags]="this.tags"></ngx-tags>
+      Favorite tags: <ngx-tags [tags]="this.tags.reverse()"></ngx-tags>
     </div>
   </nb-card-body>
   <nb-card-footer>

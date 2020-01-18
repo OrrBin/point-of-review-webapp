@@ -6,13 +6,15 @@ import { StateService } from '../../../@core/utils';
 import { Router } from '@angular/router';
 import { AuthorizedComponentComponent as AuthorizedComponent } from '../authorized-component/authorized-component.component';
 import {AuthService} from '../../../@core/services/auth.service';
+import {Tag} from "../../../@core/lib/objects/tag";
+import {NbDialogService} from "@nebular/theme";
 
 @Component({
   selector: 'ngx-personal-feed',
   templateUrl: './personal-feed.component.html',
   styleUrls: ['./personal-feed.component.scss']
 })
-export class PersonalFeedComponent extends AuthorizedComponent {
+export class PersonalFeedComponent extends AuthorizedComponent implements OnInit {
   snippetsCard = {
     news: [],
     placeholders: [],
@@ -23,12 +25,29 @@ export class PersonalFeedComponent extends AuthorizedComponent {
 
   snippets: CodeSnippet[] = [];
   user: User;
+
+  reputation: number;
+  tags: Tag[];
+
   constructor(auth: AuthService, private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router) {
     super(auth, state, router);
     this.codeSnippetsService.getCodeSnippetsByUserName(this.currentUserName())
       .subscribe(nextSnippet => {
         this.snippets.push(...nextSnippet);
       });
+  }
+
+  ngOnInit() {
+    this.getReputation();
+    this.codeSnippetsService.getTopTags(this.user.username).subscribe(tags => this.tags = tags);
+  }
+
+  getReputation(): number {
+    this.codeSnippetsService.getReputation(this.user.username).subscribe(num => {
+        this.reputation = num;
+      },
+    );
+    return this.reputation;
   }
 
   loadNext(cardData) {
