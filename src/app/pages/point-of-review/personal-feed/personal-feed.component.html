@@ -7,8 +7,8 @@
       <div>{{getNextRank()}}</div>
     </nb-card-header>
     <nb-card-body>
-      <div class="space">Number of snippets uploaded: {{snippets.length}}</div>
-      <div *ngIf="this.tags.length > 0">
+      <div class="space" *ngIf="snippets">Number of snippets uploaded: {{snippets.length}}</div>
+      <div *ngIf="this.tags && this.tags.length > 0">
         Favorite tags: <ngx-tags [tags]="this.tags.reverse()"></ngx-tags>
       </div>
     </nb-card-body>
