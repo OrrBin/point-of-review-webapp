@@ -1,4 +1,14 @@
 <div class="col-md-12 col-lg-12 col-xxxl-12">
+  <nb-card>
+    <nb-card-header>
+      Reputation:{{reputation}}
+    </nb-card-header>
+    <nb-card-body>
+      <div *ngIf="this.tags.length > 0">
+        Favorite tags: <ngx-tags [tags]="this.tags.reverse()"></ngx-tags>
+      </div>
+    </nb-card-body>
+  </nb-card>
   <h1>Your posts</h1>
   <nb-list listenWindowScroll>
     <nb-list-item *ngFor="let codeSnippetPost of snippets">
