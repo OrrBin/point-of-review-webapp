@@ -23,21 +23,12 @@ export class ReputationComponent implements OnInit {
   constructor(private dialogService: NbDialogService, protected snippetsService: CodeSnippetsData) { }
 
   ngOnInit() {
-    this.getReputation();
-  }
-
-  getReputation(): number {
-    this.snippetsService.getReputation(this.userId).subscribe(num => {
-      this.reputation = num;
-    },
-    );
-    return this.reputation;
+    this.snippetsService.getTopTags(this.userId).subscribe(tags => this.tags = tags);
+    this.snippetsService.getReputation(this.userId).subscribe(reputation => this.reputation = reputation);
   }
 
   async openDialog(event) {
-    this.snippetsService.getTopTags(this.userId).subscribe(tags => this.tags = tags);
     event.stopPropagation();
-    this.reputation = this.getReputation();
     await new Promise(resolve => setTimeout(resolve, 500));
     this.dialogService.open(ReputationDialogComponent, {
       context: {
