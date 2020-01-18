@@ -9,7 +9,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
 
   },
   {
-    title: 'Personal posts',
+    title: 'Personal page',
     icon: 'person-outline',
     link: '/pages/point-of-review/personal-feed',
     home: true,

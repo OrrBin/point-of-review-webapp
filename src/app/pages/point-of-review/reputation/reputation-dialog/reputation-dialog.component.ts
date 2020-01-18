@@ -18,7 +18,6 @@ export class ReputationDialogComponent {
   reputation: number;
   @Input()
   tags: Tag[];
-  rank: string;
 
   constructor(protected state: StateService, protected ref: NbDialogRef<ReputationDialogComponent>, private toastrService: NbToastrService) {
   }
@@ -28,13 +27,13 @@ export class ReputationDialogComponent {
   }
 
   getRank() {
-    if (this.reputation <= 40) {
+    if (this.reputation < 40) {
       return 'Junior';
     }
-    if (this.reputation <= 100) {
+    if (this.reputation < 100) {
       return 'Senior';
     }
-    if (this.reputation <= 200) {
+    if (this.reputation < 200) {
       return 'Master';
     }
 
@@ -42,13 +41,13 @@ export class ReputationDialogComponent {
   }
 
   getIcon() {
-    if (this.reputation <= 40) {
+    if (this.reputation < 40) {
       return 'https://i.imgur.com/xNnFkfk.png'; // bug
     }
-    if (this.reputation <= 100) {
+    if (this.reputation < 100) {
       return 'https://i.imgur.com/idyFaBE.png'; // bronze medal
     }
-    if (this.reputation <= 200) {
+    if (this.reputation < 200) {
       return 'https://i.imgur.com/J6dViiB.png'; // silver medal
     }
     return 'https://i.imgur.com/b9IazUp.png'; // gold medal

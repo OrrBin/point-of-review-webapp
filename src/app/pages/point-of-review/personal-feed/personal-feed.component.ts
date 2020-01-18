@@ -64,4 +64,45 @@ export class PersonalFeedComponent extends AuthorizedComponent implements OnInit
       });
   }
 
+  getRank() {
+    if (this.reputation < 40) {
+      return 'Junior';
+    }
+    if (this.reputation < 100) {
+      return 'Senior';
+    }
+    if (this.reputation < 200) {
+      return 'Master';
+    }
+
+    return 'Elite';
+  }
+
+  getIcon() {
+    if (this.reputation < 40) {
+      return 'https://i.imgur.com/xNnFkfk.png'; // bug
+    }
+    if (this.reputation < 100) {
+      return 'https://i.imgur.com/idyFaBE.png'; // bronze medal
+    }
+    if (this.reputation < 200) {
+      return 'https://i.imgur.com/J6dViiB.png'; // silver medal
+    }
+    return 'https://i.imgur.com/b9IazUp.png'; // gold medal
+
+  }
+
+  getNextRank() {
+    if (this.reputation < 40) {
+      return 'Next rank: Senior (40)';
+    }
+    if (this.reputation < 100) {
+      return 'Next rank: Master (100)';
+    }
+    if (this.reputation < 200) {
+      return 'Next rank: Elite (200)';
+    }
+
+    return '';
+  }
 }

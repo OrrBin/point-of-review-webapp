@@ -1,9 +1,13 @@
 <div class="col-md-12 col-lg-12 col-xxxl-12">
+  <h1>Your profile</h1>
   <nb-card>
     <nb-card-header>
-      Reputation:{{reputation}}
+      <div>Reputation:{{reputation}}</div>
+      <div>Rank: {{getRank()}} <img [src]="getIcon()" alt=""></div>
+      <div>{{getNextRank()}}</div>
     </nb-card-header>
     <nb-card-body>
+      <div class="space">Number of snippets uploaded: {{snippets.length}}</div>
       <div *ngIf="this.tags.length > 0">
         Favorite tags: <ngx-tags [tags]="this.tags.reverse()"></ngx-tags>
       </div>

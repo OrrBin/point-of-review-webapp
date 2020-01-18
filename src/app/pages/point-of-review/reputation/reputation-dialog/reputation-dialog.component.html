@@ -1,5 +1,3 @@
-<!--<script src="https://kit.fontawesome.com/yourcode.js"></script>-->
-
 <nb-card>
   <nb-card-header>
     User: {{this.userId}}
@@ -9,7 +7,6 @@
     <div class="rep">
       Rank: {{getRank()}}
       <img [src]="getIcon()" alt="">
-<!--      <i class="fas fa-bug"></i>-->
     </div>
 
     <div *ngIf="this.tags.length > 0">
