@@ -29,7 +29,7 @@ export class ReputationComponent implements OnInit {
 
   async openDialog(event) {
     event.stopPropagation();
-    await new Promise(resolve => setTimeout(resolve, 500));
+    // await new Promise(resolve => setTimeout(resolve, 500));
     this.dialogService.open(ReputationDialogComponent, {
       context: {
         reputation: this.reputation,
