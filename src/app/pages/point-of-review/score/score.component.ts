@@ -10,6 +10,7 @@ import { AuthorizedComponentComponent } from '../authorized-component/authorized
 import { Router } from '@angular/router';
 import {CodeReviewSection} from '../../../@core/lib/objects/code-review-section';
 import {AuthService} from '../../../@core/services/auth.service';
+import {Notification} from '../../../@core/lib/objects/notification';
 
 @Component({
   selector: 'ngx-score',
@@ -23,7 +24,8 @@ export class ScoreComponent extends AuthorizedComponentComponent {
   toggle1 = false;
   toggle2 = false;
   limit = 5;
-  constructor(auth: AuthService, private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router, iconsLibrary: NbIconLibraries) {
+
+  constructor(private auth: AuthService, private codeSnippetsService: CodeSnippetsData, state: StateService, router: Router, iconsLibrary: NbIconLibraries) {
     super(auth, state, router);
     iconsLibrary.registerFontPack('fa', { packClass: 'fa', iconClassPrefix: 'fa' });
     iconsLibrary.registerFontPack('fas', { packClass: 'fas', iconClassPrefix: 'fa' });
@@ -59,7 +61,12 @@ export class ScoreComponent extends AuthorizedComponentComponent {
           this.snippet.score = score;
         });
       this.codeSnippetsService.updateUserReputation(request).subscribe(null);
+
+      const notification: Notification = new Notification(this.currentUserName(), this.snippet.username, 'LIKE');
+      notification.snippet = this.snippet;
+      this.auth.addNotification(notification).subscribe(null);
       console.log('reputation is updated');
+
     } else {
       const request = new ImpressionRequest(this.snippet.id, this.currentUserName(),
         impression, this.section.codeReviewId, this.section.id, this.section.userId)
@@ -70,6 +77,12 @@ export class ScoreComponent extends AuthorizedComponentComponent {
         });
       this.codeSnippetsService.updateUserReputation(request).subscribe(null);
       console.log('reputation is updated');
+
+      // const notification: Notification = new Notification(this.currentUserName(), this.snippet.username, 'LIKE');
+      // notification.snippet = this.snippet;
+      // // TODO: find review from section
+      // notification.review = ?
+      // this.auth.addNotification(notification).subscribe(null);
     }
   }
   getImpression(impression: Impression): number {

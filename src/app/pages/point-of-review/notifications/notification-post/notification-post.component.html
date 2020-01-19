@@ -1,0 +1,15 @@
+<div class="col-md-12 col-lg-12 col-xxxl-12">
+  <nb-card>
+    <nb-card-header (click)="choosePost()" class="header">
+      <div><ngx-reputation [userId]="notification.sender" class="user"></ngx-reputation> {{getAction()}} your post</div>
+      <div></div>
+    </nb-card-header>
+    <nb-card-body>
+      <div>{{getTime()}} ago</div>
+<!--      <div class="desc-container" [innerHTML]="snippet.description"></div>-->
+<!--      <ngx-tags [tags]="snippet.tags"></ngx-tags>-->
+    </nb-card-body>
+<!--    <ngx-reputation [userId]="snippet.username" class="user">-->
+  </nb-card>
+  <ng-template #placeHolder>Alternate text while primary text is hidden</ng-template>
+</div>

@@ -2,18 +2,22 @@ import { NbMenuItem } from '@nebular/theme';
 
 export const MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'Public posts',
+    title: 'Public Posts',
     icon: 'menu-outline',
     link: '/pages/point-of-review/feed',
     home: true,
 
   },
   {
-    title: 'Personal page',
+    title: 'Personal Page',
     icon: 'person-outline',
     link: '/pages/point-of-review/personal-feed',
     home: true,
-
+  },
+  {
+    title: 'Notifications',
+    icon: 'message-circle-outline',
+    link: '/pages/point-of-review/notifications',
   },
   {
     title: 'New Code Snippet',
@@ -31,11 +35,6 @@ export const MENU_ITEMS: NbMenuItem[] = [
     icon: 'lock-outline',
     link: '/pages/point-of-review/logout',
   },
-  // {
-  //   title: 'IoT Dashboard',
-  //   icon: 'home-outline',
-  //   link: '/pages/iot-dashboard',
-  // },
   // {
   //   title: 'FEATURES',
   //   group: true,

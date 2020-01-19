@@ -52,7 +52,7 @@ export class CodeSnippetsService extends CodeSnippetsData {
   postReview(review: CodeReview): Observable<CodeReview> {
     return this.http.post<CodeReview>('http://localhost:8080/reviews', review, httpOptions)
       .pipe(
-        catchError(this.handleError)
+        catchError(this.handleError),
       );
 
   }

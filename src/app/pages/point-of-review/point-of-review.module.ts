@@ -49,6 +49,8 @@ import { ReputationComponent } from './reputation/reputation.component';
 import { ReputationDialogComponent } from './reputation/reputation-dialog/reputation-dialog.component';
 import { LogoutComponent } from './logout/logout.component';
 import { UserReputationViewComponent } from './user-reputation-view/user-reputation-view.component';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { NotificationPostComponent } from './notifications/notification-post/notification-post.component';
 
 @NgModule({
   imports: [
@@ -109,6 +111,8 @@ import { UserReputationViewComponent } from './user-reputation-view/user-reputat
     ReputationDialogComponent,
     LogoutComponent,
     UserReputationViewComponent,
+    NotificationsComponent,
+    NotificationPostComponent,
   ],
   providers: [
     NewsService,

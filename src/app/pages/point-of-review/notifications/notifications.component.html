@@ -1,0 +1,9 @@
+<div class="col-md-12 col-lg-12 col-xxxl-12">
+  <h1>Notifications</h1>
+  <nb-list listenWindowScroll>
+    <nb-list-item *ngFor="let notification of notifications">
+      <ngx-notification-post [notification]="notification">
+      </ngx-notification-post>
+    </nb-list-item>
+  </nb-list>
+</div>

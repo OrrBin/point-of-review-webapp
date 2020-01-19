@@ -11,6 +11,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { PersonalFeedComponent } from './personal-feed/personal-feed.component';
 import {ChartComponent} from './chart/chart.component';
 import {LogoutComponent} from './logout/logout.component';
+import {NotificationsComponent} from './notifications/notifications.component';
 
 const routes: Routes = [{
   path: '',
@@ -23,6 +24,10 @@ const routes: Routes = [{
     {
       path: 'personal-feed',
       component: PersonalFeedComponent
+    },
+    {
+      path: 'notifications',
+      component: NotificationsComponent,
     },
     {
       path: 'code-snippet',

@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { AuthorizedComponentComponent } from '../authorized-component/authorized-component.component';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import {AuthService} from '../../../@core/services/auth.service';
+import {Notification} from '../../../@core/lib/objects/notification';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
   dropdownSettings = {};
   nameToType = new Map<string, string>();
   codeLang = undefined;
+  auth: AuthService;
 
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -56,6 +58,7 @@ export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
   constructor(auth: AuthService, private codeSnippetsService: CodeSnippetsData, state: StateService, private toastrService: NbToastrService,
     router: Router) {
     super(auth, state, router);
+    this.auth = auth;
     this.section = this.newSection();
     this.state.selectedCodeSnippet.subscribe((snippet) => {
       this.snippet = snippet;
@@ -119,25 +122,17 @@ export class CreateCodeReviewComponent extends AuthorizedComponentComponent {
   }
 
   submit(): void {
-    // if (!this.section.validate()) {
-    //   this.failToast();
-    //   return;
-    // }
-
-   /* if (!this.section.tags)
-      this.section.tags = [];
-    for (let index = 0; index < this.selectedTags.length; index++) {
-      const tagName: string = this.selectedTags[index].item_text;
-      this.section.tags.push(new Tag(this.selectedTags[index].item_text, this.nameToType.get(tagName)));
-    }*/
     if (this.review.sections.length == 0) {
       this.reviewFailToast();
       return;
     }
 
-    // this.review.sections.push(this.section);
     this.codeSnippetsService.postReview(this.review).subscribe((review) => {
       this.successToast();
+      const notification: Notification = new Notification(this.currentUserName(), this.snippet.username, 'REVIEW');
+      notification.snippet = this.snippet;
+      notification.review = this.review;
+      this.auth.addNotification(notification).subscribe(null);
       this.router.navigate(['/pages/point-of-review/feed']);
     });
   }

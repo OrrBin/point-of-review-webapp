@@ -5,6 +5,8 @@ import { User } from '../lib/objects/user';
 import { catchError } from 'rxjs/operators';
 import { AuthenticationRequest } from '../lib/objects/authentication-request';
 import { CodeSnippet } from '../lib/objects/code-snippet';
+import {Notification} from '../lib/objects/notification';
+import {CodeReview} from '../lib/objects/code-review';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -30,6 +32,15 @@ export class AuthService {
 
   isBanned(username: string): Observable<Boolean> {
     return this.http.get<Boolean>(`http://localhost:8080/ban/${username}`);
+  }
+
+  getNotifications(username: string): Observable<Notification[]> {
+    return this.http.get<Notification[]>(`http://localhost:8080/notifications/${username}`);
+  }
+
+  addNotification(notification: Notification) {
+    return this.http.post<Notification>(`http://localhost:8080/notifications/${notification.receiver}`, notification, httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
