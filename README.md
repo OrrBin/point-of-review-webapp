@@ -13,6 +13,6 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Dependencies
 
-Relays on running pointOf<Re>view service listening `http://localhost:8080/`.
+Relays on running `Point Of Review` service listening `http://localhost:8080/`.
 
 See `https://github.com/OrrBin/service-code-camp` repository
